@@ -1,0 +1,14 @@
+{
+  "manifest_version": 2,
+
+  "name": "RestMan",
+  "description": "RESTMan is a browser extension to work on http requests.",
+  "version": "0.1",
+  "background": {"scripts": ["js/background.js"]},
+  "permissions": ["tabs", "http://*/", "http://*/*", "https://*/", "https://*/*"],
+  "browser_action": {
+    "default_icon": "res/icon.png",
+    "default_title": "RestMan"
+  },
+  "content_security_policy": "default-src 'self'; connect-src *; script-src 'self'; style-src *;"
+}

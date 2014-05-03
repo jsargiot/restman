@@ -1,0 +1,86 @@
+
+body {
+    margin: 5px;
+    background-color: #FBFBFB;
+    font-family: Verdana, Serif;
+    font-size: 1em;
+    color: #444;
+}
+
+.request-info {
+    margin-bottom: 10px;
+}
+
+.request-info select, .request-info input, .request-info button {
+    height: 2em;
+    font-size: 1em;
+    display: inline-block;
+    border: 1px solid #BBB;
+    box-shadow:inset 0 0 1px 0 #AAA;
+    border-radius: 3px;
+    padding: 0 0.5em;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.request-info-url {
+    display: inline-block;
+    width: 100%;
+    margin-right: -210px;
+    padding-right: 210px;
+    box-sizing: border-box;
+}
+
+.request-info-buttons {
+    display: inline-block;
+    width: 210px;
+}
+
+.request-info-buttons select {
+    width: 100px;
+    margin-left: 5px;
+}
+
+.request-info-buttons button {
+    width: 100px;
+    margin-left: 5px;
+    background-color: #FFF;
+    font-weight: bold;
+}
+
+.info-wrapper {
+    text-align: center;
+    margin: 0 0 10px 0;
+}
+
+.info-item {
+    vertical-align: middle;
+    display: inline-block;
+    width: 20%;
+    color: #444;
+    font-size: 0.8em;
+}
+
+.info-item .title {
+    text-align: center;
+    font-weight: bold;
+    display: block;
+    line-height: 2em;
+}
+
+.info-item .value {
+    display: block;
+    text-align: center;
+    line-height: 2em;
+}
+
+.CodeMirror {
+    border: 1px solid #BBB;
+    box-shadow:inset 0 0 1px 0 #AAA;
+    border-radius: 3px;
+}
+
+#Copyright {
+    font-size: 0.7em;
+}
+

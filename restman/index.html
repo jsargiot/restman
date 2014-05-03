@@ -1,0 +1,61 @@
+<html>
+    <head>
+        <title>RestMan</title>
+
+        <link rel="stylesheet" href="css/codemirror/codemirror.css">
+        <link rel="stylesheet" href="css/codemirror/monokai.css">
+        <link rel="stylesheet" href="css/restman.css">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+
+    <body>
+        <h1>RestMan</h1>
+
+        <div class="request-info">
+            <div class="request-info-url">
+                <input id="url" type="text" name="url" placeholder="put your url here..." />
+            </div><div class="request-info-buttons">
+                <select>
+                    <option value="GET">GET</option>
+                </select><button id="send" type="submit">Send</button>
+            </div>
+        </div>
+
+        <div class="info-wrapper">
+            <div class="info-item">
+                <div class="title">Response Status</div>
+                <div id="ResponseStatus" class="value">-</div>
+            </div>
+            <div class="info-item">
+                <div class="title">Response Type</div>
+                <div id="ResponseType" class="value">-</div>
+            </div>
+            <div class="info-item">
+                <div class="title">Response Size</div>
+                <div id="ResponseSize" class="value">0 bytes</div>
+            </div>
+            <div class="info-item">
+                <div class="title">Response Time</div>
+                <div id="ResponseTime" class="value">0 ms</div>
+            </div>
+        </div>
+
+        <textarea id="ResponseContent"></textarea>
+
+        <!-- Load scripts -->
+        <script type="text/javascript" src="js/jquery-min.js"></script>
+        
+        <script type="text/javascript" src="js/beautify.js"></script>
+        <script type="text/javascript" src="js/beautify-html.js"></script>
+        
+        <script type="text/javascript" src="js/codemirror/codemirror.js"></script>
+        <script type="text/javascript" src="js/codemirror/css/css.js"></script>
+        <script type="text/javascript" src="js/codemirror/javascript/javascript.js"></script>
+        <script type="text/javascript" src="js/codemirror/xml/xml.js"></script>
+        <script type="text/javascript" src="js/codemirror/htmlmixed/htmlmixed.js"></script>
+        
+        <script type="text/javascript" src="js/entities/request.js"></script>
+        <script type="text/javascript" src="js/interactors.js"></script>
+    </body>
+</html>
