@@ -10,5 +10,5 @@
     "default_icon": "res/icon.png",
     "default_title": "RestMan"
   },
-  "content_security_policy": "default-src 'self'; connect-src *; script-src 'self'; style-src *;"
+  "content_security_policy": "default-src 'self'; connect-src *; script-src 'self'; style-src *; img-src 'self' data:;"
 }

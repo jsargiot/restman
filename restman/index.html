@@ -1,47 +1,105 @@
+<!DOCTYPE <!DOCTYPE html>
 <html>
     <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>RestMan</title>
 
+        <link rel="stylesheet" href="css/foundation.css" />
+        
         <link rel="stylesheet" href="css/codemirror/codemirror.css">
         <link rel="stylesheet" href="css/codemirror/monokai.css">
         <link rel="stylesheet" href="css/restman.css">
-
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
 
     <body>
-        <h1>RestMan</h1>
+        <header>
+            <nav class="top-bar" data-topbar>
+                <ul>
+                    <li class="name"><h1><a href="#">RestMan</a></h1></li>
+                </ul>
+            </nav>
+        </header>
 
-        <div class="request-info">
-            <div class="request-info-url">
-                <input id="url" type="text" name="url" placeholder="put your url here..." />
-            </div><div class="request-info-buttons">
-                <select>
-                    <option value="GET">GET</option>
-                </select><button id="send" type="submit">Send</button>
+        <section>
+            <div class="row">
+                <div class="large-12 columns">
+                    <form>
+                        <div class="row collapse">
+                            <div class="small-4 medium-2 columns">
+                                <select>
+                                    <option value="GET">GET</option>
+                                </select>
+                            </div>
+                            <div class="small-8 columns">
+                                <input id="url" type="text" name="url" placeholder="Enter url here..." />
+                            </div>
+                            <div class="small-12 medium-2 columns">
+                                <a id="Send" href="#" class="expand button postfix">Send</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
-        </div>
 
-        <div class="info-wrapper">
-            <div class="info-item">
-                <div class="title">Response Status</div>
-                <div id="ResponseStatus" class="value">-</div>
+            <div class="row">
+                <div class="small-6 medium-3 columns">
+                    <ul class="pricing-table">
+                        <li class="title">Status</li>
+                        <li id="ResponseStatus" class="description">-</li>
+                    </ul>
+                </div>
+                <div class="small-6 medium-3 columns">
+                    <ul class="pricing-table">
+                        <li class="title">Type</li>
+                        <li id="ResponseType" class="description">-</li>
+                    </ul>
+                </div>
+                <div class="small-6 medium-3 columns">
+                    <ul class="pricing-table">
+                        <li class="title">Size</li>
+                        <li id="ResponseSize" class="description">-</li>
+                    </ul>
+                </div>
+                <div class="small-6 medium-3 columns">
+                    <ul class="pricing-table">
+                        <li class="title">Time</li>
+                        <li id="ResponseTime" class="description">-</li>
+                    </ul>
+                </div>
             </div>
-            <div class="info-item">
-                <div class="title">Response Type</div>
-                <div id="ResponseType" class="value">-</div>
-            </div>
-            <div class="info-item">
-                <div class="title">Response Size</div>
-                <div id="ResponseSize" class="value">0 bytes</div>
-            </div>
-            <div class="info-item">
-                <div class="title">Response Time</div>
-                <div id="ResponseTime" class="value">0 ms</div>
-            </div>
-        </div>
 
-        <textarea id="ResponseContent"></textarea>
+            <div class="row">
+                <div class="small-6 columns">
+                    <div class="panel radius no-padding">
+                        <textarea id="RequestContent"></textarea>
+                        <dl class="sub-nav">
+                            <dd class="active"><a class="switch-json" href="#RequestContent">JSON</a></dd>
+                            <dd><a class="switch-xml" href="#RequestContent">XML</a></dd>
+                            <dd><a class="switch-plain" href="#RequestContent">Plain</a></dd>
+                        </dl>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                <div class="small-6 columns">
+                    <div class="panel radius no-padding">
+                        <textarea id="ResponseContent" class="editor-box"></textarea>
+                        <dl class="sub-nav">
+                            <dd class="active"><a class="switch-json" href="#ResponseContent">JSON</a></dd>
+                            <dd><a class="switch-xml" href="#ResponseContent">XML</a></dd>
+                            <dd><a class="switch-plain" href="#ResponseContent">Plain</a></dd>
+                        </dl>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <div class="row">
+                <p class="copyright">© 2014 Joaquin Sargiotto. All rights reserved.</p>
+            </div>
+        </footer>
 
         <!-- Load scripts -->
         <script type="text/javascript" src="js/jquery-min.js"></script>
@@ -57,5 +115,8 @@
         
         <script type="text/javascript" src="js/entities/request.js"></script>
         <script type="text/javascript" src="js/interactors.js"></script>
+
+        <script src="js/foundation.min.js"></script>
+          
     </body>
 </html>
