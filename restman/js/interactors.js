@@ -72,7 +72,7 @@ $("#Send").click(function(event) {
     }else{
         request.send(
             $("#Url").val(),
-            "POST",
+            method,
             function(data, textStatus, jqXHR, duration) {
                 $('#ResponseStatus').text(jqXHR.status + " " + jqXHR.statusText).addClass("code" + jqXHR.status);
 
