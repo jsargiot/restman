@@ -1,6 +1,16 @@
 //
 //
 
+function collect_headers(table) {
+    headers = {}
+    $("#HeadersTable tbody tr").each(function (index){
+        var inputs = $(this).find("input")
+        var inputs = $(this).find("input");
+        headers[$.trim(inputs[0].value)] = $.trim(inputs[1].value);
+    });
+    return headers;
+}
+
 var editors = {}
 editors["#ResponseContent"] = CodeMirror.fromTextArea(document.getElementById("ResponseContent"), {
       lineNumbers: true,
@@ -16,11 +26,16 @@ editors["#RequestContent"] = CodeMirror.fromTextArea(document.getElementById("Re
 $("#Send").click(function(event) {
     request = new Request()
     
+    $(".shouldwait").addClass('loading');
+
     var method = $("#Method").val();
 
+    headers = collect_headers();
+
     if (method == "GET") {
-        request.get(
-            $("#url").val(),
+        request.send(
+            $("#Url").val(),
+            "GET",
             function(data, textStatus, jqXHR, duration) {
                 $('#ResponseStatus').text(jqXHR.status + " " + jqXHR.statusText).addClass("code" + jqXHR.status);
 
@@ -50,13 +65,14 @@ $("#Send").click(function(event) {
                 
                 output = data;
                 editors["#ResponseContent"].setValue(output);
-
-            }
-        );
+                $(".shouldwait").removeClass('loading');
+            },
+            headers,
+            null);
     }else{
-        request.post(
-            $("#url").val(),
-            editors["#RequestContent"].getValue(),
+        request.send(
+            $("#Url").val(),
+            "POST",
             function(data, textStatus, jqXHR, duration) {
                 $('#ResponseStatus').text(jqXHR.status + " " + jqXHR.statusText).addClass("code" + jqXHR.status);
 
@@ -70,6 +86,8 @@ $("#Send").click(function(event) {
                         data = html_beautify(data);
                         }
                     }
+                } else {
+                    content_type = "";
                 }
                 
 
@@ -86,9 +104,10 @@ $("#Send").click(function(event) {
                 
                 output = data;
                 editors["#ResponseContent"].setValue(output);
-
-            }
-        );
+                $(".shouldwait").removeClass('loading');
+            },
+            headers,
+            editors["#RequestContent"].getValue());
     }
     //$('#ResponseCode').each(function(i, e) {hljs.highlightBlock(e)});
     
@@ -101,7 +120,7 @@ $("a.switch-xml").click(function(event) {
     editor = editors[textarea];
     editor.setOption("mode", "htmlmixed");
 
-    $(this).parent().parent().children("dd.active").removeClass('active');
+    $(this).parent().parent().children(".active").removeClass('active');
     $(this).parent().addClass('active');
 });
 
@@ -111,7 +130,7 @@ $("a.switch-json").click(function(event) {
     editor = editors[textarea];
     editor.setOption("mode", "javascript");
 
-    $(this).parent().parent().children("dd.active").removeClass('active');
+    $(this).parent().parent().children(".active").removeClass('active');
     $(this).parent().addClass('active');
 });
 
@@ -121,6 +140,20 @@ $("a.switch-plain").click(function(event) {
     editor = editors[textarea];
     editor.setOption("mode", "text");
 
-    $(this).parent().parent().children("dd.active").removeClass('active');
+    $(this).parent().parent().children(".active").removeClass('active');
     $(this).parent().addClass('active');
+});
+
+$("a.delete-row").click(function(event) {
+    /* Act on the event */
+    var row = $(this).parent().parent();
+    row.remove();
+});
+
+$("#AddHeader").click(function(event) {
+    /* Act on the event */
+    var original = $("#RowTemplate");
+    var cloned = original.clone()[0];
+    cloned.id = "";
+    original.parent().append(cloned);
 });

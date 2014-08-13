@@ -1,0 +1,13 @@
+{
+  "manifest_version": 2,
+  "name": "RestMan",
+  "version": "0.1",
+  "description": "RESTMan is a browser extension to work on http requests.",
+  "app": {
+    "background": {
+      "scripts": [ "js/background.js" ]
+    }
+  },
+  "offline_enabled": true,
+  "permissions": ["webview", "system.display", "contextMenus", "unlimitedStorage", "storage", "fileSystem", "fileSystem.write", "http://*/", "http://*/*", "https://*/", "https://*/*"]
+}

@@ -1,4 +1,4 @@
-<!DOCTYPE <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8" />
@@ -13,97 +13,172 @@
     </head>
 
     <body>
-        <header>
-            <nav class="top-bar" data-topbar>
-                <ul>
-                    <li class="name"><h1><a href="#">RestMan</a></h1></li>
-                </ul>
-            </nav>
-        </header>
 
-        <section>
-            <div class="row">
-                <div class="large-12 columns">
-                    <form>
-                        <div class="row collapse">
-                            <div class="small-4 medium-2 columns">
-                                <select id="method">
-                                    <option value="GET">GET</option>
-                                    <option value="POST">POST</option>
-                                </select>
-                            </div>
-                            <div class="small-8 columns">
-                                <input id="url" type="text" name="url" placeholder="Enter url here..." />
-                            </div>
-                            <div class="small-12 medium-2 columns">
-                                <a id="Send" href="#" class="expand button postfix">Send</a>
-                            </div>
-                        </div>
-                    </form>
+        <div class="separated">
+            <header class="row" data-topbar data-options="sticky_on: large">
+                <nav class="top-bar">
+                    <ul class="title-area" >
+                        <li class="name"><h1><a href="#">RestMan</a></h1></li>
+                    </ul>
+                </nav>
+            </header>
+
+            <section class="row collapse">
+                <div class="small-4 medium-2 columns">
+                    <select id="Method">
+                        <option value="GET">GET</option>
+                        <option value="POST">POST</option>
+                    </select>
                 </div>
+                <div class="small-8 columns">
+                    <input id="Url" class="shouldwait" type="text" name="url" placeholder="Enter url here..." value="http://httpbin.org/basic-auth/jsargiot/passwd3" />
+                </div>
+                <div class="small-12 medium-2 columns">
+                    <a id="Send" href="#" class="expand button postfix">Send</a>
+                </div>
+            </section>
+        </div>
+
+        <!--
+        <section class="small-4 columns">
+            <dl id="CollectionTitle" class="clearfix sub-nav left">
+                <dt>History</dt>
+            </dl>
+
+            <ul id="HistoryList" class="clearfix no-bullet">
+                <li class="">
+                    <a href="#">
+                        <span class="label success">GET</span>
+                        <span class="history-entry">https://google.com.ar/una/entrada/larga/js/entities/request.js</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="#">
+                        <span class="label success">POST</span>
+                        <span class="history-entry">/js/entities/request.js</span>
+                    </a>
+                </li>
+            </ul>
+        </section>
+        -->
+
+        <section class="row separated">
+            <div class="small-2 columns">
+                <h6>Headers</h6>
             </div>
-
-            <div class="row">
-                <div class="small-6 medium-3 columns">
-                    <ul class="pricing-table">
-                        <li class="title">Status</li>
-                        <li id="ResponseStatus" class="description">-</li>
-                    </ul>
-                </div>
-                <div class="small-6 medium-3 columns">
-                    <ul class="pricing-table">
-                        <li class="title">Type</li>
-                        <li id="ResponseType" class="description">-</li>
-                    </ul>
-                </div>
-                <div class="small-6 medium-3 columns">
-                    <ul class="pricing-table">
-                        <li class="title">Size</li>
-                        <li id="ResponseSize" class="description">-</li>
-                    </ul>
-                </div>
-                <div class="small-6 medium-3 columns">
-                    <ul class="pricing-table">
-                        <li class="title">Time</li>
-                        <li id="ResponseTime" class="description">-</li>
-                    </ul>
-                </div>
+            <div class="small-10 columns">
+                <table id="HeadersTable" class="edi-table">
+                    <tbody>
+                        <tr id="RowTemplate">
+                            <td>
+                                <input type="text" class="edi-text radius" placeholder="Header..." value="">
+                            </td>
+                            <td>
+                                <input type="text" class="edi-text active radius" placeholder="Value..." value="">
+                            </td>
+                            <td>
+                                <a class="delete-row"></a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="text" class="edi-text radius" value="Authorization">
+                            </td>
+                            <td>
+                                <input type="text" class="edi-text active radius" value="Basic anNhcmdpb3Q6cGFzc3dk">
+                            </td>
+                            <td>
+                                <a class="delete-row"></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="2">
+                                <a id="AddHeader" href="#" class="expand button postfix">Add header</a>
+                            </td>
+                            <td>&nbsp;</td>
+                        </tr>
+                    </tfoot>
+                </table>
+                
             </div>
+        </section>
 
-            <div class="row">
-                <div class="small-6 columns">
-                    <div class="panel radius no-padding">
-                        <textarea id="RequestContent"></textarea>
-                        <dl class="sub-nav">
-                            <dd class="active"><a class="switch-json" href="#RequestContent">JSON</a></dd>
-                            <dd><a class="switch-xml" href="#RequestContent">XML</a></dd>
-                            <dd><a class="switch-plain" href="#RequestContent">Plain</a></dd>
-                        </dl>
-                        <div class="clearfix"></div>
-                    </div>
-                </div>
-                <div class="small-6 columns">
-                    <div class="panel radius no-padding">
-                        <textarea id="ResponseContent" class="editor-box"></textarea>
-                        <dl class="sub-nav">
-                            <dd class="active"><a class="switch-json" href="#ResponseContent">JSON</a></dd>
-                            <dd><a class="switch-xml" href="#ResponseContent">XML</a></dd>
-                            <dd><a class="switch-plain" href="#ResponseContent">Plain</a></dd>
-                        </dl>
-                        <div class="clearfix"></div>
-                    </div>
+        <section class="row separated">
+            <div class="small-2 columns">
+                <h6>Body</h6>
+            </div>
+            <div class="small-10 columns">
+                <div class="panel radius no-padding">
+                    <textarea id="RequestContent"></textarea>
+                        <!-- ul class="sub-nav right">
+                            <li class="active"><a class="switch-json" href="#RequestContent">JSON</a></li>
+                            <li><a class="switch-xml" href="#RequestContent">XML</a></li>
+                            <li><a class="switch-plain" href="#RequestContent">Plain</a></li></ul>
+                        <div class="clearfix"></div -->
                 </div>
             </div>
         </section>
 
-        <footer>
-            <div class="row">
-                <p class="copyright">© 2014 Joaquin Sargiotto. All rights reserved.</p>
+        <section class="row separated">
+            <div class="small-2 columns">
+                <h6>Stats</h6>
             </div>
+            <div class="small-10 columns">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td><span class="label radius secondary">Status:</span></td>
+                            <td><span class="label secondary value radius" id="ResponseStatus">&nbsp;</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="label radius secondary">Response Time:</span></td>
+                            <td><span class="label secondary value radius" id="ResponseTime">&nbsp;</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="label radius secondary">Response Size:</span></td>
+                            <td><span class="label secondary value radius" id="ResponseSize">&nbsp;</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="label radius secondary">Response Type:</span></td>
+                            <td><span class="label secondary value radius" id="ResponseType">&nbsp;</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p></p>
+            </div>
+        </section>
+
+        <section class="row separated">
+            <div class="small-2 columns">
+                <h6>Response</h6>
+            </div>
+            <div class="small-10 columns">
+                <div id="ResponsePanel" class="panel radius no-padding shouldwait">
+                    <div class="overlay"></div>
+                    <textarea id="ResponseContent" class="editor-box"></textarea>
+                    <!-- ul class="sub-nav left">
+                        <li class="active"><a href="#">Status: </a></li>
+                    </ul -->
+                    <ul class="sub-nav right">
+                        <li class="active"><a class="switch-json" href="#ResponseContent">JSON</a></li>
+                        <li><a class="switch-xml" href="#ResponseContent">XML</a></li>
+                        <li><a class="switch-plain" href="#ResponseContent">Plain</a></li>
+                    </ul>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </section>
+
+        <webview id="foo" src="http://www.google.com/" style="width:640px; height:480px"></webview>
+        
+        <footer class="row">
+            <small class="copyright">Made by <a href="http://github.com/jsargiot">Joaquin Sargiotto</a>. Powered by <a href="http://jquery.com/">JQuery</a> and <a href="http://foundation.zurb.com/">Foundation</a>.</small>
         </footer>
 
         <!-- Load scripts -->
-        <script type="text/javascript" src="js/jquery-min.js"></script>
+        <script type="text/javascript" src="js/jquery-1.11.1.js"></script>
         
         <script type="text/javascript" src="js/beautify.js"></script>
         <script type="text/javascript" src="js/beautify-html.js"></script>
@@ -118,6 +193,6 @@
         <script type="text/javascript" src="js/interactors.js"></script>
 
         <script src="js/foundation.min.js"></script>
-          
+        <script src="js/initialize.js"></script>
     </body>
 </html>
