@@ -6,7 +6,6 @@
         <title>RestMan</title>
 
         <link rel="stylesheet" href="css/foundation.css" />
-        
         <link rel="stylesheet" href="css/codemirror/codemirror.css">
         <link rel="stylesheet" href="css/codemirror/monokai.css">
         <link rel="stylesheet" href="css/restman.css">
@@ -14,16 +13,14 @@
 
     <body>
 
-        <div class="separated">
-            <header class="row" data-topbar data-options="sticky_on: large">
-                <nav class="top-bar">
-                    <ul class="title-area" >
-                        <li class="name"><h1><a href="#">RestMan</a></h1></li>
-                    </ul>
-                </nav>
-            </header>
+        <header class="row full-width">
+            <nav class="top-bar">
+                <ul class="title-area" >
+                    <li class="name"><h1><a href="#">RestMan</a></h1></li>
+                </ul>
+            </nav>
 
-            <section class="row collapse">
+            <section class="row collapse expandable">
                 <div class="small-4 medium-2 columns">
                     <select id="Method">
                         <option value="GET">GET</option>
@@ -34,168 +31,107 @@
                     </select>
                 </div>
                 <div class="small-8 columns">
-                    <input id="Url" class="shouldwait" type="text" name="url" placeholder="Enter url here..." value="http://httpbin.org/basic-auth/jsargiot/passwd3" />
+                    <input id="Url" class="shouldwait" type="text" name="url" placeholder="Enter url here..." value="" />
                 </div>
                 <div class="small-12 medium-2 columns">
                     <a id="Send" href="#" class="expand button postfix">Send</a>
                 </div>
+
+                <div class="small-12 columns text-center">
+                    <dl class="small-4 medium-3 columns">
+                        <dt>Status</dt>
+                        <dd id="ResponseStatus">-</dd>
+                    </dl>
+                    <dl class="small-4 medium-3 columns">
+                        <dt>Time</dt>
+                        <dd id="ResponseTime">-</dd>
+                    </dl>
+                    <dl class="small-4 medium-3 columns">
+                        <dt>Size</dt>
+                        <dd id="ResponseSize">-</dd>
+                    </dl>
+                    <dl class="small-12 medium-3 columns">
+                        <dt>Type</dt>
+                        <dd id="ResponseType">-</dd>
+                    </dl>
+                </div>
+                <progress id="progress" max='100' value='0'></progress>
             </section>
-        </div>
+        </header>
 
-        <!--
-        <section class="small-4 columns">
-            <dl id="CollectionTitle" class="clearfix sub-nav left">
-                <dt>History</dt>
-            </dl>
+        <article>
+            <section class="row expandable closed">
+                <h3 class="expander">Headers</h3>
 
-            <ul id="HistoryList" class="clearfix no-bullet">
-                <li class="">
-                    <a href="#">
-                        <span class="label success">GET</span>
-                        <span class="history-entry">https://google.com.ar/una/entrada/larga/js/entities/request.js</span>
-                    </a>
-                </li>
-                <li class="">
-                    <a href="#">
-                        <span class="label success">POST</span>
-                        <span class="history-entry">/js/entities/request.js</span>
-                    </a>
-                </li>
-            </ul>
-        </section>
-        -->
-
-        <section class="row separated">
-            <div class="small-2 columns">
-                <h6>Headers</h6>
-            </div>
-            <div class="small-10 columns">
-                <table id="HeadersTable" class="edi-table">
-                    <tbody>
-                        <tr id="RowTemplate">
-                            <td>
-                                <input type="text" class="edi-text radius" placeholder="Header..." value="">
-                            </td>
-                            <td>
-                                <input type="text" class="edi-text active radius" placeholder="Value..." value="">
-                            </td>
-                            <td>
-                                <a class="delete-row"></a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <input type="text" class="edi-text radius" value="Authorization">
-                            </td>
-                            <td>
-                                <input type="text" class="edi-text active radius" value="Basic anNhcmdpb3Q6cGFzc3dk">
-                            </td>
-                            <td>
-                                <a class="delete-row"></a>
-                            </td>
-                        </tr>
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <td colspan="2">
-                                <a id="AddHeader" href="#" class="expand button postfix">Add header</a>
-                            </td>
-                            <td>&nbsp;</td>
-                        </tr>
-                    </tfoot>
-                </table>
-                
-            </div>
-        </section>
-
-        <section class="row separated">
-            <div class="small-2 columns">
-                <h6>Body</h6>
-            </div>
-            <div class="small-10 columns">
-                <div class="panel radius no-padding">
-                    <textarea id="RequestContent"></textarea>
-                        <!-- ul class="sub-nav right">
-                            <li class="active"><a class="switch-json" href="#RequestContent">JSON</a></li>
-                            <li><a class="switch-xml" href="#RequestContent">XML</a></li>
-                            <li><a class="switch-plain" href="#RequestContent">Plain</a></li></ul>
-                        <div class="clearfix"></div -->
+                <div class="small-12 columns">
+                <ul id="HeadersTable" class="name-value-list">
+                    <li class="template-item">
+                        <label class="name">Name:
+                            <input type="text" placeholder="Header...">
+                        </label>
+                        <label class="value">Value:
+                            <input type="text" placeholder="Value...">
+                        </label>
+                        <a class="delete-parent"></a>
+                    </li>
+                </ul><br />
+                <a href="#HeadersTable" class="button tiny template-item-cloner">Add header</a>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <section class="row separated">
-            <div class="small-2 columns">
-                <h6>Stats</h6>
-            </div>
-            <div class="small-10 columns">
-                <table>
-                    <tbody>
-                        <tr>
-                            <td><span class="label radius secondary">Status:</span></td>
-                            <td><span class="label secondary value radius" id="ResponseStatus">&nbsp;</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="label radius secondary">Response Time:</span></td>
-                            <td><span class="label secondary value radius" id="ResponseTime">&nbsp;</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="label radius secondary">Response Size:</span></td>
-                            <td><span class="label secondary value radius" id="ResponseSize">&nbsp;</span></td>
-                        </tr>
-                        <tr>
-                            <td><span class="label radius secondary">Response Type:</span></td>
-                            <td><span class="label secondary value radius" id="ResponseType">&nbsp;</span></td>
-                        </tr>
-                    </tbody>
-                </table>
-                <p></p>
-            </div>
-        </section>
+            <section class="row expandable closed">
+                <h3 class="expander">Body</h3>
 
-        <section class="row separated">
-            <div class="small-2 columns">
-                <h6>Response</h6>
-            </div>
-            <div class="small-10 columns">
-                <div id="ResponsePanel" class="panel radius no-padding shouldwait">
-                    <div class="overlay"></div>
-                    <textarea id="ResponseContent" class="editor-box"></textarea>
-                    <!-- ul class="sub-nav left">
-                        <li class="active"><a href="#">Status: </a></li>
-                    </ul -->
-                    <ul class="sub-nav right">
-                        <li class="active"><a class="switch-json" href="#ResponseContent">JSON</a></li>
-                        <li><a class="switch-xml" href="#ResponseContent">XML</a></li>
-                        <li><a class="switch-plain" href="#ResponseContent">Plain</a></li>
-                    </ul>
-                    <div class="clearfix"></div>
+                <div class="small-12 columns">
+                    <div class="panel radius no-padding">
+                        <textarea id="RequestContent"></textarea>
+                            <ul class="sub-nav right">
+                                <li class="active"><a class="switch-json" href="#RequestContent">JSON</a></li>
+                                <li><a class="switch-xml" href="#RequestContent">XML</a></li>
+                                <li><a class="switch-plain" href="#RequestContent">Plain</a></li></ul>
+                            <div class="clearfix"></div>
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <webview id="foo" src="http://www.google.com/" style="width:640px; height:480px"></webview>
-        
+            <section class="row expandable">
+                <h3 class="expander">Response</h3>
+
+                <div class="small-12 columns">
+                    <div id="ResponsePanel" class="panel radius no-padding shouldwait">
+                        <div class="overlay"></div>
+                        <textarea id="ResponseContent" class="editor-box"></textarea>
+                        <ul class="sub-nav right">
+                            <li class="active"><a class="switch-json" href="#ResponseContent">JSON</a></li>
+                            <li><a class="switch-xml" href="#ResponseContent">XML</a></li>
+                            <li><a class="switch-plain" href="#ResponseContent">Plain</a></li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </section>
+        </article>
+
         <footer class="row">
             <small class="copyright">Made by <a href="http://github.com/jsargiot">Joaquin Sargiotto</a>. Powered by <a href="http://jquery.com/">JQuery</a> and <a href="http://foundation.zurb.com/">Foundation</a>.</small>
         </footer>
 
         <!-- Load scripts -->
         <script type="text/javascript" src="js/jquery-1.11.1.js"></script>
-        
+
         <script type="text/javascript" src="js/beautify.js"></script>
         <script type="text/javascript" src="js/beautify-html.js"></script>
-        
+
         <script type="text/javascript" src="js/codemirror/codemirror.js"></script>
         <script type="text/javascript" src="js/codemirror/css/css.js"></script>
         <script type="text/javascript" src="js/codemirror/javascript/javascript.js"></script>
         <script type="text/javascript" src="js/codemirror/xml/xml.js"></script>
         <script type="text/javascript" src="js/codemirror/htmlmixed/htmlmixed.js"></script>
-        
-        <script type="text/javascript" src="js/entities/request.js"></script>
-        <script type="text/javascript" src="js/interactors.js"></script>
 
         <script src="js/foundation.min.js"></script>
+
+        <script type="text/javascript" src="js/entities/request.js"></script>
+        <script type="text/javascript" src="js/interactors.js"></script>
         <script src="js/initialize.js"></script>
     </body>
 </html>

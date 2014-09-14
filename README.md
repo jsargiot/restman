@@ -1,10 +1,11 @@
-== RESTMan for Opera
+RESTMan for Opera
+===
 
-RESTMan is a browser extension to work on http requests.
+RESTMan is a browser extension to work on http(s) requests.
 
 Inspired by POSTMAN for Chrome.
 
+License
+---
 
--- License
-
-MIT License v2.
+MIT License v2 (see LICENSE file).

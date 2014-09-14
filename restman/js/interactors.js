@@ -3,12 +3,24 @@
 
 function collect_headers(table) {
     headers = {}
-    $("#HeadersTable tbody tr").each(function (index){
-        var inputs = $(this).find("input")
+    $(table).children("li").each(function (index){
         var inputs = $(this).find("input");
-        headers[$.trim(inputs[0].value)] = $.trim(inputs[1].value);
+        var header = $.trim(inputs[0].value);
+        var value = $.trim(inputs[1].value);
+        if (header && value) {
+            headers[header] = value;
+        }
     });
     return headers;
+}
+
+var onProgressHandler = function(event) {
+    if(event.lengthComputable) {
+        var howmuch = (event.loaded / event.total) * 100;
+                document.querySelector('#progress').value = Math.ceil(howmuch);
+    } else {
+        console.log("Can't determine the size of the file.");
+    }
 }
 
 var editors = {}
@@ -30,7 +42,7 @@ $("#Send").click(function(event) {
 
     var method = $("#Method").val();
 
-    headers = collect_headers();
+    headers = collect_headers("#HeadersTable");
 
     if (method == "GET") {
         request.send(
@@ -50,7 +62,23 @@ $("#Send").click(function(event) {
                         }
                     }
                 }
-                
+
+                /*
+                // Populate headers table.
+                headers = jqXHR.getAllResponseHeaders().split("\n");
+                for (var hv in headers) {
+                    htext = headers[hv];
+                    divider = htext.indexOf(":");
+                    header = htext.substr(0, divider);
+                    value = htext.substr(divider + 2); // +2 because we ignore ": " (2 chars)
+                    if (header) {
+                        $("#ResponseHeadersTable").append(
+                            $("<span class=\"label radius secondary\"><span class=\"name\">" + header + ": </span><strong class=\"value\">" + value + "</strong></span><br />")
+                        );
+                    }
+                }
+                */
+
 
                 // Calculate length of response
                 content_length = jqXHR.getResponseHeader("Content-Length");
@@ -68,7 +96,9 @@ $("#Send").click(function(event) {
                 $(".shouldwait").removeClass('loading');
             },
             headers,
-            null);
+            null,
+            onProgressHandler
+        );
     }else{
         request.send(
             $("#Url").val(),
@@ -107,7 +137,9 @@ $("#Send").click(function(event) {
                 $(".shouldwait").removeClass('loading');
             },
             headers,
-            editors["#RequestContent"].getValue());
+            editors["#RequestContent"].getValue().replace(/\n/g, "\r\n") + "\r\n",
+            onProgressHandler
+        );
     }
     //$('#ResponseCode').each(function(i, e) {hljs.highlightBlock(e)});
     
@@ -144,16 +176,54 @@ $("a.switch-plain").click(function(event) {
     $(this).parent().addClass('active');
 });
 
-$("a.delete-row").click(function(event) {
+
+/*
+ * HEADERS TABLE
+ */
+$("a.delete-parent").click(function(event) {
     /* Act on the event */
-    var row = $(this).parent().parent();
+    var row = $(this).parent();
     row.remove();
+    // Avoid going to href
+    return false;
 });
 
-$("#AddHeader").click(function(event) {
+$("a.template-item-cloner").click(function(event) {
+    // Get the id for the container
+    var anchor = $(this)[0];
+    var target = anchor.href.replace(anchor.baseURI, "");
+    var parent = $(target);
+
+    // Get the template child to clone
+    var original = parent.children(".template-item");
+
+    // Clone and clean
+    if (original) {
+        // Clone template (with data and events!)
+        var cloned = original.clone(true);
+        // Remove id for the clones
+        cloned.each(function(index, elem) { elem.id = ""; });
+        cloned.removeClass("template-item");
+
+        // Add the new born to the container
+        parent.append(cloned);
+    }
+    // Avoid going to href
+    return false;
+});
+
+/*
+ * EXPANDABLES
+ */
+$("section.expandable .expander").click(function(event) {
     /* Act on the event */
-    var original = $("#RowTemplate");
-    var cloned = original.clone()[0];
-    cloned.id = "";
-    original.parent().append(cloned);
+    var section = $(this).parent();
+    
+    if (section.hasClass("closed")) {
+        section.removeClass("closed");
+    } else {
+        section.addClass("closed");
+    }
+    // Avoid going to href when coming from a link
+    return false;
 });
