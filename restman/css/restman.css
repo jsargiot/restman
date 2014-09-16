@@ -153,9 +153,8 @@ section h3 {
         }
         .name-value-list li a.delete-parent {
             width: 24px;
-            background-position: center;
-            background-repeat: no-repeat;
-            background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAQAAABKfvVzAAAA00lEQVR4Ae3BvStEAQAA8N+hE69HdHWSqMtiuE0GmxKum6TEWWREJhZKhMkfoC6TGHxMykA2H+WjS0+dxeBPsVree9nv9/NvDQOuVPUBKLpwLBSrakfFhxwYUldyYFWsLduY8SzQ78swzpTFCjyZw7JbkUnsO5GRoFvNBCrGseJGixS9PhXAmEftUmWcGwVLdqVz6AihrKw7i1Ksu9RkUF1Nl9CLsgQl91r1iIxY8KBNXqQg1qlZHV5NgTXXmu3ZEGvauzfzADZ9+1GUICfwV16nhl9psisN+pFbYQAAAABJRU5ErkJggg1fa07920e05a6ac40aafcc1fb2eb3516');
+            text-align: center;
+            font-size: 1.6em;
             flex-grow: 0;
         }
 
@@ -177,6 +176,13 @@ section h3 {
 }
     .sub-nav li {
         margin: 0;
+        padding: 0;
+    }
+
+.tabs-content {
+    margin: 0;
+}
+    .tabs-content > .content {
         padding: 0;
     }
 

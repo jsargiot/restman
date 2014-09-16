@@ -41,8 +41,8 @@ $("#Send").click(function(event) {
     $(".shouldwait").addClass('loading');
 
     var method = $("#Method").val();
-
-    headers = collect_headers("#HeadersTable");
+    var body = null;
+    var headers = collect_headers("#HeadersTable");
 
     if (method == "GET") {
         request.send(
@@ -100,6 +100,18 @@ $("#Send").click(function(event) {
             onProgressHandler
         );
     }else{
+        var ctype = $("#ContentType").val();
+        if (ctype == "raw") {
+            body = editors["#RequestContent"].getValue().replace(/\n/g, "\r\n") + "\r\n"
+        }
+        if (ctype == "form") {
+            body = new FormData();
+            keyvalues = collect_headers("#FormData");
+            for (var i in keyvalues) {
+                body.append(i, keyvalues[i]);
+            }
+        }
+
         request.send(
             $("#Url").val(),
             method,
@@ -137,7 +149,7 @@ $("#Send").click(function(event) {
                 $(".shouldwait").removeClass('loading');
             },
             headers,
-            editors["#RequestContent"].getValue().replace(/\n/g, "\r\n") + "\r\n",
+            body,
             onProgressHandler
         );
     }
@@ -226,4 +238,34 @@ $("section.expandable .expander").click(function(event) {
     }
     // Avoid going to href when coming from a link
     return false;
+});
+
+/*
+ * TAB SELECT
+ *
+ * Turn a normal select into a tab switcher. This works by invoking the
+ * "toggle_active_tab" when the select changes. The code needed is like
+ * the following:
+ *
+ *     <select data-tab tab-select>
+ *         <option value="value1" tab-panel="#panel1">Raw</option>
+ *         <option value="value2" tab-panel="#panel2">Form data</option>
+ *     </select>
+ *     <div class="tabs-content">
+ *         <div class="content active" id="panel1">
+ *             <h2>Title Panel1</h2>
+ *         </div>
+ *         <div class="content" id="panel2">
+ *             <h2>Title Panel2</h2>
+ *         </div>
+ *     </div>
+ */
+$("[tab-select]").change(function (event) {
+    self = $(event.target);
+    panel = self.children("option:selected").attr('tab-panel');
+
+    self.children = function (until, selector) {
+        return $('<a href="' + panel + '">Hi</a>');
+    };
+    Foundation.libs.tab.toggle_active_tab(self);
 });

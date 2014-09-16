@@ -72,7 +72,7 @@
                         <label class="value">Value:
                             <input type="text" placeholder="Value...">
                         </label>
-                        <a class="delete-parent"></a>
+                        <a class="delete-parent">&times;</a>
                     </li>
                 </ul><br />
                 <a href="#HeadersTable" class="button tiny template-item-cloner">Add header</a>
@@ -83,13 +83,38 @@
                 <h3 class="expander">Body</h3>
 
                 <div class="small-12 columns">
-                    <div class="panel radius no-padding">
-                        <textarea id="RequestContent"></textarea>
-                            <ul class="sub-nav right">
-                                <li class="active"><a class="switch-json" href="#RequestContent">JSON</a></li>
-                                <li><a class="switch-xml" href="#RequestContent">XML</a></li>
-                                <li><a class="switch-plain" href="#RequestContent">Plain</a></li></ul>
-                            <div class="clearfix"></div>
+                    <label class="name">Type:
+                        <select id="ContentType" class="radius" data-tab tab-select>
+                            <option value="raw" tab-panel="#panelRaw">Raw</option>
+                            <option value="form" tab-panel="#panelForm">Form data</option>
+                        </select>
+                    </label>
+                    <div class="tabs-content">
+                        <div class="content active" id="panelRaw">
+                            <div class="panel radius no-padding">
+                                <textarea id="RequestContent"></textarea>
+                                <ul class="sub-nav right">
+                                    <li class="active"><a class="switch-json" href="#RequestContent">JSON</a></li>
+                                    <li><a class="switch-xml" href="#RequestContent">XML</a></li>
+                                    <li><a class="switch-plain" href="#RequestContent">Plain</a></li>
+                                </ul>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                        <div class="content" id="panelForm">
+                            <ul id="FormData" class="name-value-list">
+                                <li class="template-item">
+                                    <label class="name">Name:
+                                        <input type="text" placeholder="Key...">
+                                    </label>
+                                    <label class="value">Value:
+                                        <input type="text" placeholder="Value...">
+                                    </label>
+                                    <a class="delete-parent">&times;</a>
+                                </li>
+                            </ul><br />
+                            <a href="#FormData" class="button tiny template-item-cloner">Add form data</a>
+                        </div>
                     </div>
                 </div>
             </section>
