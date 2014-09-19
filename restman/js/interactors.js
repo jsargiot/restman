@@ -6,7 +6,7 @@ function collect_headers(table) {
     $(table).children("li").each(function (index){
         var inputs = $(this).find("input");
         var header = $.trim(inputs[0].value);
-        var value = $.trim(inputs[1].value);
+        var value = inputs[1].type == "file" ? inputs[1].files[0] : inputs[1].value;
         if (header && value) {
             headers[header] = value;
         }
@@ -62,23 +62,6 @@ $("#Send").click(function(event) {
                         }
                     }
                 }
-
-                /*
-                // Populate headers table.
-                headers = jqXHR.getAllResponseHeaders().split("\n");
-                for (var hv in headers) {
-                    htext = headers[hv];
-                    divider = htext.indexOf(":");
-                    header = htext.substr(0, divider);
-                    value = htext.substr(divider + 2); // +2 because we ignore ": " (2 chars)
-                    if (header) {
-                        $("#ResponseHeadersTable").append(
-                            $("<span class=\"label radius secondary\"><span class=\"name\">" + header + ": </span><strong class=\"value\">" + value + "</strong></span><br />")
-                        );
-                    }
-                }
-                */
-
 
                 // Calculate length of response
                 content_length = jqXHR.getResponseHeader("Content-Length");
@@ -225,6 +208,25 @@ $("a.template-item-cloner").click(function(event) {
 });
 
 /*
+ * FILE DROP ON TEXT INPUTS (Only for the FormData form)
+ *
+ * Turn a normal `input[type="text"]` component into a drop-zone for files. When
+ * a file is dropped over the input element, it will be converted to a
+ * `type="file" element`. This will allow an user to drop a file over the
+ * 'value' input element to add a file to the form data.
+ *
+ */
+$('#FormData input[type="text"]').on("dragover drop", function(e) {
+    return e.preventDefault();
+}).on("drop", function(e) {
+    // Change type of this input to file
+    target = $(e.target);
+    target.attr("type", "file");
+    target.prop("files", e.originalEvent.dataTransfer.files);
+    return $();
+});
+
+/*
  * EXPANDABLES
  */
 $("section.expandable .expander").click(function(event) {
@@ -247,9 +249,9 @@ $("section.expandable .expander").click(function(event) {
  * "toggle_active_tab" when the select changes. The code needed is like
  * the following:
  *
- *     <select data-tab tab-select>
- *         <option value="value1" tab-panel="#panel1">Raw</option>
- *         <option value="value2" tab-panel="#panel2">Form data</option>
+ *     <select data-tab data-tab-select>
+ *         <option value="value1" data-tab-panel="#panel1">Raw</option>
+ *         <option value="value2" data-tab-panel="#panel2">Form data</option>
  *     </select>
  *     <div class="tabs-content">
  *         <div class="content active" id="panel1">
@@ -260,9 +262,9 @@ $("section.expandable .expander").click(function(event) {
  *         </div>
  *     </div>
  */
-$("[tab-select]").change(function (event) {
+$("[data-tab-select]").change(function (event) {
     self = $(event.target);
-    panel = self.children("option:selected").attr('tab-panel');
+    panel = self.children("option:selected").attr('data-tab-panel');
 
     self.children = function (until, selector) {
         return $('<a href="' + panel + '">Hi</a>');

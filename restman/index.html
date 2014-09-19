@@ -21,6 +21,7 @@
             </nav>
 
             <section class="row collapse expandable">
+
                 <div class="small-4 medium-2 columns">
                     <select id="Method">
                         <option value="GET">GET</option>
@@ -59,7 +60,7 @@
             </section>
         </header>
 
-        <article>
+        <div>
             <section class="row expandable closed">
                 <h3 class="expander">Headers</h3>
 
@@ -84,9 +85,9 @@
 
                 <div class="small-12 columns">
                     <label class="name">Type:
-                        <select id="ContentType" class="radius" data-tab tab-select>
-                            <option value="raw" tab-panel="#panelRaw">Raw</option>
-                            <option value="form" tab-panel="#panelForm">Form data</option>
+                        <select id="ContentType" class="radius" data-tab data-tab-select>
+                            <option value="raw" data-tab-panel="#panelRaw">Raw</option>
+                            <option value="form" data-tab-panel="#panelForm">Form data</option>
                         </select>
                     </label>
                     <div class="tabs-content">
@@ -105,10 +106,10 @@
                             <ul id="FormData" class="name-value-list">
                                 <li class="template-item">
                                     <label class="name">Name:
-                                        <input type="text" placeholder="Key...">
+                                        <input type="text" placeholder="Write key...">
                                     </label>
                                     <label class="value">Value:
-                                        <input type="text" placeholder="Value...">
+                                        <input type="text" placeholder="Write value or drop file...">
                                     </label>
                                     <a class="delete-parent">&times;</a>
                                 </li>
@@ -135,7 +136,7 @@
                     </div>
                 </div>
             </section>
-        </article>
+        </div>
 
         <footer class="row">
             <small class="copyright">Made by <a href="http://github.com/jsargiot">Joaquin Sargiotto</a>. Powered by <a href="http://jquery.com/">JQuery</a> and <a href="http://foundation.zurb.com/">Foundation</a>.</small>
