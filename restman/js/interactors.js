@@ -36,108 +36,73 @@ editors["#RequestContent"] = CodeMirror.fromTextArea(document.getElementById("Re
     });
 
 $("#Send").click(function(event) {
-    request = new Request()
-    
+    request = new Request();
+
     $(".shouldwait").addClass('loading');
 
     var method = $("#Method").val();
-    var body = null;
+    var url = $("#Url").val();
     var headers = collect_headers("#HeadersTable");
+    var ctype = $("#ContentType").val();
+    var body = {};
+    var data = null;
 
-    if (method == "GET") {
-        request.send(
-            $("#Url").val(),
-            "GET",
-            function(data, textStatus, jqXHR, duration) {
-                $('#ResponseStatus').text(jqXHR.status + " " + jqXHR.statusText).addClass("code" + jqXHR.status);
-
-                content_type = jqXHR.getResponseHeader("Content-type");
-                content_simple_type = "htmlmixed"; // By default, assume XML, HTML
-                if (content_type != null) {
-                    if (content_type.indexOf("application/json") >= 0) {
-                        data = js_beautify(data);
-                    } else {
-                        if (content_type.indexOf("text/html") >= 0) {
-                        data = html_beautify(data);
-                        }
-                    }
-                }
-
-                // Calculate length of response
-                content_length = jqXHR.getResponseHeader("Content-Length");
-                if (content_length == null) {
-                    content_length = data.length
-                }
-
-                $('#ResponseType').text(content_type);
-                $('#ResponseSize').text(content_length + " bytes");
-
-                $('#ResponseTime').text(parseFloat(duration).toFixed(2) + " ms");
-                
-                output = data;
-                editors["#ResponseContent"].setValue(output);
-                $(".shouldwait").removeClass('loading');
-            },
-            headers,
-            null,
-            onProgressHandler
-        );
-    }else{
-        var ctype = $("#ContentType").val();
+    if (method !== "GET") {
         if (ctype == "raw") {
-            body = editors["#RequestContent"].getValue().replace(/\n/g, "\r\n") + "\r\n"
+            body.type = "raw";
+            body.content = editors["#RequestContent"].getValue().replace(/\n/g, "\r\n") + "\r\n";
+            data = body.content;
         }
         if (ctype == "form") {
-            body = new FormData();
-            keyvalues = collect_headers("#FormData");
-            for (var i in keyvalues) {
-                body.append(i, keyvalues[i]);
+            data = new FormData();
+            body.type = "form";
+            body.content = collect_headers("#FormData");
+            for (var i in body.content) {
+                data.append(i, body.content[i]);
             }
         }
-
-        request.send(
-            $("#Url").val(),
-            method,
-            function(data, textStatus, jqXHR, duration) {
-                $('#ResponseStatus').text(jqXHR.status + " " + jqXHR.statusText).addClass("code" + jqXHR.status);
-
-                content_type = jqXHR.getResponseHeader("Content-type");
-                content_simple_type = "htmlmixed"; // By default, assume XML, HTML
-                if (content_type != null) {
-                    if (content_type.indexOf("application/json") >= 0) {
-                        data = js_beautify(data);
-                    } else {
-                        if (content_type.indexOf("text/html") >= 0) {
-                        data = html_beautify(data);
-                        }
-                    }
-                } else {
-                    content_type = "";
-                }
-                
-
-                // Calculate length of response
-                content_length = jqXHR.getResponseHeader("Content-Length");
-                if (content_length == null) {
-                    content_length = data.length
-                }
-
-                $('#ResponseType').text(content_type);
-                $('#ResponseSize').text(content_length + " bytes");
-
-                $('#ResponseTime').text(parseFloat(duration).toFixed(2) + " ms");
-                
-                output = data;
-                editors["#ResponseContent"].setValue(output);
-                $(".shouldwait").removeClass('loading');
-            },
-            headers,
-            body,
-            onProgressHandler
-        );
     }
-    //$('#ResponseCode').each(function(i, e) {hljs.highlightBlock(e)});
-    
+
+    // Save request for loading later.
+    restman.storage.saveRequest(method, url, headers, body);
+
+    request.send(
+        url,
+        method,
+        function(data, textStatus, jqXHR, duration) {
+            $('#ResponseStatus').text(jqXHR.status + " " + jqXHR.statusText).addClass("code" + jqXHR.status);
+
+            content_type = jqXHR.getResponseHeader("Content-type");
+            content_simple_type = "htmlmixed"; // By default, assume XML, HTML
+            if (content_type != null) {
+                if (content_type.indexOf("application/json") >= 0) {
+                    data = js_beautify(data);
+                } else {
+                    if (content_type.indexOf("text/html") >= 0) {
+                    data = html_beautify(data);
+                    }
+                }
+            }
+
+            // Calculate length of response
+            content_length = jqXHR.getResponseHeader("Content-Length");
+            if (content_length == null) {
+                content_length = data.length
+            }
+
+            $('#ResponseType').text(content_type);
+            $('#ResponseSize').text(content_length + " bytes");
+
+            $('#ResponseTime').text(parseFloat(duration).toFixed(2) + " ms");
+            
+            output = data;
+            editors["#ResponseContent"].setValue(output);
+            $(".shouldwait").removeClass('loading');
+        },
+        headers,
+        data,
+        onProgressHandler
+    );
 })
 
 
