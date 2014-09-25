@@ -14,6 +14,22 @@ function collect_headers(table) {
     return headers;
 }
 
+function reload_history() {
+    // Clean history
+    $('#HistoryList > li:not(.template-item)').remove();
+    // Re-populate history.
+    var history = restman.storage.getAll('requests', function(item) {
+        var clone = $('#HistoryList .template-item').clone(true);
+        // Set id
+        var a = clone.children('a');
+        a.attr('data-history-item', item.timestamp);
+        a.children('.history-method').text(item.method);
+        a.children('.history-url').text(item.url);
+        clone.removeClass('template-item');
+        $('#HistoryList').append(clone);
+    });
+}
+
 var onProgressHandler = function(event) {
     if(event.lengthComputable) {
         var howmuch = (event.loaded / event.total) * 100;
@@ -64,7 +80,7 @@ $("#Send").click(function(event) {
     }
 
     // Save request for loading later.
-    restman.storage.saveRequest(method, url, headers, body);
+    restman.storage.saveRequest(method, url, headers, body, function (evt){});
 
     request.send(
         url,
@@ -235,4 +251,24 @@ $("[data-tab-select]").change(function (event) {
         return $('<a href="' + panel + '">Hi</a>');
     };
     Foundation.libs.tab.toggle_active_tab(self);
+});
+
+$(document).ready(function(event) {
+    /*
+     * LOAD HISTORY ITEM
+     *
+     * <a href="#" data-history-item="1411588114901">Cargar</a>
+     *
+     */
+    $("[data-history-item]").click(function (event) {
+        // Load history item.
+        restman.storage.getRequest(parseInt($(this).attr('data-history-item')), function (item){
+            $("#Method").val(item.method);
+            $("#Url").val(item.url);
+            // TODO
+        });
+        return false;
+    });
+
+    reload_history();
 });
