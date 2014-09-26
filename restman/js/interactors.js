@@ -170,8 +170,21 @@ $("a.template-item-cloner").click(function(event) {
     var target = anchor.href.replace(anchor.baseURI, "");
     var parent = $(target);
 
+    cloneListItem(parent);
+    // Avoid going to href
+    return false;
+});
+
+/*
+ * CHILD TEMPLATE ITEM
+ *
+ * This works for things that have a template item and should clone it on
+ * demand and append it to the target object.
+ *
+ */
+function cloneListItem(target) {
     // Get the template child to clone
-    var original = parent.children(".template-item");
+    var original = $(target).children(".template-item");
 
     // Clone and clean
     if (original) {
@@ -182,11 +195,11 @@ $("a.template-item-cloner").click(function(event) {
         cloned.removeClass("template-item");
 
         // Add the new born to the container
-        parent.append(cloned);
+        $(target).append(cloned);
+        return cloned;
     }
-    // Avoid going to href
     return false;
-});
+}
 
 /*
  * FILE DROP ON TEXT INPUTS (Only for the FormData form)
@@ -260,12 +273,39 @@ $(document).ready(function(event) {
      * <a href="#" data-history-item="1411588114901">Cargar</a>
      *
      */
-    $("[data-history-item]").click(function (event) {
+    $('[data-history-item]').click(function (event) {
         // Load history item.
         restman.storage.getRequest(parseInt($(this).attr('data-history-item')), function (item){
-            $("#Method").val(item.method);
-            $("#Url").val(item.url);
-            // TODO
+            $('#Method').val(item.method);
+            $('#Url').val(item.url);
+
+            // Load Headers
+            // Cleanup headers
+            $('#HeadersTable > li:not(.template-item)').remove();
+            for (var d in item.headers) {
+                var row = cloneListItem($('#HeadersTable'));
+                row.find('label.name input').val(d);
+                row.find('label.value input').val(item.headers[d]);
+            }
+
+            if (!('type' in item.body)) {
+                item.body.type = 'raw';
+            }
+            // Load Body
+            if (item.body.type == 'raw') {
+                editors["#RequestContent"].setValue(item.body.content);
+            }
+            if (item.body.type == 'form') {
+                // Cleanup form
+                $('#FormData > li:not(.template-item)').remove();
+                for (var d in item.body.content) {
+                    var row = cloneListItem($('#FormData'));
+                    row.find('label.name input').val(d);
+                    row.find('label.value input').val(item.body.content[d]);
+                }
+            }
+            $('#ContentType').val(item.body.type).change();
+            }
         });
         return false;
     });
