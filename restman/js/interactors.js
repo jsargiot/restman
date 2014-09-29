@@ -284,8 +284,8 @@ $(document).ready(function(event) {
             $('#HeadersTable > li:not(.template-item)').remove();
             for (var d in item.headers) {
                 var row = cloneListItem($('#HeadersTable'));
-                row.find('label.name input').val(d);
-                row.find('label.value input').val(item.headers[d]);
+                row.find('label input.key').val(d);
+                row.find('label input.value').val(item.headers[d]);
             }
 
             if (!('type' in item.body)) {
@@ -300,8 +300,8 @@ $(document).ready(function(event) {
                 $('#FormData > li:not(.template-item)').remove();
                 for (var d in item.body.content) {
                     var row = cloneListItem($('#FormData'));
-                    row.find('label.name input').val(d);
-                    row.find('label.value input').val(item.body.content[d]);
+                    row.find('label input.key').val(d);
+                    row.find('label input.value').val(item.body.content[d]);
                 }
             }
             $('#ContentType').val(item.body.type).change();
