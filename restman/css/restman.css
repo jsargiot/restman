@@ -34,19 +34,22 @@ section h3 {
 }
 
 #HistoryList li a {
-    flex-grow: 1;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
-    line-height: 2em;
-    font-size: 0.825em;
 }
 
-#HistoryList li .label{
-    margin: 0;
-    padding: 0.25em;
-    line-height: inherit;
-    width: 4em;
+#HistoryList li a.delete-parent,
+#HeadersTable li a.delete-parent,
+#FormData li a.delete-parent{
+    width: 24px;
+    text-align: center;
+}
+
+#HeadersTable li label, #FormData li label {
+    text-indent: -5000px;
+    line-height: 0px;
+    padding: 0.250em;
 }
 
 #ResponsePanel {
@@ -154,16 +157,10 @@ section h3 {
         .name-value-list li:hover {
             box-shadow: 0 0 0 1px rgb(165, 165, 165);
         }
-        .name-value-list li label {
-            text-indent: -5000px;
-            line-height: 0px;
-            padding: 0.250em;
+        .name-value-list li .eager {
             flex-grow: 1;
         }
-        .name-value-list li a.delete-parent {
-            width: 24px;
-            text-align: center;
-            font-size: 1.6em;
+        .name-value-list li .uneager {
             flex-grow: 0;
         }
 

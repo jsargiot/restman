@@ -309,5 +309,24 @@ $(document).ready(function(event) {
         return false;
     });
 
+    $('#ClearHistory').click(function (event) {
+        restman.storage.getAll('requests', function (obj) {
+            restman.storage.deleteRequest(obj.timestamp, function (e) {});
+        });
+    });
+
+    $('#HistoryList a.delete-parent').click(function(event) {
+        // We just take care of the delete of the history item since the delete
+        // of the row will be taken care by the first a.delete-parent click
+        // event.
+
+        // Remove history entry
+        var id = $(this).attr('data-history-item');
+        restman.storage.deleteRequest(parseInt(id), function (e) {});
+
+        // Avoid going to href
+        return false;
+    });
+
     reload_history();
 });

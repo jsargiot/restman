@@ -67,12 +67,14 @@
                 <div class="small-12 columns">
                     <ul id="HistoryList" class="name-value-list">
                         <li class="template-item">
-                            <a href="#" data-history-item="1411588114901">
+                            <a class="eager" href="#" data-history-item="1411588114901">
                                 <span class="history-method label success">method</span>
                                 <span class="history-url">url</span>
                             </a>
+                            <a class="uneager delete-parent">&times;</a>
                         </li>
                     </ul><br />
+                    <a id="ClearHistory" href="#" class="button tiny">Clear all</a>
                 </div>
             </section>
 
@@ -82,13 +84,13 @@
                 <div class="small-12 columns">
                 <ul id="HeadersTable" class="name-value-list">
                     <li class="template-item">
-                        <label class="name">Name:
+                        <label class="eager">Name:
                             <input type="text" placeholder="Header...">
                         </label>
-                        <label class="value">Value:
+                        <label class="eager">Value:
                             <input type="text" placeholder="Value...">
                         </label>
-                        <a class="delete-parent">&times;</a>
+                        <a class="uneager delete-parent">&times;</a>
                     </li>
                 </ul><br />
                 <a href="#HeadersTable" class="button tiny template-item-cloner">Add header</a>
@@ -120,13 +122,13 @@
                         <div class="content" id="panelForm">
                             <ul id="FormData" class="name-value-list">
                                 <li class="template-item">
-                                    <label class="name">Name:
+                                    <label class="eager">Name:
                                         <input type="text" placeholder="Write key...">
                                     </label>
-                                    <label class="value">Value:
+                                    <label class="eager">Value:
                                         <input type="text" placeholder="Write value or drop file...">
                                     </label>
-                                    <a class="delete-parent">&times;</a>
+                                    <a class="uneager delete-parent">&times;</a>
                                 </li>
                             </ul><br />
                             <a href="#FormData" class="button tiny template-item-cloner">Add form data</a>

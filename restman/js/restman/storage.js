@@ -85,13 +85,34 @@ var restman = restman || {};
                 var request = store.get(reqId);
 
                 request.onsuccess = function (successevent) {
-                    var cursor = request.result;
-                    if (cursor) {
+                    var result = request.result;
+                    if (result) {
                         fn_onsuccess(successevent.target.result);
                     }
                 }
             });
         },
+
+        deleteRequest: function (reqId, fn_onsuccess) {
+            restman.storage.open(function(dbobject) {
+                var r_trans = dbobject.transaction('requests', 'readwrite');
+                var store = r_trans.objectStore('requests');
+                var request = store.delete(reqId);
+
+                request.oncomplete = function (successevent) {
+                    var result = request.result;
+                    if (result) {
+                        fn_onsuccess(successevent.target.result);
+                    }
+                }
+
+                request.onerror = function(e) {
+                    console.error(e);
+                };
+            });
+        },
+
+
     };
 
 })();
