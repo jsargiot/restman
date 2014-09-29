@@ -305,7 +305,6 @@ $(document).ready(function(event) {
                 }
             }
             $('#ContentType').val(item.body.type).change();
-            }
         });
         return false;
     });
