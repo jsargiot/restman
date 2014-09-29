@@ -39,17 +39,22 @@ section h3 {
     overflow: hidden;
 }
 
+#HistoryList li .label {
+    width: 4rem;
+    line-height: 2rem;
+    padding: 0;
+}
+
 #HistoryList li a.delete-parent,
 #HeadersTable li a.delete-parent,
 #FormData li a.delete-parent{
-    width: 24px;
+    width: 1.5rem;
     text-align: center;
 }
 
 #HeadersTable li label, #FormData li label {
     text-indent: -5000px;
     line-height: 0px;
-    padding: 0.250em;
 }
 
 #ResponsePanel {
@@ -126,6 +131,7 @@ section h3 {
     margin: 0;
     padding: 0;
     position: relative;
+    font-size: 0.9375rem;
 }
     .name-value-list input {
         border: 1px solid transparent;
@@ -133,8 +139,9 @@ section h3 {
         margin: 0;
         background-color: transparent;
         display: block;
-        padding: 0.5rem;
-        height: 2.3125rem;
+        padding: 0.275rem;
+        height: 2rem;
+        font-size: 0.825rem;
     }
     .name-value-list input:focus {
         border: 1px solid #a5a5a5;
@@ -149,6 +156,8 @@ section h3 {
         display: flex;
         border-radius: 3px;
         margin: 0.5em 0;
+        padding: 0.250em;
+        line-height: 2em;
         box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2);
     }
         .name-value-list li:nth-of-type(even) {
