@@ -293,7 +293,7 @@ $(document).ready(function(event) {
             }
             // Load Body
             if (item.body.type == 'raw') {
-                editors["#RequestContent"].setValue(item.body.content);
+                editors["#RequestContent"].setValue(item.body.content || '');
             }
             if (item.body.type == 'form') {
                 // Cleanup form
