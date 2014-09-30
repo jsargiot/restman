@@ -73,7 +73,7 @@ var restman = restman || {};
 
                 rw_trans.oncomplete = function (evt) {
                     console.debug('Request saved successfully.');
-                    fn_onsuccess(evt);
+                    fn_onsuccess(entry);
                 };
             });
         },

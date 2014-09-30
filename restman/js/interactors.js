@@ -14,19 +14,28 @@ function collect_headers(table) {
     return headers;
 }
 
+/*
+ * Adds a history item to the History section.
+ *
+ * The new item is always inserted at the beggining (newer)
+ */
+function add_history_item (item) {
+    var clone = $('#HistoryList .template-item').clone(true);
+    // Set id
+    var a = clone.children('a');
+    a.attr('data-history-item', item.timestamp);
+    a.children('.history-method').text(item.method);
+    a.children('.history-url').text(item.url);
+    clone.removeClass('template-item');
+    $('#HistoryList').prepend(clone);
+}
+
 function reload_history() {
     // Clean history
     $('#HistoryList > li:not(.template-item)').remove();
     // Re-populate history.
     var history = restman.storage.getAll('requests', function(item) {
-        var clone = $('#HistoryList .template-item').clone(true);
-        // Set id
-        var a = clone.children('a');
-        a.attr('data-history-item', item.timestamp);
-        a.children('.history-method').text(item.method);
-        a.children('.history-url').text(item.url);
-        clone.removeClass('template-item');
-        $('#HistoryList').append(clone);
+        add_history_item(item);
     });
 }
 
@@ -55,6 +64,7 @@ $("#Send").click(function(event) {
     request = new Request();
 
     $(".shouldwait").addClass('loading');
+    document.querySelector('#progress').value = 0;
 
     var method = $("#Method").val();
     var url = $("#Url").val();
@@ -80,7 +90,9 @@ $("#Send").click(function(event) {
     }
 
     // Save request for loading later.
-    restman.storage.saveRequest(method, url, headers, body, function (evt){});
+    restman.storage.saveRequest(method, url, headers, body, function (item){
+        add_history_item(item);
+    });
 
     request.send(
         url,
