@@ -120,11 +120,26 @@ $("#Send").click(function(event) {
 
             $('#ResponseType').text(content_type);
             $('#ResponseSize').text(content_length + " bytes");
-
             $('#ResponseTime').text(parseFloat(duration).toFixed(2) + " ms");
-            
-            output = data;
-            editors["#ResponseContent"].setValue(output);
+            // Set body
+            editors["#ResponseContent"].setValue(data);
+
+            // Set response headers
+            var response_headers = jqXHR.getAllResponseHeaders().split("\n");
+            $('#ResponseHeaders > li:not(.template-item)').remove();
+            for (var i in response_headers) {
+                var headervalue = response_headers[i];
+                var sep = headervalue.indexOf(":");
+
+                var key = headervalue.substring(0, sep).trim();
+                var value = headervalue.substring(sep + 1).trim();
+
+                if (key !== "") {
+                    var row = cloneListItem($('#ResponseHeaders'));
+                    row.find('span.key').text(key);
+                    row.find('span.value').text(value);
+                }
+            }
             $(".shouldwait").removeClass('loading');
         },
         headers,

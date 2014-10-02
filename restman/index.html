@@ -82,18 +82,18 @@
                 <h3 class="expander">Headers</h3>
 
                 <div class="small-12 columns">
-                <ul id="HeadersTable" class="name-value-list">
-                    <li class="template-item">
-                        <label class="eager">Name:
-                            <input class="key" type="text" placeholder="Header...">
-                        </label>
-                        <label class="eager">Value:
-                            <input class="value" type="text" placeholder="Value...">
-                        </label>
-                        <a class="uneager delete-parent">&times;</a>
-                    </li>
-                </ul><br />
-                <a href="#HeadersTable" class="button tiny template-item-cloner">Add header</a>
+                    <ul id="HeadersTable" class="name-value-list">
+                        <li class="template-item">
+                            <label class="eager">Name:
+                                <input class="key" type="text" placeholder="Header...">
+                            </label>
+                            <label class="eager">Value:
+                                <input class="value" type="text" placeholder="Value...">
+                            </label>
+                            <a class="uneager delete-parent">&times;</a>
+                        </li>
+                    </ul><br />
+                    <a href="#HeadersTable" class="button tiny template-item-cloner">Add header</a>
                 </div>
             </section>
 
@@ -139,6 +139,20 @@
 
             <section class="row expandable">
                 <h3 class="expander">Response</h3>
+
+                <div class="small-12 columns">
+                    <section class="expandable closed clearfix">
+                        <h3 class="expander">Headers</h3>
+                        <div class="small-12 columns">
+                            <ul id="ResponseHeaders" class="name-value-list">
+                                <li class="template-item">
+                                    <span class="eager key"></span>
+                                    <span class="eager value"></span>
+                                </li>
+                            </ul>
+                        </div>
+                    </section>
+                </div>
 
                 <div class="small-12 columns">
                     <div id="ResponsePanel" class="panel radius no-padding shouldwait">

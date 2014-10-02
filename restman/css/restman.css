@@ -168,6 +168,7 @@ section h3 {
         }
         .name-value-list li .eager {
             flex-grow: 1;
+            flex-basis: 100%;
         }
         .name-value-list li .uneager {
             flex-grow: 0;
