@@ -16,6 +16,15 @@ Clone the repo or download the latest package.
 - "Load Unpacked Extension" and when asked for a folder choose the folder where the manifest.json file is located.
 - A "RESTMAN" button should appear next to your url bar.
 
+Features
+---
+
+* GET, POST, PUT, PATCH, DELETE requests.
+* Custom request headers.
+* Raw and Form data body.
+* View highlighted response.
+* View response headers.
+
 License
 ---
 
