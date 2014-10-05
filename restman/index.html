@@ -78,6 +78,16 @@
                 </div>
             </section>
 
+            <div id="BasicAuthForm" class="reveal-modal" data-reveal>
+                <h3>Basic Authentication</h3>
+                <form>
+                    <label>User: <input type="text" name="user" placeholder="Username..."></label>
+                    <label>Password: <input type="text" name="pass" placeholder="Username..."></label>
+                </form>
+                <a class="close-reveal-modal">&#215;</a>
+                <button type="button" class="tiny save-modal">Save</button>
+            </div>
+
             <section class="row expandable closed">
                 <h3 class="expander">Headers</h3>
 
@@ -94,6 +104,7 @@
                         </li>
                     </ul><br />
                     <a href="#HeadersTable" class="button tiny template-item-cloner">Add header</a>
+                    <a href="#" class="button tiny" data-reveal-id="BasicAuthForm">Add Basic Authentication</a>
                 </div>
             </section>
 

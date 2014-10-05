@@ -293,6 +293,21 @@ $("[data-tab-select]").change(function (event) {
     Foundation.libs.tab.toggle_active_tab(self);
 });
 
+/*
+ * SAVE AUTHORIZATION HEADER
+ */
+$('#BasicAuthForm .save-modal').click(function (event) {
+    var user = $('#BasicAuthForm input[name="user"]').val();
+    var pass = $('#BasicAuthForm input[name="pass"]').val();
+
+    // TODO: Delete Authorization header if exists
+    var item = cloneListItem('#HeadersTable');
+    item.find('input.key').val('Authorization');
+    item.find('input.value').val('Basic ' + btoa(user + ':' + pass));
+
+    $('#BasicAuthForm').foundation('reveal', 'close')
+});
+
 $(document).ready(function(event) {
     /*
      * LOAD HISTORY ITEM
