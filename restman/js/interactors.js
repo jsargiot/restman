@@ -34,7 +34,7 @@ function reload_history() {
     // Clean history
     $('#HistoryList > li:not(.template-item)').remove();
     // Re-populate history.
-    var history = restman.storage.getAll('requests', function(item) {
+    var history = restman.storage.getAllRequests(function(item) {
         add_history_item(item);
     });
 }

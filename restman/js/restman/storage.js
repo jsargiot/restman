@@ -53,6 +53,10 @@ var restman = restman || {};
             });
         },
 
+        getAllRequests: function(fn_onsuccess) {
+            return restman.storage.getAll('requests', fn_onsuccess);
+        },
+
         saveRequest: function(method, url, headers, body, fn_onsuccess) {
             restman.storage.open(function(dbobject) {
                 // Open a transaction for writing
@@ -112,7 +116,5 @@ var restman = restman || {};
             });
         },
 
-
     };
-
 })();
