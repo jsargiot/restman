@@ -61,8 +61,6 @@ editors["#RequestContent"] = CodeMirror.fromTextArea(document.getElementById("Re
     });
 
 $("#Send").click(function(event) {
-    request = new Request();
-
     $(".shouldwait").addClass('loading');
     document.querySelector('#progress').value = 0;
 
@@ -94,9 +92,11 @@ $("#Send").click(function(event) {
         add_history_item(item);
     });
 
-    request.send(
-        url,
+    restman.request.raw_request(
         method,
+        url,
+        headers,
+        data,
         function(data, textStatus, jqXHR, duration) {
             $('#ResponseStatus').text(jqXHR.status + " " + jqXHR.statusText).addClass("code" + jqXHR.status);
 
@@ -142,8 +142,6 @@ $("#Send").click(function(event) {
             }
             $(".shouldwait").removeClass('loading');
         },
-        headers,
-        data,
         onProgressHandler
     );
 })
