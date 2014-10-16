@@ -1,4 +1,10 @@
 /*
+ * This file is part of RESTMan for Opera Extension.
+ * https://github.com/jsargiot/restman
+ *
+ * Free to use under the MIT license.
+ * https://raw.githubusercontent.com/jsargiot/restman/master/LICENSE
+ *
  * This module provides functionality to send http requests.
  *
  * Note: Some headers cannot be modified because of security measures
