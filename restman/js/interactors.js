@@ -157,6 +157,9 @@ $("a.switch-xml").click(function(event) {
     editor = editors[textarea];
     editor.setOption("mode", "htmlmixed");
 
+    var beautified = html_beautify(editor.getValue())
+    editor.setValue(beautified);
+
     $(this).parent().parent().children(".active").removeClass('active');
     $(this).parent().addClass('active');
 });
@@ -166,6 +169,9 @@ $("a.switch-json").click(function(event) {
     var textarea = $(this).attr("href");
     editor = editors[textarea];
     editor.setOption("mode", "javascript");
+
+    var beautified = js_beautify(editor.getValue())
+    editor.setValue(beautified);
 
     $(this).parent().parent().children(".active").removeClass('active');
     $(this).parent().addClass('active');
