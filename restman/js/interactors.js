@@ -245,14 +245,14 @@ function cloneListItem(target) {
  * 'value' input element to add a file to the form data.
  *
  */
-$('#FormData input[type="text"]').on("dragover drop", function(e) {
+$('input[type="text"][data-fileable]').on("dragover drop", function(e) {
     return e.preventDefault();
 }).on("drop", function(e) {
     // Change type of this input to file
     target = $(e.target);
     target.attr("type", "file");
     target.prop("files", e.originalEvent.dataTransfer.files);
-    return $();
+    return $(this);
 });
 
 /*
