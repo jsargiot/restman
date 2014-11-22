@@ -256,22 +256,6 @@ $('input[type="text"][data-fileable]').on("dragover drop", function(e) {
 });
 
 /*
- * EXPANDABLES
- */
-$("section.expandable .expander").click(function(event) {
-    /* Act on the event */
-    var section = $(this).parent();
-    
-    if (section.hasClass("closed")) {
-        section.removeClass("closed");
-    } else {
-        section.addClass("closed");
-    }
-    // Avoid going to href when coming from a link
-    return false;
-});
-
-/*
  * TAB SELECT
  *
  * Turn a normal select into a tab switcher. This works by invoking the
