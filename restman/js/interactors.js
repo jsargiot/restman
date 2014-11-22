@@ -237,25 +237,6 @@ function cloneListItem(target) {
 }
 
 /*
- * FILE DROP ON TEXT INPUTS (Only for the FormData form)
- *
- * Turn a normal `input[type="text"]` component into a drop-zone for files. When
- * a file is dropped over the input element, it will be converted to a
- * `type="file" element`. This will allow an user to drop a file over the
- * 'value' input element to add a file to the form data.
- *
- */
-$('input[type="text"][data-fileable]').on("dragover drop", function(e) {
-    return e.preventDefault();
-}).on("drop", function(e) {
-    // Change type of this input to file
-    target = $(e.target);
-    target.attr("type", "file");
-    target.prop("files", e.originalEvent.dataTransfer.files);
-    return $(this);
-});
-
-/*
  * SAVE AUTHORIZATION HEADER
  */
 $('#BasicAuthForm .save-modal').click(function (event) {
