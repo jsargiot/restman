@@ -150,6 +150,16 @@ $("#Send").click(function(event) {
     );
 })
 
+/*
+ * Trigger send button everytime someone presses "enter" on the url input.
+ * Fixes: #3
+ */
+$("#Url").keypress(function(e) {
+    if(e.which == 13) {
+        $("#Send").click();
+    }
+});
+
 
 $("a.switch-xml").click(function(event) {
     /* Act on the event */
