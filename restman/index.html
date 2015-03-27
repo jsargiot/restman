@@ -14,31 +14,39 @@
 
     <body>
 
-        <header class="row full-width">
-            <nav class="top-bar">
-                <ul class="title-area" >
-                    <li class="name"><h1><a href="#">RestMan</a></h1></li>
-                </ul>
-            </nav>
+        <header class="row collapse full-width">
+
+            <div class="hide-for-small medium-1 columns">
+                <img class="logo" src="res/icon64.png" />
+            </div>
+
+            <div id="Controls" class="small-12 medium-11 columns">
+                <div class="row collapse">
+                    <div class="small-4 medium-2 columns">
+                        <select class="btn btn-success radius" id="Method">
+                            <option value="GET">GET</option>
+                            <option value="POST">POST</option>
+                            <option value="PUT">PUT</option>
+                            <option value="PATCH">PATCH</option>
+                            <option value="DELETE">DELETE</option>
+                        </select>
+                    </div>
+                    <div class="small-8 columns">
+                        <input id="Url" class="shouldwait" type="text" name="url" placeholder="Enter url here..." value="" />
+                    </div>
+                    <div class="small-12 medium-2 columns">
+                        <input type="button" value="Send" id="Send" class="button expand radius no-margin" />
+                    </div>
+                </div>
+            </div>
+
+
+        </header>
+        <div class="row collapse full-width">
+            <progress class="small-12 columns" id="progress" max='100' value='0'></progress>
+        </div>
 
             <section class="row collapse expandable">
-
-                <div class="small-4 medium-2 columns">
-                    <select id="Method">
-                        <option value="GET">GET</option>
-                        <option value="POST">POST</option>
-                        <option value="PUT">PUT</option>
-                        <option value="PATCH">PATCH</option>
-                        <option value="DELETE">DELETE</option>
-                    </select>
-                </div>
-                <div class="small-8 columns">
-                    <input id="Url" class="shouldwait" type="text" name="url" placeholder="Enter url here..." value="" />
-                </div>
-                <div class="small-12 medium-2 columns">
-                    <a id="Send" href="#" class="expand button postfix">Send</a>
-                </div>
-
                 <div class="small-12 columns text-center">
                     <dl class="small-4 medium-3 columns">
                         <dt>Status</dt>
@@ -57,9 +65,7 @@
                         <dd id="ResponseType">-</dd>
                     </dl>
                 </div>
-                <progress id="progress" max='100' value='0'></progress>
             </section>
-        </header>
 
         <div>
             <section class="row expandable closed">
