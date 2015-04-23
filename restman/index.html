@@ -6,48 +6,56 @@
         <title>RestMan</title>
 
         <link rel="stylesheet" href="css/foundation-5.4.6.css" />
-        <link rel="stylesheet" href="css/codemirror-4.1/codemirror.css">
-        <link rel="stylesheet" href="css/codemirror-4.1/monokai.css">
+        <link rel="stylesheet" href="css/codemirror-5.1/codemirror.css">
+        <link rel="stylesheet" href="css/codemirror-5.1/monokai.css">
         <link rel="stylesheet" href="css/ui/expandable.css">
+        <link rel="stylesheet" href="css/ui/material.css">
         <link rel="stylesheet" href="css/restman.css">
     </head>
 
-    <body>
+    <body class="blue-grey lighten-5">
 
-        <header class="row collapse full-width">
-
-            <div class="hide-for-small medium-1 columns">
-                <img class="logo" src="res/icon64.png" />
+        <header class="blue-grey flex-container">
+            <div class="title flex-item-static">
+                <img class="logo" src="res/icon32.png" />
+                <span>RESTMan</span>
             </div>
 
-            <div id="Controls" class="small-12 medium-11 columns">
-                <div class="row collapse">
-                    <div class="small-4 medium-2 columns">
-                        <select class="btn btn-success radius" id="Method">
-                            <option value="GET">GET</option>
-                            <option value="POST">POST</option>
-                            <option value="PUT">PUT</option>
-                            <option value="PATCH">PATCH</option>
-                            <option value="DELETE">DELETE</option>
-                        </select>
-                    </div>
-                    <div class="small-8 columns">
-                        <input id="Url" class="shouldwait" type="text" name="url" placeholder="Enter url here..." value="" />
-                    </div>
-                    <div class="small-12 medium-2 columns">
-                        <input type="button" value="Send" id="Send" class="button expand radius no-margin" />
-                    </div>
+            <div id="Controls" class="flex-item-grow">
+                <div class="row full-width collapse flex-container">
+                
+                    <select class="border-radius flex-item-static" id="Method">
+                        <option value="GET">GET</option>
+                        <option value="POST">POST</option>
+                        <option value="PUT">PUT</option>
+                        <option value="PATCH">PATCH</option>
+                        <option value="DELETE">DELETE</option>
+                    </select>
+
+                    <input id="Url" class="shouldwait flex-item-grow" type="text" name="url" placeholder="Enter url here..." value="" />
+
+                    <input type="button" value="Send" id="Send" class="flat border-radius expanded  flex-item-static blue-grey" />
+                    
                 </div>
             </div>
-
-
         </header>
-        <div class="row collapse full-width">
-            <progress class="small-12 columns" id="progress" max='100' value='0'></progress>
+        <progress class="small-12 columns" id="progress" max='100' value='0'></progress>
+
+        <div class="content" style="padding: 0">
+            <section class="expandable" style="margin: 0; padding: 0; text-align: center;">
+                <ul class="material-tabs">
+                    <li>History</li>
+                    <li class="active">Request</li>
+                    <li>Response</li>
+                </ul>
+            </section>
         </div>
 
-            <section class="row collapse expandable">
-                <div class="small-12 columns text-center">
+
+        <div class="content">
+
+            <section class="expandable">
+                <div class="row text-center">
                     <dl class="small-4 medium-3 columns">
                         <dt>Status</dt>
                         <dd id="ResponseStatus">-</dd>
@@ -66,23 +74,23 @@
                     </dl>
                 </div>
             </section>
+        
 
-        <div>
-            <section class="row expandable closed">
+        
+            <section class="expandable closed">
                 <h3 class="expander">History</h3>
 
-                <div class="small-12 columns">
-                    <ul id="HistoryList" class="name-value-list">
-                        <li class="template-item">
-                            <a class="eager" href="#" data-history-item="1411588114901">
-                                <span class="history-method label success">method</span>
-                                <span class="history-url">url</span>
-                            </a>
-                            <a class="uneager delete-parent">&times;</a>
-                        </li>
-                    </ul><br />
-                    <a id="ClearHistory" href="#" class="button tiny">Clear all</a>
-                </div>
+                <ul id="HistoryList" class="name-value-list">
+                    <li class="template-item">
+                        <a class="eager" href="#" data-history-item="1411588114901">
+                            <span class="history-method label success">method</span>
+                            <span class="history-url">url</span>
+                        </a>
+                        <a class="uneager delete-parent">&times;</a>
+                    </li>
+                </ul><br />
+                <a id="ClearHistory" href="#" class="button tiny">Clear all</a>
+            
             </section>
 
             <div id="BasicAuthForm" class="reveal-modal" data-reveal>
@@ -95,30 +103,29 @@
                 <button type="button" class="tiny save-modal">Save</button>
             </div>
 
-            <section class="row expandable closed">
+            <section class="expandable closed">
                 <h3 class="expander">Headers</h3>
 
-                <div class="small-12 columns">
-                    <ul id="HeadersTable" class="name-value-list">
-                        <li class="template-item">
-                            <label class="eager">Name:
-                                <input class="key" type="text" placeholder="Header..." />
-                            </label>
-                            <label class="eager">Value:
-                                <input class="value" type="text" placeholder="Value..." />
-                            </label>
-                            <a class="uneager delete-parent">&times;</a>
-                        </li>
-                    </ul><br />
-                    <a href="#HeadersTable" class="button tiny template-item-cloner">Add header</a>
-                    <a href="#" class="button tiny" data-reveal-id="BasicAuthForm">Add Basic Authentication</a>
-                </div>
+                <ul id="HeadersTable" class="name-value-list">
+                    <li class="template-item">
+                        <label class="eager">Name:
+                            <input class="key" type="text" placeholder="Header..." />
+                        </label>
+                        <label class="eager">Value:
+                            <input class="value" type="text" placeholder="Value..." />
+                        </label>
+                        <a class="uneager delete-parent">&times;</a>
+                    </li>
+                </ul><br />
+                <a href="#HeadersTable" class="button tiny template-item-cloner">Add header</a>
+                <a href="#" class="button tiny" data-reveal-id="BasicAuthForm">Add Basic Authentication</a>
             </section>
 
-            <section class="row expandable closed">
+            <section class="expandable closed">
+
                 <h3 class="expander">Body</h3>
 
-                <div class="small-12 columns">
+                <div class="small-12 medium-6 columns">
                     <label class="name">Type:
                         <select id="ContentType" class="radius" data-tab data-tab-select>
                             <option value="raw" data-tab-panel="#panelRaw">Raw</option>
@@ -129,11 +136,11 @@
                         <div class="content active" id="panelRaw">
                             <div class="panel radius no-padding">
                                 <textarea id="RequestContent"></textarea>
-                                <ul class="sub-nav right">
+                                <!-- ul class="sub-nav right">
                                     <li class="active"><a class="switch-json" href="#RequestContent">JSON</a></li>
                                     <li><a class="switch-xml" href="#RequestContent">XML</a></li>
                                     <li><a class="switch-plain" href="#RequestContent">Plain</a></li>
-                                </ul>
+                                </ul -->
                                 <div class="clearfix"></div>
                             </div>
                         </div>
@@ -153,9 +160,27 @@
                         </div>
                     </div>
                 </div>
+
+
+
+                <div class="small-12 medium-6 columns">
+                <label class="name">
+                    Type:
+                    <div id="ResponsePanel" class="panel radius no-padding shouldwait">
+                        <div class="overlay"></div>
+                        <textarea id="ResponseContent" class="editor-box"></textarea>
+                        <ul class="sub-nav right">
+                            <li class="active"><a class="switch-json" href="#ResponseContent">JSON</a></li>
+                            <li><a class="switch-xml" href="#ResponseContent">XML</a></li>
+                            <li><a class="switch-plain" href="#ResponseContent">Plain</a></li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                </label>
             </section>
 
-            <section class="row expandable">
+            <section class="expandable">
                 <h3 class="expander">Response</h3>
 
                 <div class="small-12 columns">
@@ -171,24 +196,13 @@
                         </div>
                     </section>
                 </div>
-
-                <div class="small-12 columns">
-                    <div id="ResponsePanel" class="panel radius no-padding shouldwait">
-                        <div class="overlay"></div>
-                        <textarea id="ResponseContent" class="editor-box"></textarea>
-                        <ul class="sub-nav right">
-                            <li class="active"><a class="switch-json" href="#ResponseContent">JSON</a></li>
-                            <li><a class="switch-xml" href="#ResponseContent">XML</a></li>
-                            <li><a class="switch-plain" href="#ResponseContent">Plain</a></li>
-                        </ul>
-                        <div class="clearfix"></div>
-                    </div>
-                </div>
             </section>
         </div>
 
-        <footer class="row">
-            <small class="copyright">Made by <a href="http://github.com/jsargiot">Joaquin Sargiotto</a>. Powered by <a href="http://jquery.com/">JQuery</a> and <a href="http://foundation.zurb.com/">Foundation</a>.</small>
+        <footer class="page-footer blue-grey">
+            <div class="row footer-copyright blue-grey-text text-lighten-5">
+                <span>Made by <a class="blue-grey-text text-lighten-2" href="http://github.com/jsargiot">Joaquin Sargiotto</a>. Powered by <a class="blue-grey-text text-lighten-2" href="http://jquery.com/">JQuery</a> and <a class="blue-grey-text text-lighten-2" href="http://foundation.zurb.com/">Foundation</a>.</span>
+            </div>
         </footer>
 
         <!-- Load scripts -->
@@ -197,11 +211,10 @@
         <script type="text/javascript" src="js/beautify.js"></script>
         <script type="text/javascript" src="js/beautify-html.js"></script>
 
-        <script type="text/javascript" src="js/codemirror-4.1/codemirror.js"></script>
-        <script type="text/javascript" src="js/codemirror-4.1/css/css.js"></script>
-        <script type="text/javascript" src="js/codemirror-4.1/javascript/javascript.js"></script>
-        <script type="text/javascript" src="js/codemirror-4.1/xml/xml.js"></script>
-        <script type="text/javascript" src="js/codemirror-4.1/htmlmixed/htmlmixed.js"></script>
+        <script type="text/javascript" src="js/codemirror-5.1/codemirror.js"></script>
+        <script type="text/javascript" src="js/codemirror-5.1/javascript/javascript.js"></script>
+        <script type="text/javascript" src="js/codemirror-5.1/xml/xml.js"></script>
+        <script type="text/javascript" src="js/codemirror-5.1/htmlmixed/htmlmixed.js"></script>
 
         <script src="js/foundation-5.4.6.js"></script>
 
