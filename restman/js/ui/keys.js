@@ -5,16 +5,11 @@
  * Free to use under the MIT license.
  * https://raw.githubusercontent.com/jsargiot/restman/master/LICENSE
  *
- * This module provides functionality to replace specific ${token} by some
- * value.
+ * Requires: shortcut.js, jquery
  */
-
-var restman = restman || {};
-
-(function() {
-    'use strict';
-
-    restman.variables = {
-
-    };
-})();
+$(document).ready(function(event) {
+    // Press Ctrl+Enter to execute request
+    shortcut.add("ctrl+enter", function() {
+        $("#Send").click();
+    }); 
+});

@@ -7,16 +7,15 @@
  */
 
 .expandable {
-    /*border: 1px solid #a5a5a5;
-    box-shadow: 0 0px 1px #d7d7d7;*/
-    margin: 1em auto;
+    overflow: auto;
+    border-top: 1px solid rgba(0,0,0,0.1);
 }
     .expandable.closed {
         overflow: hidden;
     }
     .expandable .expander {
         display: block;
-        padding: 0.5em 0 0.5em 2em;
+        padding: 1em 0 1em 2em;
         background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAFCAYAAAB4ka1VAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAAJcEhZcwAACxEAAAsRAX9kX5EAAAA3SURBVBhXXYuJDQAgCAPB/TotA2raFCVewnsQEwCb4VGkq6RbUVVySr9seJRT9tfcLdcryesjDrXcFeyp7PAGAAAAAElFTkSuQmCC");
         background-position: 0.825em center;
         background-repeat: no-repeat;

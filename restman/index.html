@@ -13,195 +13,162 @@
         <link rel="stylesheet" href="css/restman.css">
     </head>
 
-    <body class="blue-grey lighten-5">
+    <body class="blue-grey lighten-5 flex-container flex-columns">
+        <progress id="progress" value="" max="100"></progress>
 
-        <header class="blue-grey flex-container">
-            <div class="title flex-item-static">
+        <header class="blue-grey flex-item-static flex-container">
+            <div class="title flex-item-static hide-for-small-only">
                 <img class="logo" src="res/icon32.png" />
                 <span>RESTMan</span>
             </div>
-
-            <div id="Controls" class="flex-item-grow">
-                <div class="row full-width collapse flex-container">
-                
-                    <select class="border-radius flex-item-static" id="Method">
-                        <option value="GET">GET</option>
-                        <option value="POST">POST</option>
-                        <option value="PUT">PUT</option>
-                        <option value="PATCH">PATCH</option>
-                        <option value="DELETE">DELETE</option>
-                    </select>
-
-                    <input id="Url" class="shouldwait flex-item-grow" type="text" name="url" placeholder="Enter url here..." value="" />
-
-                    <input type="button" value="Send" id="Send" class="flat border-radius expanded  flex-item-static blue-grey" />
-                    
-                </div>
+            <div id="Controls" class="flex-item-dynamic flex-container">
+                <select class="border-radius flex-item-static" id="Method">
+                    <option value="GET">GET</option>
+                    <option value="POST">POST</option>
+                    <option value="PUT">PUT</option>
+                    <option value="PATCH">PATCH</option>
+                    <option value="DELETE">DELETE</option>
+                </select>
+                <input id="Url" class="shouldwait flex-item-dynamic" type="text" name="url" placeholder="Enter url here..." value="" />
+                <img id="History" class="flex-item-static" src="img/mdi-history.svg" data-reveal-id="HistoryForm" />
+                <input id="Send" type="button" value="Send" class="flat border-radius expanded flex-item-static blue-grey" />
             </div>
         </header>
-        <progress class="small-12 columns" id="progress" max='100' value='0'></progress>
 
-        <div class="content" style="padding: 0">
-            <section class="expandable" style="margin: 0; padding: 0; text-align: center;">
-                <ul class="material-tabs">
-                    <li>History</li>
-                    <li class="active">Request</li>
-                    <li>Response</li>
-                </ul>
-            </section>
-        </div>
-
-
-        <div class="content">
-
+        <div class="flex-item-dynamic scrollable-y main-container">
             <section class="expandable">
-                <div class="row text-center">
-                    <dl class="small-4 medium-3 columns">
+                <div class="tabs-content text-center">
+                    <dl class="small-6 medium-3 columns">
                         <dt>Status</dt>
                         <dd id="ResponseStatus">-</dd>
                     </dl>
-                    <dl class="small-4 medium-3 columns">
+                    <dl class="small-6 medium-3 columns">
                         <dt>Time</dt>
                         <dd id="ResponseTime">-</dd>
                     </dl>
-                    <dl class="small-4 medium-3 columns">
+                    <dl class="small-6 medium-3 columns">
                         <dt>Size</dt>
                         <dd id="ResponseSize">-</dd>
                     </dl>
-                    <dl class="small-12 medium-3 columns">
+                    <dl class="small-6 medium-3 columns">
                         <dt>Type</dt>
                         <dd id="ResponseType">-</dd>
                     </dl>
                 </div>
             </section>
-        
 
-        
-            <section class="expandable closed">
-                <h3 class="expander">History</h3>
-
-                <ul id="HistoryList" class="name-value-list">
-                    <li class="template-item">
-                        <a class="eager" href="#" data-history-item="1411588114901">
-                            <span class="history-method label success">method</span>
-                            <span class="history-url">url</span>
-                        </a>
-                        <a class="uneager delete-parent">&times;</a>
-                    </li>
-                </ul><br />
-                <a id="ClearHistory" href="#" class="button tiny">Clear all</a>
-            
-            </section>
-
+            <!-- Basic Authentication modal -->
             <div id="BasicAuthForm" class="reveal-modal" data-reveal>
-                <h3>Basic Authentication</h3>
-                <form>
-                    <label>User: <input type="text" name="user" placeholder="Username..." /></label>
-                    <label>Password: <input type="text" name="pass" placeholder="Username..." /></label>
-                </form>
-                <a class="close-reveal-modal">&#215;</a>
-                <button type="button" class="tiny save-modal">Save</button>
+                <div class="modal-content">
+                    <h4>Basic Authentication</h4>
+                    <form>
+                        <label>User: <input type="text" class="flat" name="user" placeholder="Username..." /></label>
+                        <label>Password: <input type="password" class="flat" name="pass" placeholder="Password..." /></label>
+                    </form>
+                </div>
+                <div class="modal-buttons">
+                    <input type="button" class="flat border-radius close-modal" value="Cancel" />
+                    <input type="button" class="flat border-radius save-modal ok" value="Save" />
+                </div>
+            </div>
+
+            <!-- History modal -->
+            <div id="HistoryForm" class="reveal-modal flex-container" data-reveal>
+                <div class="flex-container flex-columns">
+                    <div class="modal-content flex-item-dynamic flex-container flex-columns">
+                        <h4 class="flex-item-static">History</h4>
+
+                        <ul id="HistoryList" class="list flex-item-dynamic">
+                            <li data-clone-template class="flex-container flex-item-middle close-modal" data-history-item="1411588114901">
+                                <span class="flex-item-static history-method label success">method</span>
+                                <span class="flex-item-dynamic history-url" title="">url</span>
+                                <img src="img/mdi-remove.svg" class="flex-item-static" data-delete-item />
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="modal-buttons flex-item-static">
+                        <input type="button" class="flat border-radius close-modal" value="Cancel" />
+                        <input id="ClearHistory" type="button" class="flat border-radius error" value="Clear all" />
+                    </div>
+                </div>
             </div>
 
             <section class="expandable closed">
                 <h3 class="expander">Headers</h3>
-
-                <ul id="HeadersTable" class="name-value-list">
-                    <li class="template-item">
-                        <label class="eager">Name:
-                            <input class="key" type="text" placeholder="Header..." />
-                        </label>
-                        <label class="eager">Value:
-                            <input class="value" type="text" placeholder="Value..." />
-                        </label>
-                        <a class="uneager delete-parent">&times;</a>
-                    </li>
-                </ul><br />
-                <a href="#HeadersTable" class="button tiny template-item-cloner">Add header</a>
-                <a href="#" class="button tiny" data-reveal-id="BasicAuthForm">Add Basic Authentication</a>
+                <div class="tabs-content">
+                    <ul id="HeadersTable" class="name-value-list">
+                        <li data-clone-template class="flex-container">
+                            <input class="flat key flex-item-dynamic" type="text" placeholder="Header..." />
+                            <input class="flat value flex-item-dynamic" type="text" placeholder="Value..." />
+                            <img src="img/mdi-remove.svg" class="flex-item-static" data-delete-item />
+                        </li>
+                    </ul>
+                    <input type="button" data-clone-item="#HeadersTable" class="flat border-radius" value="Add header" />
+                    <input type="button" class="flat border-radius" data-reveal-id="BasicAuthForm" value="Add Basic Authentication" />
+                </div>
             </section>
 
             <section class="expandable closed">
-
                 <h3 class="expander">Body</h3>
-
-                <div class="small-12 medium-6 columns">
-                    <label class="name">Type:
-                        <select id="ContentType" class="radius" data-tab data-tab-select>
-                            <option value="raw" data-tab-panel="#panelRaw">Raw</option>
-                            <option value="form" data-tab-panel="#panelForm">Form data</option>
-                        </select>
-                    </label>
-                    <div class="tabs-content">
-                        <div class="content active" id="panelRaw">
-                            <div class="panel radius no-padding">
-                                <textarea id="RequestContent"></textarea>
-                                <!-- ul class="sub-nav right">
-                                    <li class="active"><a class="switch-json" href="#RequestContent">JSON</a></li>
-                                    <li><a class="switch-xml" href="#RequestContent">XML</a></li>
-                                    <li><a class="switch-plain" href="#RequestContent">Plain</a></li>
-                                </ul -->
-                                <div class="clearfix"></div>
-                            </div>
-                        </div>
-                        <div class="content" id="panelForm">
-                            <ul id="FormData" class="name-value-list">
-                                <li class="template-item">
-                                    <label class="eager">Name:
-                                        <input class="key" type="text" placeholder="Write key..." />
-                                    </label>
-                                    <label class="eager">Value:
-                                        <input class="value" type="text" placeholder="Write value or drop file..." data-fileable />
-                                    </label>
-                                    <a class="uneager delete-parent">&times;</a>
-                                </li>
-                            </ul><br />
-                            <a href="#FormData" class="button tiny template-item-cloner">Add form data</a>
-                        </div>
+                <ul class="material-tabs" data-tab>
+                    <li class="active"><a href="#PanelForm">Form</a></li>
+                    <li><a href="#PanelRaw">Raw</a></li>
+                </ul>
+                <div class="tabs-content">
+                    <div id="PanelForm" class="content active">
+                        <ul id="FormData" class="name-value-list">
+                            <li data-clone-template class="flex-container">
+                                <input class="flat key flex-item-dynamic" type="text" placeholder="Write key..." />
+                                <input class="flat key flex-item-dynamic" type="text" placeholder="Write value or drop file..." data-fileable />
+                                <img src="img/mdi-remove.svg" class="flex-item-static" data-delete-item />
+                            </li>
+                        </ul>
+                        <input type="button" data-clone-item="#FormData" class="flat border-radius" value="Add form data" />
                     </div>
-                </div>
-
-
-
-                <div class="small-12 medium-6 columns">
-                <label class="name">
-                    Type:
-                    <div id="ResponsePanel" class="panel radius no-padding shouldwait">
-                        <div class="overlay"></div>
-                        <textarea id="ResponseContent" class="editor-box"></textarea>
+                    <div id="PanelRaw" class="panel radius no-padding content">
+                        <textarea id="RequestContent"></textarea>
                         <ul class="sub-nav right">
-                            <li class="active"><a class="switch-json" href="#ResponseContent">JSON</a></li>
-                            <li><a class="switch-xml" href="#ResponseContent">XML</a></li>
-                            <li><a class="switch-plain" href="#ResponseContent">Plain</a></li>
+                            <li class="active"><a href="#" data-target="#RequestContent" data-switch-type="json">JSON</a></li>
+                            <li><a href="#" data-target="#RequestContent" data-switch-type="htmlmixed">XML</a></li>
+                            <li><a href="#" data-target="#RequestContent" data-switch-type="text">Plain</a></li>
                         </ul>
                         <div class="clearfix"></div>
                     </div>
                 </div>
-                </label>
             </section>
 
             <section class="expandable">
                 <h3 class="expander">Response</h3>
-
-                <div class="small-12 columns">
-                    <section class="expandable closed clearfix">
-                        <h3 class="expander">Headers</h3>
-                        <div class="small-12 columns">
-                            <ul id="ResponseHeaders" class="name-value-list">
-                                <li class="template-item">
-                                    <span class="eager key"></span>
-                                    <span class="eager value"></span>
-                                </li>
-                            </ul>
-                        </div>
-                    </section>
+                <ul class="material-tabs" data-tab>
+                    <li class="active"><a href="#ResponsePanel">Body</a></li>
+                    <li><a href="#ResponseHeadersContainer">Headers</a></li>
+                </ul>
+                <div class="tabs-content">
+                    <div id="ResponsePanel" class="panel radius no-padding shouldwait content active">
+                        <div class="overlay"></div>
+                        <textarea id="ResponseContent" class="editor-box"></textarea>
+                        <ul class="sub-nav right">
+                            <li class="active"><a href="#" data-target="#ResponseContent" data-switch-type="json">JSON</a></li>
+                            <li><a href="#" data-target="#ResponseContent" data-switch-type="htmlmixed">XML</a></li>
+                            <li><a href="#" data-target="#ResponseContent" data-switch-type="text">Plain</a></li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div id="ResponseHeadersContainer" class="content">
+                        <ul id="ResponseHeaders" class="name-value-list">
+                            <li data-clone-template class="flex-container">
+                                <span class="flat key flex-item-static"></span>
+                                <span class="flat value flex-item-dynamic"></span>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </section>
         </div>
 
-        <footer class="page-footer blue-grey">
-            <div class="row footer-copyright blue-grey-text text-lighten-5">
-                <span>Made by <a class="blue-grey-text text-lighten-2" href="http://github.com/jsargiot">Joaquin Sargiotto</a>. Powered by <a class="blue-grey-text text-lighten-2" href="http://jquery.com/">JQuery</a> and <a class="blue-grey-text text-lighten-2" href="http://foundation.zurb.com/">Foundation</a>.</span>
+        <footer class="flex-item-static page-footer blue-grey">
+            <div class="footer-copyright blue-grey-text text-lighten-5">
+                <span>Made by <a class="blue-grey-text text-lighten-2" href="http://github.com/jsargiot">Joaquin Sargiotto</a>. MIT License v2</span>
             </div>
         </footer>
 
@@ -218,12 +185,20 @@
 
         <script src="js/foundation-5.4.6.js"></script>
 
-        <script type="text/javascript" src="js/restman/request.js"></script>
+        <script type="text/javascript" src="js/shortcut.js"></script>
+
         <script type="text/javascript" src="js/restman/storage.js"></script>
+        <script type="text/javascript" src="js/restman/request.js"></script>
+
         <script type="text/javascript" src="js/ui/expandable.js"></script>
-        <script type="text/javascript" src="js/ui/tabselect.js"></script>
+        <script type="text/javascript" src="js/ui/dynamic_lists.js"></script>
         <script type="text/javascript" src="js/ui/fileable.js"></script>
-        <script type="text/javascript" src="js/interactors.js"></script>
-        <script src="js/initialize.js"></script>
+        <script type="text/javascript" src="js/ui/modals.js"></script>
+        <script type="text/javascript" src="js/ui/request.js"></script>
+        <script type="text/javascript" src="js/ui/headers.js"></script>
+        <script type="text/javascript" src="js/ui/keys.js"></script>
+        <script type="text/javascript" src="js/ui/editors.js"></script>
+        <script type="text/javascript" src="js/ui/history.js"></script>
+
     </body>
 </html>
