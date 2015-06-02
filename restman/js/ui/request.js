@@ -37,12 +37,12 @@ $(document).ready(function(event) {
         var data = null;
 
         if (method !== "GET") {
-            if ($("#PanelRaw").attr('aria-hidden') == "false") {
+            if ($("#PanelRaw").hasClass('active')) {
                 body.type = "raw";
                 body.content = restman.ui.editors.get("#RequestContent").getValue().replace(/\n/g, "\r\n") + "\r\n";
                 data = body.content;
             }
-            if ($("#PanelForm").attr('aria-hidden') == "false") {
+            if ($("#PanelForm").hasClass('active')) {
                 data = new FormData();
                 body.type = "form";
                 body.content = restman.ui.headers.collect("#FormData");

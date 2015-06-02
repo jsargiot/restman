@@ -56,7 +56,7 @@ $(document).ready(function(event) {
     /* Remove a history item. */
     $('#HistoryList li [data-delete-item]').click(function(event) {
         // We just take care of the delete of the history item since the delete
-        // of the row will be taken care by the first a.delete-parent click
+        // of the row will be taken care by the first [data-delete-item] click
         // event.
 
         // Remove history entry
@@ -85,10 +85,14 @@ $(document).ready(function(event) {
             if (!('type' in item.body)) {
                 item.body.type = 'raw';
             }
+
             // Load Body
+            var raw_value = '';
             if (item.body.type == 'raw') {
-                restman.ui.editors.get("#RequestContent").setValue(item.body.content || '');
+                raw_value = item.body.content;
             }
+            restman.ui.editors.get("#RequestContent").setValue(raw_value);
+
             if (item.body.type == 'form') {
                 // Cleanup form
                 $('#FormData > li:not([data-clone-template])').remove();

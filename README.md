@@ -27,6 +27,7 @@ Features
 * Raw and Form data body.
 * View highlighted response.
 * View response headers.
+* Ctrl+Enter sends request.
 
 License
 ---
