@@ -259,7 +259,14 @@ img#History {
 
 .CodeMirror {
   border-bottom: 1px solid #d8d8d8;
-  max-height: 75rem;
+  height: auto;
+}
+
+.CodeMirror .CodeMirror-scroll {
+  min-height: 18rem;
+  max-height: 50rem;
+  height: auto;
+  box-sizing: border-box;
 }
 
 .label {
