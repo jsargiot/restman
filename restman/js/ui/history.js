@@ -88,22 +88,28 @@ $(document).ready(function(event) {
                 item.body.type = 'raw';
             }
 
+            // Cleanup body (form and raw)
+            var raw_value = '', form_value = [];
+
             // Load Body
-            var raw_value = '';
             if (item.body.type == 'raw') {
                 raw_value = item.body.content;
+                $('a[href="#PanelRaw"]').click();
             }
-            restman.ui.editors.get("#RequestContent").setValue(raw_value);
 
             if (item.body.type == 'form') {
-                // Cleanup form
-                $('#FormData > li:not([data-clone-template])').remove();
-                // Load form items
-                for (var d in item.body.content) {
-                    var row = restman.ui.dynamic_list.add_item($('#FormData'), true);
-                    row.find('input.key').val(d);
-                    row.find('input.value').val(item.body.content[d]);
-                }
+                form_value = item.body.content;
+                $('a[href="#PanelForm"]').click();
+            }
+
+            // Load raw value (if set)
+            restman.ui.editors.get("#RequestContent").setValue(raw_value);
+            // Load form items (if any)
+            $('#FormData > li:not([data-clone-template])').remove();
+            for (var d in form_value) {
+                var row = restman.ui.dynamic_list.add_item($('#FormData'), true);
+                row.find('input.key').val(d);
+                row.find('input.value').val(item.body.content[d]);
             }
         });
         return false;
