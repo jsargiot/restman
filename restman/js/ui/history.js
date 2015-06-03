@@ -37,8 +37,10 @@ restman.ui = restman.ui || {};
                 // Clean non-template items
                 $(restman.ui.history.HISTORY_LIST + ' > li:not([data-clone-template])').remove();
                 // Re-populate history.
-                restman.storage.getAllRequests(function(item) {
-                    restman.ui.history.dialog.add(item);
+                restman.storage.getAllRequests(function(items) {
+                    for (var i in items) {
+                        restman.ui.history.dialog.add(items[i]);
+                    }
                 });
             }
         }

@@ -19,6 +19,45 @@ var restman = restman || {};
         /* Database version. */
         DB_VERSION: 1,
 
+        _compareRequests: function (item, entry) {
+            // Compare url and method
+            if (item.url != entry.url || item.method != entry.method) {
+                return false;
+            }
+
+            // Compare headers
+            var len_headers = Object.keys(item.headers).length;
+            if (len_headers != Object.keys(entry.headers).length) {
+                return false;
+            }
+            for (var i in item.headers) {
+                if (!(i in entry.headers) || item.headers[i] != entry.headers[i]) {
+                    return false;
+                }
+            }
+
+            // Compare body
+            if (item.body.type != entry.body.type) {
+                return false;
+            }
+            if (item.body.type == 'form') {
+                var len_form = Object.keys(item.body.content).length;
+                if (len_form != Object.keys(entry.body.content).length) {
+                    return false;
+                }
+                for (var i in item.body.content) {
+                    if (!(i in entry.body.content) || item.body.content[i] != entry.body.content[i]) {
+                        return false;
+                    }
+                }
+            } else {
+                if (item.body.content != entry.body.content) {
+                    return false;
+                }
+            }
+            return true;
+        },
+
         /*
          * Open storage store for reading/writing.
          */
@@ -46,17 +85,24 @@ var restman = restman || {};
             restman.storage.open(function(dbobject) {
                 var r_trans = dbobject.transaction(storeId, 'readonly');
                 var store = r_trans.objectStore(storeId);
-                var request = store.openCursor(IDBKeyRange.lowerBound(0),
-                                               'next');
+                var request = store.openCursor(IDBKeyRange.lowerBound(0), 'next');
+                var items = [];
 
-                request.onsuccess = function (successevent) {
-                    var cursor = request.result;
+                // Return all items once the transaction is completed
+                r_trans.oncomplete = function (successevent) {
+                    fn_onsuccess(items);
+                }
+                // Get all the items
+                request.onerror = function(error) {
+                    console.log(error);
+                };
+                request.onsuccess = function(evt) {
+                    var cursor = evt.target.result;
                     if (cursor) {
-                        fn_onsuccess(successevent.target.result.value);
-                        // advance to the next result
+                        items.push(cursor.value);
                         cursor.continue();
                     }
-                }
+                };
             });
         },
 
@@ -66,10 +112,6 @@ var restman = restman || {};
 
         saveRequest: function(method, url, headers, body, fn_onsuccess) {
             restman.storage.open(function(dbobject) {
-                // Open a transaction for writing
-                var rw_trans = dbobject.transaction(['requests'], 'readwrite');
-                var store = rw_trans.objectStore('requests');
-
                 // Build request object
                 var entry = {
                     timestamp: new Date().getTime(),
@@ -79,13 +121,27 @@ var restman = restman || {};
                     body: body,
                 };
 
-                // Save the entry object
-                store.add(entry);
-
-                rw_trans.oncomplete = function (evt) {
-                    console.debug('Request saved successfully.');
-                    fn_onsuccess(entry);
-                };
+                restman.storage.getAllRequests(function(items) {
+                    // Check that entry isn't in the history already
+                    for (var i in items) {
+                        var item = items[i];
+                        if (restman.storage._compareRequests(item, entry)) {
+                            console.debug('Entry is already in history.');
+                            return false;
+                        }
+                    }
+                    // Open a transaction for writing
+                    var rw_trans = dbobject.transaction(['requests'], 'readwrite');
+                    var store = rw_trans.objectStore('requests');
+                    var items = [];
+                    // Save the entry object
+                    store.add(entry);
+                    // Notify callback about success
+                    rw_trans.oncomplete = function (evt) {
+                        console.debug('Request saved successfully.');
+                        fn_onsuccess(entry);
+                    };
+                });
             });
         },
 
