@@ -87,7 +87,7 @@ $(document).ready(function(event) {
                 $('#ResponseSize').text(content_length + " bytes");
                 $('#ResponseTime').text(parseFloat(duration).toFixed(2) + " ms");
                 // Set body
-                restman.ui.editors.get("#ResponseContent").setValue(data);
+                restman.ui.editors.setValue("#ResponseContent", data);
 
                 // Set response headers
                 var response_headers = jqXHR.getAllResponseHeaders().split("\n");

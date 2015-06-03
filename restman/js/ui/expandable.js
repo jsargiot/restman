@@ -22,8 +22,10 @@ $(document).ready(function(event) {
         
         if (section.hasClass("closed")) {
             section.removeClass("closed");
+            section.trigger('expanded', section)
         } else {
             section.addClass("closed");
+            section.trigger('closed', section)
         }
         // Avoid going to href when coming from a link
         return false;

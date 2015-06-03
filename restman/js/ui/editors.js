@@ -27,6 +27,12 @@ restman.ui = restman.ui || {};
 
         get: function(id) {
             return restman.ui.editors._editors[id];
+        },
+
+        setValue: function(id, value) {
+            var e = restman.ui.editors.get(id);
+            e.setValue(value);
+            e.refresh();
         }
     };
 })();
@@ -48,14 +54,15 @@ $(document).ready(function(event) {
         var button = $(this);
         var source_type = button.attr('data-switch-type');
 
-        editor = restman.ui.editors.get(button.attr("data-target"));
+        var editor_id = button.attr("data-target");
+        editor = restman.ui.editors.get(editor_id);
         editor.setOption("mode", source_type);
 
         var value = editor.getValue();
         if (beautifiers[source_type]) {
             value = beautifiers[source_type](value);
         }
-        editor.setValue(value);
+        restman.ui.editors.setValue(editor_id, value);
 
         button.parent().parent().children(".active").removeClass('active');
         button.parent().addClass('active');
@@ -63,11 +70,20 @@ $(document).ready(function(event) {
 
     // Fix for bug where CodeMirror won't show the gutter properly when
     // it's created hidden.
-    function refreshCodeMirror(event) {
+    function refreshBodyCodeMirror(event, tab) {
         restman.ui.editors.get("#RequestContent").refresh();
-        // Remove handler, we only need one refresh
-        $('#PanelRaw').off("toggled");
     };
     // As soon as the panel is shown, trigger the fix.
-    $('#PanelRaw').on("toggled", refreshCodeMirror);
+    $('#PanelRaw').on("toggled", refreshBodyCodeMirror);
+    $('#BodySection').on("expanded", refreshBodyCodeMirror);
+
+    // Fix for bug where CodeMirror won't show the gutter properly when
+    // it's created hidden.
+    function refreshResponseCodeMirror(event, tab) {
+        restman.ui.editors.get("#ResponseContent").refresh();
+    };
+    // As soon as the panel is shown, trigger the fix.
+    $('#ResponsePanel').on("toggled", refreshResponseCodeMirror);
+    $('#ResponseSection').on("expanded", refreshResponseCodeMirror);
+
 });

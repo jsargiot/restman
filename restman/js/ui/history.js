@@ -103,7 +103,7 @@ $(document).ready(function(event) {
             }
 
             // Load raw value (if set)
-            restman.ui.editors.get("#RequestContent").setValue(raw_value);
+            restman.ui.editors.setValue("#RequestContent", raw_value);
             // Load form items (if any)
             $('#FormData > li:not([data-clone-template])').remove();
             for (var d in form_value) {
