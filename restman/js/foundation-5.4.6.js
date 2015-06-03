@@ -5721,3 +5721,8 @@
     reflow : function () {}
   };
 }(jQuery, window, window.document));
+
+// Start when loaded
+$(document).ready(function(event) {
+    $(document).foundation();
+});
