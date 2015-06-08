@@ -126,7 +126,7 @@ var restman = restman || {};
                     for (var i in items) {
                         var item = items[i];
                         if (restman.storage._compareRequests(item, entry)) {
-                            console.debug('Entry is already in history.');
+                            //Entry is already in history
                             return false;
                         }
                     }
@@ -138,7 +138,6 @@ var restman = restman || {};
                     store.add(entry);
                     // Notify callback about success
                     rw_trans.oncomplete = function (evt) {
-                        console.debug('Request saved successfully.');
                         fn_onsuccess(entry);
                     };
                 });

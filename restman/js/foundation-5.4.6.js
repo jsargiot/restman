@@ -288,8 +288,6 @@
       xxlarge: S('.foundation-mq-xxlarge').css('font-family').replace(/^[\/\\'"]+|(;\s?})+|[\/\\'"]+$/g, '')
     },
 
-    stylesheet : $('<style></style>').appendTo('head')[0].sheet,
-
     global: {
       namespace: undefined
     },

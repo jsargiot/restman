@@ -21,8 +21,6 @@ $(document).ready(function(event) {
         if(event.lengthComputable) {
             var howmuch = (event.loaded / event.total) * 100;
             document.querySelector('#progress').value = Math.ceil(howmuch);
-        } else {
-            console.log("Can't determine the size of the file.");
         }
     }
 
