@@ -46,6 +46,19 @@ restman.ui = restman.ui || {};
             return false;
         },
 
+        /*
+         * Deletes item from list.
+         */
+        del_item: function(target) {
+            $(target).remove();
+        },
+
+        /*
+         * Clears all the rows in the target.
+         */
+        clear: function(target) {
+            $(target).find('li:not([data-clone-template])').find('[data-delete-item]').click();
+        }
     };
 })();
 
@@ -61,8 +74,14 @@ $(document).ready(function(event) {
     });
 
     $("[data-delete-item]").click(function(event) {
-        var par = $(this).parent();
-        par.remove();
+        var target = $(this).parent();
+        restman.ui.dynamic_list.del_item(target);
+        return false;
+    });
+
+    $("[data-clear-all]").click(function(event) {
+        var id = $(this).attr('data-clear-all');
+        restman.ui.dynamic_list.clear(id);
         return false;
     });
 });

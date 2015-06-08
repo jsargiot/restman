@@ -37,6 +37,16 @@ restman.ui = restman.ui || {};
     };
 })();
 
+function js_beautify(jsonVal) {
+    try {
+        obj = JSON.parse(jsonVal);
+        return JSON.stringify(obj, null, "    ")
+    } catch (e) {
+        console.error("Cannot parse json: " + jsonVal)
+    }
+    return jsonVal
+}
+
 $(document).ready(function(event) {
     // Create editor for raw body
     restman.ui.editors.create('#RequestContent', false);
@@ -60,7 +70,11 @@ $(document).ready(function(event) {
 
         var value = editor.getValue();
         if (beautifiers[source_type]) {
-            value = beautifiers[source_type](value);
+            try {
+                value = beautifiers[source_type](value);
+            } catch (e) {
+                // Ignore errors, just use value as is
+            }
         }
         restman.ui.editors.setValue(editor_id, value);
 
