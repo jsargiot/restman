@@ -42,7 +42,7 @@ function js_beautify(jsonVal) {
         obj = JSON.parse(jsonVal);
         return JSON.stringify(obj, null, "    ")
     } catch (e) {
-        console.error("Cannot parse json: " + jsonVal)
+        // pass
     }
     return jsonVal
 }

@@ -52,7 +52,7 @@ $(document).ready(function(event) {
     
     /* Remove all history items. */
     $('#ClearHistory').click(function (event) {
-        $('#HistoryList li [data-delete-item]').click();
+        restman.ui.dynamic_list.clear('#HistoryList');
     });
 
     /* Remove a history item. */
