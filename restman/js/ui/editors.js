@@ -56,7 +56,7 @@ $(document).ready(function(event) {
     // Prepare switches
     $("*[data-switch-type]").click(function(event) {
         var beautifiers = {
-            "json": js_beautify,
+            "javascript": js_beautify,
             "htmlmixed": html_beautify,
             "text": null
         };

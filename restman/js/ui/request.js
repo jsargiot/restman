@@ -64,14 +64,14 @@ $(document).ready(function(event) {
                 $('#ResponseStatus').text(jqXHR.status + " " + jqXHR.statusText).addClass("code" + jqXHR.status);
 
                 content_type = jqXHR.getResponseHeader("Content-type");
-                content_simple_type = "htmlmixed"; // By default, assume XML, HTML
+                content_simple_type = "text"; // By default, assume text
                 if (content_type != null) {
-                    if (content_type.indexOf("application/json") >= 0) {
+                    if (content_type.indexOf("application/json") >= 0 || content_type.indexOf("application/javascript") >= 0) {
+                        content_simple_type = "javascript";
                         data = js_beautify(data);
-                    } else {
-                        if (content_type.indexOf("text/html") >= 0) {
+                    } else if (content_type.indexOf("text/html") >= 0 || content_type.indexOf("application/xhtml+xml") >= 0 || content_type.indexOf("application/xml") >= 0) {
+                        content_simple_type = "htmlmixed";
                         data = html_beautify(data);
-                        }
                     }
                 }
 
@@ -84,8 +84,10 @@ $(document).ready(function(event) {
                 $('#ResponseType').text(content_type);
                 $('#ResponseSize').text(content_length + " bytes");
                 $('#ResponseTime').text(parseFloat(duration).toFixed(2) + " ms");
+
                 // Set body
                 restman.ui.editors.setValue("#ResponseContent", data);
+                $('[data-target="#ResponseContent"][data-switch-type="' + content_simple_type + '"]').click()
 
                 // Set response headers
                 var response_headers = jqXHR.getAllResponseHeaders().split("\n");
