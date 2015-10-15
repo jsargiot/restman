@@ -37,7 +37,7 @@ $(document).ready(function(event) {
         if (method !== "GET") {
             if ($("#PanelRaw").hasClass('active')) {
                 body.type = "raw";
-                body.content = restman.ui.editors.get("#RequestContent").getValue().replace(/\n/g, "\r\n") + "\r\n";
+                body.content = restman.ui.editors.get("#RequestContent").getValue();
                 data = body.content;
             }
             if ($("#PanelForm").hasClass('active')) {
