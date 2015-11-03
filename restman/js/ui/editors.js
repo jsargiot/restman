@@ -57,6 +57,7 @@ $(document).ready(function(event) {
     $("*[data-switch-type]").click(function(event) {
         var beautifiers = {
             "javascript": js_beautify,
+            "html": null,
             "htmlmixed": html_beautify,
             "text": null
         };
