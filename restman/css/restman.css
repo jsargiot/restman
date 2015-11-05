@@ -240,6 +240,24 @@ img#History {
   text-align: center;
 }
 
+#ResponsePanel .html-overlay {
+  background-color: white;
+  display: none;
+  position: absolute;
+  padding: 16px;
+  width: 100%;
+  bottom: 33px;
+  top: 0;
+  left: 0;
+  z-index: 99;
+}
+
+#ResponsePanel .html-overlay iframe {
+  border: 0;
+  width: 100%;
+  height: 100%;
+}
+
 #ResponsePanel.loading .overlay {
   display: block;
 }
