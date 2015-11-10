@@ -142,14 +142,14 @@ $(document).ready(function(event) {
     $('#Url').keyup(function (event) {
         if (event.type == "keyup" && event.keyCode == 27) {
             restman.ui.history.dialog.hide()
+            event.stopPropagation()
         }
-        event.stopPropagation()
     });
 
     // Filter history when typing in the url box
     $('#Url').bind('input', function (event) {
         if ( event.which != 13 ) {
-            $('#HistoryList').children().map(function (i, e) {
+            $('#HistoryList').children('li:not([data-clone-template])').map(function (i, e) {
                 var jelem = $(e);
                 if (jelem.is(':contains("' + $('#Url').val() + '")')){
                     jelem.show();
