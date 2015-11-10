@@ -13,13 +13,13 @@ def start_background_test_server():
 def before_all(context):
     service = Service('drivers\\operadriver.exe')
     service.start()
-    test_extension = "..\\restman-0.3.nex"
+    test_extension = "..\\restman-0.4.nex"
 
     b64ext = base64.b64encode(open(test_extension, 'rb').read())
 
     capabilities = {
         'operaOptions': {
-            'binary': 'C:\\Program Files (x86)\\Opera Next\\30.0.1835.49\\opera.exe',
+            'binary': 'C:\\Program Files (x86)\\Opera Next\\34.0.2036.3\\opera.exe',
             'extensions': [b64ext],
         },
         'Proxy': {
@@ -36,9 +36,6 @@ def before_all(context):
     context.browser.get('chrome-extension://fohkgjiaiapkkjjchddmhaaaghjakfeg/index.html')
     time.sleep(1)   # Wait for app to load
 
-#def before_scenario(context, scenario):
-#    import time
-#    time.sleep(2)
 
 def after_all(context):
     # Close session

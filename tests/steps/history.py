@@ -16,11 +16,11 @@ from behave import *
 @step('I open History dialog')
 def step_impl(context):
     # Open history
-    context.browser.find_element_by_id('History').click()
+    context.browser.find_element_by_id('Url').send_keys("")
     # Wait for modal to appear
     WebDriverWait(context.browser, 10).until(
         expected_conditions.visibility_of_element_located(
-            (By.ID, 'HistoryForm')))
+            (By.ID, 'HistoryPopup')))
 
 @step('I clear the history')
 def step_impl(context):
@@ -34,19 +34,25 @@ def step_impl(context):
 
 @step('url "{url}" with method "{method}" it\'s in the history')
 def step_impl(context, url, method):
-    history = context.browser.find_element_by_id("HistoryForm")
+    history = context.browser.find_element_by_id("HistoryPopup")
     history.find_element_by_xpath('.//span[contains(@class, "history-method") and text()="{}"]'.format(method))
     history.find_element_by_xpath('.//span[contains(@class, "history-url") and text()="{}"]'.format(url))
 
 @then('there are no entries in history')
 def step_impl(context):
-    history = context.browser.find_element_by_id("HistoryForm")
+    context.execute_steps(u'''
+        given I open History dialog
+    ''')
+    history = context.browser.find_element_by_id("HistoryPopup")
     entries = len(history.find_elements_by_xpath('.//li[not(@data-clone-template)]'))
     assert entries == 0, "History list is not empty"
 
 @when('I remove the first element in the history list')
 def step_impl(context):
-    history = context.browser.find_element_by_id("HistoryForm")
+    context.execute_steps(u'''
+        given I open History dialog
+    ''')
+    history = context.browser.find_element_by_id("HistoryPopup")
     entries = history.find_elements_by_xpath('.//li[not(@data-clone-template)]')
     assert len(entries) > 0, "There are no entries in the history"
     item = entries[0]
