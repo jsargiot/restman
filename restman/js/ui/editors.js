@@ -63,20 +63,33 @@ $(document).ready(function(event) {
 
         var button = $(this);
         var source_type = button.attr('data-switch-type');
-
         var editor_id = button.attr("data-target");
         editor = restman.ui.editors.get(editor_id);
         editor.setOption("mode", source_type);
 
         var value = editor.getValue();
-        if (beautifiers[source_type]) {
-            try {
-                value = beautifiers[source_type](value);
-            } catch (e) {
-                // Ignore errors, just use value as is
-            }
+
+        if (source_type === 'html') {
+          $('.html-overlay').show();
+
+          var $iframe = $('<iframe>');
+
+        	$('.html-overlay').html($iframe);
+
+          var $contents =  $(value);
+          $iframe.contents().find('html').html(value);
+        } else {
+          $('.html-overlay').hide();
+
+          if (beautifiers[source_type]) {
+              try {
+                  value = beautifiers[source_type](value);
+              } catch (e) {
+                  // Ignore errors, just use value as is
+              }
+          }
+          restman.ui.editors.setValue(editor_id, value);
         }
-        restman.ui.editors.setValue(editor_id, value);
 
         button.parent().parent().children(".active").removeClass('active');
         button.parent().addClass('active');
