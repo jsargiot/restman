@@ -18,7 +18,7 @@ var restman = restman || {};
 
     restman.request = {
 
-        raw_request: function(method, url, headers, body, on_complete, on_progress) {
+        raw_request: function(method, url, headers, body, on_complete, on_progress, on_error) {
             // Create request object
             var timestart, timecomplete;
             var xhr = new XMLHttpRequest();
@@ -35,11 +35,17 @@ var restman = restman || {};
                     xhr.setRequestHeader(key, headers[key]);
                 }
             }
-            // Se onload
+            // Set onload
             xhr.onload = function (event) {
                 timecomplete = window.performance.now();
                 on_complete(xhr.responseText, xhr.statusText, xhr, timecomplete - timestart);
             };
+            // Handle errors
+            xhr.onreadystatechange = function (event) {
+                if (xhr.readyState == 4 && xhr.status == 0){
+                    if (on_error) on_error(event)
+                }
+            }
             // Trigger request
             timestart = window.performance.now();
             return xhr.send(body);

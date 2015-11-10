@@ -20,13 +20,22 @@ $(document).ready(function(event) {
     var onProgressHandler = function(event) {
         if(event.lengthComputable) {
             var howmuch = (event.loaded / event.total) * 100;
-            document.querySelector('#progress').value = Math.ceil(howmuch);
+            $('#progress').get(0).value = Math.ceil(howmuch);
         }
+    }
+
+    var onErrorHandler = function(event) {
+        $(".shouldwait").removeClass('loading');
+        $('#ResponseStatus').text("CONNECTION ERROR");
+        $('#ResponseType').text(" - ");
+        $('#ResponseSize').text(" - ");
+        $('#ResponseTime').text(" - ");
+        $('#progress').get(0).value = 0;
     }
 
     $("#Send").click(function(event) {
         $(".shouldwait").addClass('loading');
-        document.querySelector('#progress').value = 0;
+        $('#progress').get(0).value = 0;
 
         var method = $("#Method").val();
         var url = $("#Url").val();
@@ -105,10 +114,11 @@ $(document).ready(function(event) {
                         row.find('.value').text(value);
                     }
                 }
-                document.querySelector('#progress').value = 0;
+                $('#progress').get(0).value = 0;
                 $(".shouldwait").removeClass('loading');
             },
-            onProgressHandler
+            onProgressHandler,
+            onErrorHandler
         );
     })
 
