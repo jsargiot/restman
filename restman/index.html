@@ -10,6 +10,7 @@
         <link rel="stylesheet" href="css/codemirror-5.3/monokai.css">
         <link rel="stylesheet" href="css/ui/expandable.css">
         <link rel="stylesheet" href="css/ui/material.css">
+        <link rel="stylesheet" href="css/ui/history.css">
         <link rel="stylesheet" href="css/restman.css">
     </head>
 
@@ -29,8 +30,27 @@
                     <option value="PATCH">PATCH</option>
                     <option value="DELETE">DELETE</option>
                 </select>
-                <input id="Url" class="shouldwait flex-item-dynamic" type="text" name="url" placeholder="Enter url here..." value="" />
-                <img id="History" class="flex-item-static" src="img/mdi-history.svg" data-reveal-id="HistoryForm" />
+                <div class="flex-item-dynamic">
+                    <input id="Url" class="shouldwait" type="text" name="url" placeholder="Enter url here..." value="" />
+
+                    <div id="HistoryPopup" class="history-popup">
+                        <div class="flex-container flex-columns">
+                            <div class="modal-content flex-item-dynamic flex-container flex-columns">
+                                <ul id="HistoryList" class="list flex-item-dynamic">
+                                    <li data-clone-template class="flex-container flex-item-middle close-modal" data-history-item="1411588114901">
+                                        <span class="flex-item-static history-method label success">method</span>
+                                        <span class="flex-item-dynamic history-url" title="">url</span>
+                                        <img src="img/mdi-remove.svg" class="flex-item-static" data-delete-item />
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="modal-buttons flex-item-static">
+                                <input type="button" class="flat border-radius close-modal" value="Cancel" />
+                                <input id="ClearHistory" type="button" class="flat border-radius error" value="Clear all" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <input id="Send" type="button" value="Send" class="flat border-radius expanded flex-item-static blue-grey" />
             </div>
         </header>
@@ -69,27 +89,6 @@
                 <div class="modal-buttons">
                     <input type="button" class="flat border-radius close-modal" value="Cancel" />
                     <input type="button" class="flat border-radius save-modal ok" value="Save" />
-                </div>
-            </div>
-
-            <!-- History modal -->
-            <div id="HistoryForm" class="reveal-modal flex-container" data-reveal>
-                <div class="flex-container flex-columns">
-                    <div class="modal-content flex-item-dynamic flex-container flex-columns">
-                        <h4 class="flex-item-static">History</h4>
-
-                        <ul id="HistoryList" class="list flex-item-dynamic">
-                            <li data-clone-template class="flex-container flex-item-middle close-modal" data-history-item="1411588114901">
-                                <span class="flex-item-static history-method label success">method</span>
-                                <span class="flex-item-dynamic history-url" title="">url</span>
-                                <img src="img/mdi-remove.svg" class="flex-item-static" data-delete-item />
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="modal-buttons flex-item-static">
-                        <input type="button" class="flat border-radius close-modal" value="Cancel" />
-                        <input id="ClearHistory" type="button" class="flat border-radius error" value="Clear all" />
-                    </div>
                 </div>
             </div>
 

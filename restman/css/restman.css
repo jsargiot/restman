@@ -33,12 +33,9 @@ dl dd {
 
 header {
   padding: 1rem;
-  box-sizing: border-box;
   border-bottom: solid 1px #d3d3d3;
-  background-color: white;
-  text-align: center;
-  z-index: 70;
   box-shadow: 0 2px 5px 0 rgba(0,0,0,0.26);
+  z-index: 100;
 }
 
 header .title {
@@ -171,6 +168,7 @@ ul.sub-nav li.active a {
   box-shadow: 0 0;
   margin-left: 0.3rem;
   margin-right: 0.3rem;
+  margin: 0;
 }
 
 #Send {
@@ -334,12 +332,6 @@ img#History {
   padding-bottom: 0.5rem;
 }
 
-.history-url {
-  color: #333333;
-  padding-left: 1rem;
-  width: 19rem;
-}
-
 .flex-container {
   display: flex;
 }
@@ -350,6 +342,7 @@ img#History {
 
 .flex-item-dynamic {
   flex: 1 1 auto;
+  position: relative;
 }
 
 .flex-item-center {

@@ -14,7 +14,8 @@ restman.ui = restman.ui || {};
 
     restman.ui.history = {
         // History list container
-        HISTORY_LIST: '#HistoryList',
+        ID_HISTORY_LIST: '#HistoryList',
+        ID_HISTORY_POPUP: '#HistoryPopup',
 
         /*
          * Adds a history item to the History section.
@@ -23,7 +24,7 @@ restman.ui = restman.ui || {};
          */
         dialog: {
             add: function (item) {
-                var new_item = restman.ui.dynamic_list.add_item(restman.ui.history.HISTORY_LIST, true);
+                var new_item = restman.ui.dynamic_list.add_item(restman.ui.history.ID_HISTORY_LIST, true);
                 // Set id
                 new_item.attr('data-history-item', item.timestamp);
                 // Set values
@@ -35,13 +36,21 @@ restman.ui = restman.ui || {};
 
             reload: function () {
                 // Clean non-template items
-                $(restman.ui.history.HISTORY_LIST + ' > li:not([data-clone-template])').remove();
+                $(restman.ui.history.ID_HISTORY_LIST + ' > li:not([data-clone-template])').remove();
                 // Re-populate history.
                 restman.storage.getAllRequests(function(items) {
                     for (var i in items) {
                         restman.ui.history.dialog.add(items[i]);
                     }
                 });
+            },
+
+            show: function () {
+                $(restman.ui.history.ID_HISTORY_POPUP).addClass('history-popup-open');
+            },
+
+            hide: function () {
+                $(restman.ui.history.ID_HISTORY_POPUP).removeClass('history-popup-open');
             }
         }
     };
@@ -103,7 +112,7 @@ $(document).ready(function(event) {
             }
 
             // Load raw value (if set)
-            restman.ui.editors.setValue("#RequestContent", raw_value);
+            restman.ui.editors.setValue("#RequestContent", raw_value || "");
             // Load form items (if any)
             $('#FormData > li:not([data-clone-template])').remove();
             for (var d in form_value) {
@@ -113,6 +122,42 @@ $(document).ready(function(event) {
             }
         });
         return false;
+    });
+
+    // Show history when #Url gets the focus
+    $('#Url').focusin(function (event) {
+        restman.ui.history.dialog.show();
+    });
+
+    // Hide history when #Url looses the focus
+    $('#Url').focusout(function (event) {
+        // Wait a little before hiding the history popup. This fixes a problem
+        // when you click in a history entry and the #Url looses the focus
+        // before the history item gets the click event.
+        setTimeout(function () {
+            restman.ui.history.dialog.hide();
+        }, 100);
+    });
+    // Hide history when Esc is pressed
+    $('#Url').keyup(function (event) {
+        if (event.type == "keyup" && event.keyCode == 27) {
+            restman.ui.history.dialog.hide()
+        }
+        event.stopPropagation()
+    });
+
+    // Filter history when typing in the url box
+    $('#Url').bind('input', function (event) {
+        if ( event.which != 13 ) {
+            $('#HistoryList').children().map(function (i, e) {
+                var jelem = $(e);
+                if (jelem.is(':contains("' + $('#Url').val() + '")')){
+                    jelem.show();
+                }else{
+                    jelem.hide();
+                }
+            })
+        }
     });
 
     restman.ui.history.dialog.reload();

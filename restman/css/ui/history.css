@@ -1,0 +1,31 @@
+/*
+ * This file is part of RESTMan for Opera Extension.
+ * https://github.com/jsargiot/restman
+ *
+ * Free to use under the MIT license.
+ * https://raw.githubusercontent.com/jsargiot/restman/master/LICENSE
+ */
+
+.history-url {
+  color: #333333;
+  padding-left: 1rem;
+  width: 19rem;
+}
+
+.history-popup {
+    margin-top: 0.2rem;
+    z-index: -1;
+    background: #fff;
+    box-shadow: 0 0 2px rgba(0,0,0,.12),0 2px 4px rgba(0,0,0,.24);
+    position: absolute;
+    transition: max-height .2s,visibility .2s;
+    width: 100%;
+    overflow: auto;
+    visibility: hidden;
+    max-height: 0;
+}
+
+.history-popup-open {
+    max-height: calc(100vh - 56px);
+    visibility: visible;
+}
