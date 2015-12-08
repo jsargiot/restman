@@ -3,7 +3,7 @@
   "name": "RestMan",
   "author": "Joaquin Sargiotto",
   "description": "RESTMan is a browser extension to work on http requests.",
-  "version": "0.4",
+  "version": "0.5",
   "icons": {
     "32": "res/icon32.png",
     "64": "res/icon64.png"
