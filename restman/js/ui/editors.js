@@ -51,7 +51,7 @@ $(document).ready(function(event) {
     // Create editor for raw body
     restman.ui.editors.create('#RequestContent', false);
     // Create editor for request response
-    restman.ui.editors.create('#ResponseContent', true);
+    restman.ui.editors.create('#ResponseContentText', true);
 
     // Prepare switches
     $("*[data-switch-type]").click(function(event) {
@@ -63,12 +63,17 @@ $(document).ready(function(event) {
 
         var button = $(this);
         var source_type = button.attr('data-switch-type');
-
         var editor_id = button.attr("data-target");
         editor = restman.ui.editors.get(editor_id);
         editor.setOption("mode", source_type);
 
         var value = editor.getValue();
+
+        // Show the right type of childrens of the ResponsePanel
+        $("#ResponsePanel > *[data-show-type~='" + source_type + "']").show();
+        // Hide those who's type is not the one of the request
+        $("#ResponsePanel > *[data-show-type]:not([data-show-type~='" + source_type + "'])").hide();
+
         if (beautifiers[source_type]) {
             try {
                 value = beautifiers[source_type](value);
@@ -94,10 +99,12 @@ $(document).ready(function(event) {
     // Fix for bug where CodeMirror won't show the gutter properly when
     // it's created hidden.
     function refreshResponseCodeMirror(event, tab) {
-        restman.ui.editors.get("#ResponseContent").refresh();
+        restman.ui.editors.get("#ResponseContentText").refresh();
     };
     // As soon as the panel is shown, trigger the fix.
     $('#ResponsePanel').on("toggled", refreshResponseCodeMirror);
     $('#ResponseSection').on("expanded", refreshResponseCodeMirror);
 
+    // Select Plain type by default
+    $('[data-target="#ResponseContentText"][data-switch-type="text"]').click()
 });

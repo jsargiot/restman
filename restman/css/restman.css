@@ -238,6 +238,24 @@ img#History {
   text-align: center;
 }
 
+#ResponsePanel > [data-show-type] {
+  border-bottom: 1px solid #d8d8d8;
+}
+
+#ResponsePanel .html-box {
+  background-color: white;
+  height: auto;
+}
+
+#ResponsePanel .html-box iframe {
+  min-height: 18rem;
+  max-height: 50rem;
+  border: 0;
+  width: 100%;
+  resize: vertical; /* Allow vertical manual resize */
+  display: block;
+}
+
 #ResponsePanel.loading .overlay {
   display: block;
 }
@@ -256,7 +274,6 @@ img#History {
 }
 
 .CodeMirror {
-  border-bottom: 1px solid #d8d8d8;
   height: auto;
 }
 

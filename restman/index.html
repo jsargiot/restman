@@ -145,13 +145,21 @@
                     <li><a href="#ResponseHeadersContainer">Headers</a></li>
                 </ul>
                 <div class="tabs-content">
+                    <div class="overlay"></div>
                     <div id="ResponsePanel" class="panel radius no-padding shouldwait content active">
-                        <div class="overlay"></div>
-                        <textarea id="ResponseContent" class="editor-box"></textarea>
+                        <div data-show-type="html">
+                            <div id="ResponseContentHtml" class="html-box">
+                                <iframe></iframe>
+                            </div>
+                        </div>
+                        <div data-show-type="javascript htmlmixed text">
+                            <textarea id="ResponseContentText" class="editor-box"></textarea>
+                        </div>
                         <ul class="sub-nav right">
-                            <li class="active"><a href="#" data-target="#ResponseContent" data-switch-type="javascript">JSON</a></li>
-                            <li><a href="#" data-target="#ResponseContent" data-switch-type="htmlmixed">XML</a></li>
-                            <li><a href="#" data-target="#ResponseContent" data-switch-type="text">Plain</a></li>
+                            <li><a href="#" data-target="#ResponseContentText" data-switch-type="javascript">JSON</a></li>
+                            <li><a href="#" data-target="#ResponseContentText" data-switch-type="htmlmixed">XML</a></li>
+                            <li><a href="#" data-target="#ResponseContentText" data-switch-type="html">HTML Preview</a></li>
+                            <li><a href="#" data-target="#ResponseContentText" data-switch-type="text">Plain</a></li>
                         </ul>
                         <div class="clearfix"></div>
                     </div>
@@ -174,7 +182,7 @@
         </footer>
 
         <!-- Load scripts -->
-        <script type="text/javascript" src="js/jquery-1.11.1.js"></script>
+        <script type="text/javascript" src="js/jquery-2.1.4.js"></script>
 
         <script type="text/javascript" src="js/beautify-html.js"></script>
 

@@ -74,6 +74,7 @@ $(document).ready(function(event) {
 
                 content_type = jqXHR.getResponseHeader("Content-type");
                 content_simple_type = "text"; // By default, assume text
+
                 if (content_type != null) {
                     if (content_type.indexOf("application/json") >= 0 || content_type.indexOf("application/javascript") >= 0) {
                         content_simple_type = "javascript";
@@ -95,8 +96,16 @@ $(document).ready(function(event) {
                 $('#ResponseTime').text(parseFloat(duration).toFixed(2) + " ms");
 
                 // Set body
-                restman.ui.editors.setValue("#ResponseContent", data);
-                $('[data-target="#ResponseContent"][data-switch-type="' + content_simple_type + '"]').click()
+                restman.ui.editors.setValue("#ResponseContentText", data);
+                var iframe = $('#ResponseContentHtml > iframe');
+                try {
+                    iframe.contents().find('html').html(data);
+                } catch (e) {
+                    // An error is thrown if the html links images or scripts
+                    // outside of the permissions of the extension
+                    console.info('Ignoring non-available resources, probably because of security restrictions')
+                }
+                $('[data-target="#ResponseContentText"][data-switch-type="' + content_simple_type + '"]').click()
 
                 // Set response headers
                 var response_headers = jqXHR.getAllResponseHeaders().split("\n");

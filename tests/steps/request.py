@@ -29,6 +29,9 @@ def step_impl(context, url):
     input_txt = context.browser.find_element_by_id('Url')
     input_txt.clear()
     input_txt.send_keys(url)
+    # Hide history
+    input_txt.send_keys(Keys.ESCAPE)
+    time.sleep(0.1)
 
 @step('I click on send')
 def step_impl(context):
@@ -53,12 +56,12 @@ def step_impl(context):
 
 @then('output contains "{value}"')
 def step_impl(context, value):
-    output = context.browser.execute_script("return restman.ui.editors.get('#ResponseContent').getValue();")
+    output = context.browser.execute_script("return restman.ui.editors.get('#ResponseContentText').getValue();")
     assert value in output, "Value: {}\nOutput: {}".format(value, output)
 
 @then('response body contains the following headers')
 def step_impl(context):
-    output = context.browser.execute_script("return restman.ui.editors.get('#ResponseContent').getValue();")
+    output = context.browser.execute_script("return restman.ui.editors.get('#ResponseContentText').getValue();")
     outdict = json.loads(output)
     assert 'headers' in outdict, "No headers in output"
     # Check if headers in table are in response body
@@ -68,7 +71,7 @@ def step_impl(context):
 
 @then('response body contains the following FORM DATA')
 def step_impl(context):
-    output = context.browser.execute_script("return restman.ui.editors.get('#ResponseContent').getValue();")
+    output = context.browser.execute_script("return restman.ui.editors.get('#ResponseContentText').getValue();")
     outdict = json.loads(output)
     assert 'form' in outdict, "No FORM DATA in output"
     # Check if headers in table are in response body
@@ -78,13 +81,13 @@ def step_impl(context):
 
 @then('response body doesn\'t contains FORM DATA')
 def step_impl(context):
-    output = context.browser.execute_script("return restman.ui.editors.get('#ResponseContent').getValue();")
+    output = context.browser.execute_script("return restman.ui.editors.get('#ResponseContentText').getValue();")
     outdict = json.loads(output)
     assert 'form' not in outdict, "There is JSON output in body"
 
 @then('response body contains the following json')
 def step_impl(context):
-    output = context.browser.execute_script("return restman.ui.editors.get('#ResponseContent').getValue();")
+    output = context.browser.execute_script("return restman.ui.editors.get('#ResponseContentText').getValue();")
     outdict = json.loads(output)
     indict = json.loads(context.text)
     assert 'json' in outdict, "No json output"
@@ -92,7 +95,7 @@ def step_impl(context):
 
 @then('response body doesn\'t contains json')
 def step_impl(context):
-    output = context.browser.execute_script("return restman.ui.editors.get('#ResponseContent').getValue();")
+    output = context.browser.execute_script("return restman.ui.editors.get('#ResponseContentText').getValue();")
     outdict = json.loads(output)
     assert 'json' not in outdict, "There is JSON output in body"
 

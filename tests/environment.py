@@ -13,13 +13,13 @@ def start_background_test_server():
 def before_all(context):
     service = Service('drivers\\operadriver.exe')
     service.start()
-    test_extension = "..\\restman-0.4.nex"
+    test_extension = "..\\restman-0.5.nex"
 
     b64ext = base64.b64encode(open(test_extension, 'rb').read())
 
     capabilities = {
         'operaOptions': {
-            'binary': 'C:\\Program Files (x86)\\Opera Next\\34.0.2036.3\\opera.exe',
+            'binary': 'C:\\Program Files (x86)\\Opera Next\\34.0.2036.24\\opera.exe',
             'extensions': [b64ext],
         },
         'Proxy': {
