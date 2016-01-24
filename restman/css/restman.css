@@ -387,3 +387,27 @@ img#History {
   border-radius: 5px;
   border: 2px solid white;
 }
+
+.history-method {
+  background-color: transparent;
+}
+
+.history-method-GET .label {
+  color: darkgreen;
+}
+
+.history-method-POST .label {
+  color: darkblue;
+}
+
+.history-method-PUT .label {
+  color: purple;
+}
+
+.history-method-PATCH .label {
+  color: teal;
+}
+
+.history-method-DELETE .label {
+  color: red;
+}

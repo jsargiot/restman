@@ -32,6 +32,7 @@ restman.ui = restman.ui || {};
                 new_item.children('.history-url').text(item.url);
                 new_item.children('.history-url').attr('title', item.url);
                 new_item.removeClass('template-item');
+                new_item.addClass('history-method-' + item.method)
             },
 
             reload: function () {
