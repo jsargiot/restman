@@ -5,13 +5,13 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>RestMan</title>
 
-        <link rel="stylesheet" href="css/foundation-5.4.6.css" />
-        <link rel="stylesheet" href="css/codemirror-5.3/codemirror.css">
-        <link rel="stylesheet" href="css/codemirror-5.3/monokai.css">
-        <link rel="stylesheet" href="css/ui/expandable.css">
-        <link rel="stylesheet" href="css/ui/material.css">
-        <link rel="stylesheet" href="css/ui/history.css">
-        <link rel="stylesheet" href="css/restman.css">
+        <link rel="stylesheet" href="./css/foundation-5.4.6.css" />
+        <link rel="stylesheet" href="./css/codemirror-5.3/codemirror.css">
+        <link rel="stylesheet" href="./css/codemirror-5.3/monokai.css">
+        <link rel="stylesheet" href="./css/ui/expandable.css">
+        <link rel="stylesheet" href="./css/ui/material.css">
+        <link rel="stylesheet" href="./css/ui/history.css">
+        <link rel="stylesheet" href="./css/restman.css">
     </head>
 
     <body class="blue-grey lighten-5 flex-container flex-columns">
@@ -19,7 +19,7 @@
 
         <header class="blue-grey flex-item-static flex-container">
             <div class="title flex-item-static hide-for-small-only">
-                <img class="logo" src="res/icon32.png" />
+                <img class="logo" src="./res/icon32.png" />
                 <span>RESTMan</span>
             </div>
             <div id="Controls" class="flex-item-dynamic flex-container">
@@ -40,7 +40,7 @@
                                     <li data-clone-template class="flex-container flex-item-middle close-modal" data-history-item="1411588114901">
                                         <span class="flex-item-static history-method label">method</span>
                                         <span class="flex-item-dynamic history-url" title="">url</span>
-                                        <img src="img/mdi-remove.svg" class="flex-item-static" data-delete-item />
+                                        <img src="./img/mdi-remove.svg" class="flex-item-static" data-delete-item />
                                     </li>
                                 </ul>
                             </div>
@@ -99,7 +99,7 @@
                         <li data-clone-template class="flex-container">
                             <input class="flat key flex-item-dynamic" type="text" placeholder="Header..." />
                             <input class="flat value flex-item-dynamic" type="text" placeholder="Value..." />
-                            <img src="img/mdi-remove.svg" class="flex-item-static" data-delete-item />
+                            <img src="./img/mdi-remove.svg" class="flex-item-static" data-delete-item />
                         </li>
                     </ul>
                     <input type="button" data-clone-item="#HeadersTable" class="flat border-radius" value="Add header" />
@@ -120,7 +120,7 @@
                             <li data-clone-template class="flex-container">
                                 <input class="flat key flex-item-dynamic" type="text" placeholder="Write key..." />
                                 <input class="flat key flex-item-dynamic" type="text" placeholder="Write value or drop file..." data-fileable />
-                                <img src="img/mdi-remove.svg" class="flex-item-static" data-delete-item />
+                                <img src="./img/mdi-remove.svg" class="flex-item-static" data-delete-item />
                             </li>
                         </ul>
                         <input type="button" data-clone-item="#FormData" class="flat border-radius" value="Add form data" />
@@ -182,33 +182,33 @@
         </footer>
 
         <!-- Load scripts -->
-        <script type="text/javascript" src="js/jquery-2.1.4.js"></script>
+        <script type="text/javascript" src="./js/jquery-2.1.4.js"></script>
 
-        <script type="text/javascript" src="js/beautify-html.js"></script>
+        <script type="text/javascript" src="./js/beautify-html.js"></script>
 
-        <script type="text/javascript" src="js/codemirror-5.3/codemirror.js"></script>
-        <script type="text/javascript" src="js/codemirror-5.3/css/css.js"></script>
-        <script type="text/javascript" src="js/codemirror-5.3/javascript/javascript.js"></script>
-        <script type="text/javascript" src="js/codemirror-5.3/xml/xml.js"></script>
-        <script type="text/javascript" src="js/codemirror-5.3/htmlmixed/htmlmixed.js"></script>
+        <script type="text/javascript" src="./js/codemirror-5.3/codemirror.js"></script>
+        <script type="text/javascript" src="./js/codemirror-5.3/css/css.js"></script>
+        <script type="text/javascript" src="./js/codemirror-5.3/javascript/javascript.js"></script>
+        <script type="text/javascript" src="./js/codemirror-5.3/xml/xml.js"></script>
+        <script type="text/javascript" src="./js/codemirror-5.3/htmlmixed/htmlmixed.js"></script>
 
-        <script src="js/foundation-5.4.6.js"></script>
+        <script src="./js/foundation-5.4.6.js"></script>
 
-        <script type="text/javascript" src="js/shortcut.js"></script>
+        <script type="text/javascript" src="./js/shortcut.js"></script>
 
-        <script type="text/javascript" src="js/restman/storage.js"></script>
-        <script type="text/javascript" src="js/restman/request.js"></script>
+        <script type="text/javascript" src="./js/restman/storage.js"></script>
+        <script type="text/javascript" src="./js/restman/request.js"></script>
 
-        <script type="text/javascript" src="js/ui/expandable.js"></script>
-        <script type="text/javascript" src="js/ui/dynamic_lists.js"></script>
-        <script type="text/javascript" src="js/ui/fileable.js"></script>
-        <script type="text/javascript" src="js/ui/modals.js"></script>
-        <script type="text/javascript" src="js/ui/request.js"></script>
-        <script type="text/javascript" src="js/ui/headers.js"></script>
-        <script type="text/javascript" src="js/ui/keys.js"></script>
-        <script type="text/javascript" src="js/ui/editors.js"></script>
-        <script type="text/javascript" src="js/ui/history.js"></script>
-        <script type="text/javascript" src="js/ui/version.js"></script>
+        <script type="text/javascript" src="./js/ui/expandable.js"></script>
+        <script type="text/javascript" src="./js/ui/dynamic_lists.js"></script>
+        <script type="text/javascript" src="./js/ui/fileable.js"></script>
+        <script type="text/javascript" src="./js/ui/modals.js"></script>
+        <script type="text/javascript" src="./js/ui/request.js"></script>
+        <script type="text/javascript" src="./js/ui/headers.js"></script>
+        <script type="text/javascript" src="./js/ui/keys.js"></script>
+        <script type="text/javascript" src="./js/ui/editors.js"></script>
+        <script type="text/javascript" src="./js/ui/history.js"></script>
+        <script type="text/javascript" src="./js/ui/version.js"></script>
 
     </body>
 </html>
