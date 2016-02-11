@@ -5,35 +5,35 @@
  * Free to use under the MIT license.
  * https://raw.githubusercontent.com/jsargiot/restman/master/LICENSE
  */
-$(document).ready(function(event) {
+$(document).ready(function (event) {
 
     /*
      * Trigger send button everytime someone presses "enter" on the url input.
      * Fixes: #3
      */
-    $("#Url").keypress(function(e) {
-        if(e.which == 13) {
+    $("#Url").keypress(function (e) {
+        if (e.which == 13) {
             $("#Send").click();
         }
     });
 
-    var onProgressHandler = function(event) {
-        if(event.lengthComputable) {
+    var onProgressHandler = function (event) {
+        if (event.lengthComputable) {
             var howmuch = (event.loaded / event.total) * 100;
             $('#progress').get(0).value = Math.ceil(howmuch);
         }
-    }
+    };
 
-    var onErrorHandler = function(event) {
+    var onErrorHandler = function (event) {
         $(".shouldwait").removeClass('loading');
         $('#ResponseStatus').text("CONNECTION ERROR");
         $('#ResponseType').text(" - ");
         $('#ResponseSize').text(" - ");
         $('#ResponseTime').text(" - ");
         $('#progress').get(0).value = 0;
-    }
+    };
 
-    $("#Send").click(function(event) {
+    $("#Send").click(function (event) {
         $(".shouldwait").addClass('loading');
         $('#progress').get(0).value = 0;
 
@@ -60,7 +60,7 @@ $(document).ready(function(event) {
         }
 
         // Save request for loading later.
-        restman.storage.saveRequest(method, url, headers, body, function (item){
+        restman.storage.saveRequest(method, url, headers, body, function (item) {
             restman.ui.history.dialog.add(item);
         });
 
@@ -69,7 +69,7 @@ $(document).ready(function(event) {
             url,
             headers,
             data,
-            function(data, textStatus, jqXHR, duration) {
+            function (data, textStatus, jqXHR, duration) {
                 $('#ResponseStatus').text(jqXHR.status + " " + jqXHR.statusText).addClass("code" + jqXHR.status);
 
                 content_type = jqXHR.getResponseHeader("Content-type");

@@ -13,12 +13,12 @@
  */
 var restman = restman || {};
 
-(function() {
+(function () {
     'use strict';
 
     restman.request = {
 
-        raw_request: function(method, url, headers, body, on_complete, on_progress, on_error) {
+        raw_request: function (method, url, headers, body, on_complete, on_progress, on_error) {
             // Create request object
             var timestart, timecomplete;
             var xhr = new XMLHttpRequest();
@@ -31,7 +31,7 @@ var restman = restman || {};
                 xhr.addEventListener('progress', on_progress, false);
             // Set headers
             for (var key in headers) {
-                if (key){
+                if (key) {
                     xhr.setRequestHeader(key, headers[key]);
                 }
             }
@@ -42,21 +42,21 @@ var restman = restman || {};
             };
             // Handle errors
             xhr.onreadystatechange = function (event) {
-                if (xhr.readyState == 4 && xhr.status == 0){
+                if (xhr.readyState == 4 && xhr.status == 0) {
                     if (on_error) on_error(event)
                 }
-            }
+            };
             // Trigger request
             timestart = window.performance.now();
             return xhr.send(body);
         },
 
-        get: function(url, headers, on_complete, on_progress) {
+        get: function (url, headers, on_complete, on_progress) {
             return restman.request.raw_request('GET', url, headers, null, on_complete, on_progress);
         },
 
-        post: function(url, headers, body, on_complete, on_progress) {
+        post: function (url, headers, body, on_complete, on_progress) {
             return restman.request.raw_request('POST', url, headers, body, on_complete, on_progress);
-        },
+        }
     };
 })();
