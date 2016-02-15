@@ -1,0 +1,29 @@
+.dark-theme {
+    -webkit-filter:
+            invert(100%)
+            hue-rotate(180deg)
+            brightness(110%)
+            contrast(80%)
+            grayscale(30%)
+            sepia(10%);
+    background: rgb(26, 26, 25);
+}
+
+/* Button selector theme */
+input[data-toggle] {
+    display: none;
+}
+
+input[data-toggle]:checked + label,
+input[data-toggle]:checked + label:active {
+    background-color: darkslategrey;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15) inset, 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.button-group.toggle li:not(first-child) {
+    margin: 0 -0.9rem;
+}
+
+input[data-toggle] + label {
+    float: right;
+}
