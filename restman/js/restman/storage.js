@@ -118,7 +118,7 @@ var restman = restman || {};
                     method: method,
                     url: url,
                     headers: headers,
-                    body: body,
+                    body: body
                 };
 
                 restman.storage.getAllRequests(function (items) {

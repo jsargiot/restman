@@ -19,7 +19,7 @@ restman.ui = restman.ui || {};
          * @table: table id.
          */
         collect: function(table) {
-            var headers = {}
+            var headers = {};
             $(table).children("li").each(function (index){
                 var inputs = $(this).find("input");
                 var header = $.trim(inputs[0].value);
