@@ -233,7 +233,7 @@ img#History {
   height: 100%;
   top: 0;
   left: 0;
-  background: url("/img/loading.gif") center no-repeat rgba(25,25,25,0.6);
+  background: url("./../img/loading.gif") center no-repeat rgba(25,25,25,0.6);
   z-index: 100;
   text-align: center;
 }
@@ -261,7 +261,7 @@ img#History {
 }
 
 #Url.loading {
-  background: url("/img/loading.gif") right no-repeat;
+  background: url("./../img/loading.gif") right no-repeat;
   background-origin: content-box;
 }
 

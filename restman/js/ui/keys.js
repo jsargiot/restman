@@ -7,9 +7,9 @@
  *
  * Requires: shortcut.js, jquery
  */
-$(document).ready(function(event) {
+$(document).ready(function (event) {
     // Press Ctrl+Enter to execute request
-    shortcut.add("ctrl+enter", function() {
+    shortcut.add("ctrl+enter", function () {
         $("#Send").click();
-    }); 
+    });
 });
