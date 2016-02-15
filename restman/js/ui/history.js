@@ -20,7 +20,7 @@ restman.ui = restman.ui || {};
         /*
          * Adds a history item to the History section.
          *
-         * The new item is always inserted at the beggining (newer)
+         * The new item is always inserted at the beginning (newer)
          */
         dialog: {
             add: function (item) {
@@ -142,7 +142,7 @@ $(document).ready(function(event) {
     // Hide history when Esc is pressed
     $('#Url').keyup(function (event) {
         if (event.type == "keyup" && event.keyCode == 27) {
-            restman.ui.history.dialog.hide()
+            restman.ui.history.dialog.hide();
             event.stopPropagation()
         }
     });

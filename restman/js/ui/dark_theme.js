@@ -4,7 +4,7 @@
     $(document).ready(function(event) {
         $("#dark").click(function (event) {
             /* Act on the event */
-            var htmlEl = $("html"),
+            var htmlEl = $("body"),
                 method;
 
             method = (htmlEl.hasClass("dark-theme"))
