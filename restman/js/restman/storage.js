@@ -7,7 +7,7 @@
  */
 var restman = restman || {};
 
-(function() {
+(function () {
     'use strict';
 
     restman.storage = {
@@ -61,15 +61,15 @@ var restman = restman || {};
         /*
          * Open storage store for reading/writing.
          */
-        open: function(fn_onsuccess) {
+        open: function (fn_onsuccess) {
             var idb = indexedDB.open(restman.storage.DB_NAME,
-                                     restman.storage.DB_VERSION);
+                restman.storage.DB_VERSION);
 
             idb.onupgradeneeded = function (evt) {
                 var dbobject = evt.target.result;
                 if (evt.oldVersion < 1) {
                     dbobject.createObjectStore('requests',
-                                               {keyPath: 'timestamp'});
+                        {keyPath: 'timestamp'});
                 }
             };
 
@@ -81,8 +81,8 @@ var restman = restman || {};
             };
         },
 
-        getAll: function(storeId, fn_onsuccess) {
-            restman.storage.open(function(dbobject) {
+        getAll: function (storeId, fn_onsuccess) {
+            restman.storage.open(function (dbobject) {
                 var r_trans = dbobject.transaction(storeId, 'readonly');
                 var store = r_trans.objectStore(storeId);
                 var request = store.openCursor(IDBKeyRange.lowerBound(0), 'next');
@@ -91,12 +91,12 @@ var restman = restman || {};
                 // Return all items once the transaction is completed
                 r_trans.oncomplete = function (successevent) {
                     fn_onsuccess(items);
-                }
+                };
                 // Get all the items
-                request.onerror = function(error) {
+                request.onerror = function (error) {
                     console.log(error);
                 };
-                request.onsuccess = function(evt) {
+                request.onsuccess = function (evt) {
                     var cursor = evt.target.result;
                     if (cursor) {
                         items.push(cursor.value);
@@ -106,22 +106,22 @@ var restman = restman || {};
             });
         },
 
-        getAllRequests: function(fn_onsuccess) {
+        getAllRequests: function (fn_onsuccess) {
             return restman.storage.getAll('requests', fn_onsuccess);
         },
 
-        saveRequest: function(method, url, headers, body, fn_onsuccess) {
-            restman.storage.open(function(dbobject) {
+        saveRequest: function (method, url, headers, body, fn_onsuccess) {
+            restman.storage.open(function (dbobject) {
                 // Build request object
                 var entry = {
                     timestamp: new Date().getTime(),
                     method: method,
                     url: url,
                     headers: headers,
-                    body: body,
+                    body: body
                 };
 
-                restman.storage.getAllRequests(function(items) {
+                restman.storage.getAllRequests(function (items) {
                     // Check that entry isn't in the history already
                     for (var i in items) {
                         var item = items[i];
@@ -144,8 +144,8 @@ var restman = restman || {};
             });
         },
 
-        getRequest: function(reqId, fn_onsuccess) {
-            restman.storage.open(function(dbobject) {
+        getRequest: function (reqId, fn_onsuccess) {
+            restman.storage.open(function (dbobject) {
                 var r_trans = dbobject.transaction('requests', 'readonly');
                 var store = r_trans.objectStore('requests');
                 var request = store.get(reqId);
@@ -160,7 +160,7 @@ var restman = restman || {};
         },
 
         deleteRequest: function (reqId, fn_onsuccess) {
-            restman.storage.open(function(dbobject) {
+            restman.storage.open(function (dbobject) {
                 var r_trans = dbobject.transaction('requests', 'readwrite');
                 var store = r_trans.objectStore('requests');
                 var request = store.delete(reqId);
@@ -170,13 +170,13 @@ var restman = restman || {};
                     if (result) {
                         fn_onsuccess(successevent.target.result);
                     }
-                }
+                };
 
-                request.onerror = function(e) {
+                request.onerror = function (e) {
                     console.error(e);
                 };
             });
-        },
+        }
 
     };
 })();
