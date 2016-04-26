@@ -41,14 +41,14 @@ header {
 header .title {
   line-height: 3rem;
   font-weight: 500;
-  width: 150px;
   text-align: left;
   display: inherit;
   align-items: center;
+  padding-right: 1rem;
 }
 
 header .title .logo {
-  margin-right: 0.2rem;
+  height: 3.125rem;
 }
 
 header #Controls {
