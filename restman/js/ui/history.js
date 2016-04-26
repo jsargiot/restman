@@ -12,19 +12,142 @@ restman.ui = restman.ui || {};
 (function() {
     'use strict';
 
-    restman.ui.history = {
+    var self = restman.ui.history = {
         // History list container
-        ID_HISTORY_LIST: '#HistoryList',
-        ID_HISTORY_POPUP: '#HistoryPopup',
+        _$list: $('#HistoryList'),
+        _$popup: $('#HistoryPopup'),
+
+        selected: null,
+
+        items: null,
+
+        init: function ($input, $list_container, $popup_container) {
+            var $input = $input;
+
+            self._$list = $list_container;
+            self._$popup = $popup_container;
+
+            self._$popup.on('mousedown', function (event) { event.preventDefault(); });
+
+            $input.on('focus input', self._input);
+            $input.on('blur', self._blur);
+            $input.on('keydown', self._keydown);
+
+            self._$list.children('li').on('selected', self._onSelected);
+            self._$list.children('li').on('unselected', self._onUnselected);
+
+            $list_container.on('mousedown', self._mousedown);
+        },
+
+        _onSelected: function (event) {
+            var elem = event.target;
+            elem.setAttribute('selected', 'true');
+            // Make sure item is not hidden by scroll
+            var ebcr = elem.getBoundingClientRect();
+            var pbcr = elem.parentElement.getBoundingClientRect();
+            if (ebcr.top < pbcr.top)
+                elem.scrollIntoView(true);
+            if (ebcr.bottom > pbcr.bottom)
+                elem.scrollIntoView(false);
+        },
+
+        _onUnselected: function (event) {
+            event.target.setAttribute('selected', 'false');
+        },
+
+        _input: function (event) {
+            self._$list.children('li:not([data-clone-template])').map(function (i, e) {
+                var text = event.target.value;
+                var $elem = $(e);
+                if ($elem.is(':contains("' + text + '")')) {
+                    $elem.show();
+                }else{
+                    $elem.hide();
+                }
+            });
+            self.items = self._$list.children('li:not([data-clone-template]):visible');
+            self.moveSelection(0); // reset cursor
+            self.dialog.show();
+        },
+
+        _blur: function (event) {
+            self.dialog.hide();
+        },
+
+        _keydown: function (event) {
+            // If pressed escape, hide hints
+            if (event.which == 27) {
+                self._blur();
+            }
+            // If enter is pressed, do nothing, unless there is a hint selected
+            if (event.which == 13) {
+                if (self.selected != null) {
+                    // Enter selected
+                    event.preventDefault();
+                    self.items[self.selected].click();
+                    // restart cursor position
+                    self.moveSelection(0);
+                }
+                self._blur();
+            }
+
+            // If pressed up/down select the appropriate entry
+            if (event.which == 38 || event.which == 40) {
+                event.preventDefault();
+                var direction = -1; // down
+                if (event.which == 40) {
+                    direction = 1; // up
+                }
+                self.moveSelection(direction);
+            }
+        },
+
+        /*
+         * Moves the selection cursor.
+         *
+         * Direction can be: -1 for up, 1 for down and 0 to reset position.
+         */
+        moveSelection: function (direction) {
+            // Imagine you have an invisible item at the beginning of the list
+            // to simulate going back to the input
+            var count = self.items.length + 1;
+            var position = 0;  // in input by default
+
+            if (self.selected != null) {
+                // unselect previous item
+                try{
+                    self.items[self.selected].dispatchEvent(new Event('unselected'));
+                } catch (Exception) {
+                    // Ignore if element doesn't exists
+                }
+                // translate current selected item to our "list"
+                position = self.selected + 1;
+            }
+            // Calculate new position
+            position = (((position + direction) % count) + count) % count;
+            // Translate our position to selected element
+            if (position > 0 && direction != 0) {
+                self.selected = position - 1;
+                self.items[self.selected].dispatchEvent(new Event('selected'));
+            } else {
+                // back to input
+                self.selected = null;
+            }
+        },
+
+        _mousedown: function (event) {
+            event.preventDefault();
+            //self._blur();
+        },
 
         /*
          * Adds a history item to the History section.
          *
-         * The new item is always inserted at the beggining (newer)
+         * The new item is always inserted at the beginning (newer)
          */
         dialog: {
             add: function (item) {
-                var new_item = restman.ui.dynamic_list.add_item(restman.ui.history.ID_HISTORY_LIST, true);
+                var new_item = restman.ui.dynamic_list.add_item(self._$list, true);
                 // Set id
                 new_item.attr('data-history-item', item.timestamp);
                 // Set values
@@ -37,21 +160,21 @@ restman.ui = restman.ui || {};
 
             reload: function () {
                 // Clean non-template items
-                $(restman.ui.history.ID_HISTORY_LIST + ' > li:not([data-clone-template])').remove();
+                restman.ui.dynamic_list.clear(self._$list);
                 // Re-populate history.
                 restman.storage.getAllRequests(function(items) {
                     for (var i in items) {
-                        restman.ui.history.dialog.add(items[i]);
+                        self.dialog.add(items[i]);
                     }
                 });
             },
 
             show: function () {
-                $(restman.ui.history.ID_HISTORY_POPUP).addClass('history-popup-open');
+                self._$popup.addClass('history-popup-open');
             },
 
             hide: function () {
-                $(restman.ui.history.ID_HISTORY_POPUP).removeClass('history-popup-open');
+                self._$popup.removeClass('history-popup-open');
             }
         }
     };
@@ -59,11 +182,18 @@ restman.ui = restman.ui || {};
 
 
 $(document).ready(function(event) {
-    
+    restman.ui.history.init($('#Url'), $('#HistoryList'), $('#HistoryPopup'));
+
     /* Remove all history items. */
     $('#ClearHistory').click(function (event) {
-        restman.ui.dynamic_list.clear('#HistoryList');
+        restman.ui.dynamic_list.remove_all('#HistoryList');
+        return false;
     });
+
+    $('#CancelHistory').click(function (event) {
+        restman.ui.history.dialog.hide();
+        return false;
+    })
 
     /* Remove a history item. */
     $('#HistoryList li [data-delete-item]').click(function(event) {
@@ -74,8 +204,6 @@ $(document).ready(function(event) {
         // Remove history entry
         var id = $(this).parent().attr('data-history-item');
         restman.storage.deleteRequest(parseInt(id), function (e) {});
-
-        // Avoid going to href
         return false;
     });
 
@@ -122,43 +250,8 @@ $(document).ready(function(event) {
                 row.find('input.value').val(item.body.content[d]);
             }
         });
+        restman.ui.history.dialog.hide();
         return false;
-    });
-
-    // Show history when #Url gets the focus
-    $('#Url').focusin(function (event) {
-        restman.ui.history.dialog.show();
-    });
-
-    // Hide history when #Url looses the focus
-    $('#Url').focusout(function (event) {
-        // Wait a little before hiding the history popup. This fixes a problem
-        // when you click in a history entry and the #Url looses the focus
-        // before the history item gets the click event.
-        setTimeout(function () {
-            restman.ui.history.dialog.hide();
-        }, 100);
-    });
-    // Hide history when Esc is pressed
-    $('#Url').keyup(function (event) {
-        if (event.type == "keyup" && event.keyCode == 27) {
-            restman.ui.history.dialog.hide()
-            event.stopPropagation()
-        }
-    });
-
-    // Filter history when typing in the url box
-    $('#Url').bind('input', function (event) {
-        if ( event.which != 13 ) {
-            $('#HistoryList').children('li:not([data-clone-template])').map(function (i, e) {
-                var jelem = $(e);
-                if (jelem.is(':contains("' + $('#Url').val() + '")')){
-                    jelem.show();
-                }else{
-                    jelem.hide();
-                }
-            })
-        }
     });
 
     restman.ui.history.dialog.reload();

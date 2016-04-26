@@ -20,7 +20,7 @@
     position: absolute;
     transition: max-height .2s,visibility .2s;
     width: 100%;
-    overflow: auto;
+    overflow: hidden;
     visibility: hidden;
     max-height: 0;
 }

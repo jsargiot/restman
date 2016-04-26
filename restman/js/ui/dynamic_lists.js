@@ -54,9 +54,17 @@ restman.ui = restman.ui || {};
         },
 
         /*
-         * Clears all the rows in the target.
+         * Clears all the rows in the target, but doesn't remove elements
          */
         clear: function(target) {
+            $(target).find('li:not([data-clone-template])').remove();
+        },
+
+        /*
+         * Removes all elements of the list by clicking on each element's
+         * data-delete-item item.
+         */
+        remove_all: function(target) {
             $(target).find('li:not([data-clone-template])').find('[data-delete-item]').click();
         }
     };

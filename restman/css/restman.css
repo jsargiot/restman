@@ -194,7 +194,7 @@ img#History {
 #HistoryList li {
   cursor: pointer;
 }
-  #HistoryList li:hover {
+  #HistoryList li:hover, #HistoryList li[selected="true"] {
     background-color: rgba(0,0,0,0.1);
   }
 
