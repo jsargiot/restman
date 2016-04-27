@@ -283,6 +283,10 @@ input[type=text].flat:focus, input[type=password].flat:focus {
   margin: 0;
 }
 
+#Url {
+  background-color: transparent;
+}
+
 #Method {
   background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAFCAYAAAB4ka1VAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAAJcEhZcwAACxEAAAsRAX9kX5EAAAAnSURBVBhXY/D19f0PwgxoAC4OYyArwhBDFkDGYEkYwCsJA5iSDAwA2BMpxchNQrMAAAAASUVORK5CYII=");
   background-repeat: no-repeat;
@@ -357,18 +361,6 @@ img#History {
   position: relative;
 }
 
-#ResponsePanel .overlay {
-  display: none;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  background: url("/img/loading.gif") center no-repeat rgba(25,25,25,0.6);
-  z-index: 100;
-  text-align: center;
-}
-
 #ResponsePanel > [data-show-type] {
   border-bottom: 1px solid #d8d8d8;
 }
@@ -385,15 +377,6 @@ img#History {
   width: 100%;
   resize: vertical; /* Allow vertical manual resize */
   display: block;
-}
-
-#ResponsePanel.loading .overlay {
-  display: block;
-}
-
-#Url.loading {
-  background: url("/img/loading.gif") right no-repeat;
-  background-origin: content-box;
 }
 
 .clearfix {
@@ -541,4 +524,19 @@ img#History {
 
 .history-method-DELETE .label {
   color: red;
+}
+
+.loading {
+    background-image: linear-gradient(-45deg, rgba(0, 0, 0, .1) 25%, transparent 25%, transparent 50%, rgba(0, 0, 0, .1) 50%, rgba(0,0,0, .1) 75%, transparent 75%, transparent);
+    background-size: 50px 50px;
+    animation: move 2s linear infinite;
+}
+
+@-webkit-keyframes move {
+    0% {
+       background-position: 0 0;
+    }
+    100% {
+       background-position: 50px 50px;
+    }
 }

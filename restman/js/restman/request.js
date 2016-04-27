@@ -24,8 +24,6 @@ var restman = restman || {};
             var xhr = new XMLHttpRequest();
             xhr.responseType = "text";
             xhr.timeout = 0;
-            // Open url
-            xhr.open(method, url, true);
             // Set progress handler
             if (on_progress)
                 xhr.addEventListener('progress', on_progress, false);
@@ -46,6 +44,8 @@ var restman = restman || {};
                     if (on_error) on_error(event)
                 }
             }
+            // Open url
+            xhr.open(method, url, true);
             // Trigger request
             timestart = window.performance.now();
             return xhr.send(body);
