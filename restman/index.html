@@ -9,7 +9,6 @@
         <link rel="stylesheet" href="css/codemirror-5.3/codemirror.css">
         <link rel="stylesheet" href="css/codemirror-5.3/monokai.css">
         <link rel="stylesheet" href="css/ui/expandable.css">
-        <link rel="stylesheet" href="css/ui/material.css">
         <link rel="stylesheet" href="css/ui/history.css">
         <link rel="stylesheet" href="css/icomoon.css">
         <link rel="stylesheet" href="css/restman.css">
@@ -23,7 +22,7 @@
                 <img class="logo" src="res/icon64.png" />
             </div>
             <div id="Controls" class="flex-item-dynamic flex-container">
-                <select id="Method" class="border-radius flex-item-static" tabindex="0">
+                <select id="Method" class="flex-item-static" tabindex="0">
                     <option value="GET">GET</option>
                     <option value="POST">POST</option>
                     <option value="PUT">PUT</option>
@@ -44,13 +43,13 @@
                                 </ul>
                             </div>
                             <div class="modal-buttons flex-item-static">
-                                <input id="CancelHistory" type="button" class="flat border-radius close-modal" value="Cancel" tabindex="-1" />
-                                <input id="ClearHistory" type="button" class="flat border-radius error" value="Clear all" tabindex="-1" />
+                                <input id="CancelHistory" type="button" value="Cancel" tabindex="-1" />
+                                <input id="ClearHistory" type="button" class="error" value="Clear all" tabindex="-1" />
                             </div>
                         </div>
                     </div>
                 </div>
-                <span id="Send" class="border-radius flex-item-static icon-send" tabindex="6" />
+                <span id="Send" class="flex-item-static icon-send" tabindex="6" />
             </div>
         </header>
 
@@ -86,9 +85,9 @@
                             <span class="flex-item-static icon-delete" data-delete-item tabindex="0" />
                         </li>
                     </ul>
-                    <input type="button" data-clone-item="#HeadersTable" class="flat border-radius" value="Add header" tabindex="0" />
-                    <input type="button" class="flat border-radius" data-reveal-id="BasicAuthForm" value="Add Basic Authentication" tabindex="0" />
-                    <input type="button" data-clear-all="#HeadersTable" class="flat border-radius error" value="Clear All" tabindex="0" />
+                    <input type="button" data-clone-item="#HeadersTable" value="Add header" tabindex="0" />
+                    <input type="button" data-reveal-id="BasicAuthForm" value="Add Basic Authentication" tabindex="0" />
+                    <input type="button" data-clear-all="#HeadersTable" class="error" value="Clear All" tabindex="0" />
                 </div>
             </section>
 
@@ -97,13 +96,13 @@
                 <div class="modal-content">
                     <h4>Basic Authentication</h4>
                     <form>
-                        <label>User: <input type="text" class="flat" name="user" placeholder="Username..." tabindex="0" /></label>
-                        <label>Password: <input type="password" class="flat" name="pass" placeholder="Password..." tabindex="0" /></label>
+                        <label>User: <input type="text" name="user" placeholder="Username..." class="flat" tabindex="0" /></label>
+                        <label>Password: <input type="password" name="pass" placeholder="Password..." class="flat" tabindex="0" /></label>
                     </form>
                 </div>
                 <div class="modal-buttons">
-                    <input type="button" class="flat border-radius close-modal" value="Cancel" tabindex="0" />
-                    <input type="button" class="flat border-radius save-modal ok" value="Save" tabindex="0" />
+                    <input type="button" class="close-modal" value="Cancel" tabindex="0" />
+                    <input type="button" class="save-modal ok" value="Save" tabindex="0" />
                 </div>
             </div>
 
@@ -122,8 +121,8 @@
                                 <span class="flex-item-static icon-delete" data-delete-item tabindex="0" />
                             </li>
                         </ul>
-                        <input type="button" data-clone-item="#FormData" class="flat border-radius" value="Add form data" tabindex="0" />
-                        <input type="button" data-clear-all="#FormData" class="flat border-radius error" value="Clear All" tabindex="0" />
+                        <input type="button" data-clone-item="#FormData" value="Add form data" tabindex="0" />
+                        <input type="button" data-clear-all="#FormData" class="error" value="Clear All" tabindex="0" />
                     </div>
                     <div id="PanelRaw" class="panel radius no-padding content">
                         <textarea id="RequestContent" tabindex="0"></textarea>

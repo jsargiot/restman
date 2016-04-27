@@ -180,6 +180,96 @@ ul.sub-nav li.active a {
     background-color: #607d8b;
   }
 
+ul[data-tab] {
+  margin: 0;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+ul[data-tab] li {
+  display: inline-block;
+  text-align: center;
+  cursor: pointer;
+}
+
+ul[data-tab] li.active {
+  border-bottom: 3px solid #607d8b;
+}
+
+ul[data-tab] li.active a {
+  color: #607d8b;
+}
+
+ul[data-tab] li > a {
+  display: block;
+  padding: 1rem;
+  text-transform: uppercase;
+  outline: none;
+  color: rgba(0,0,0,0.75);
+}
+
+input[type=button] {
+  display: inline-block;
+  height: 36px;
+  padding: 0 1rem;
+  text-transform: uppercase;
+  border: none;
+  -webkit-tap-highlight-color: transparent;
+  box-shadow: none;
+  background-color: transparent;
+  color: #343434;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+  input[type=button]:hover {
+    background-color: #DFDFDF;
+  }
+
+input[type=button].disabled {
+  background-color: #DFDFDF;
+  box-shadow: none;
+  color: #9F9F9F;
+  cursor: default;
+}
+
+input[type=button].error {
+  background-color: #c81414;
+  color: white;
+  border: 1px solid #800;
+}
+
+input[type=button].error:hover {
+  background-color: rgb(170,17,17);
+}
+
+input[type=button].ok {
+  background-color: #60b044;
+  color: white;
+  border: 1px solid #080;
+}
+
+input[type=button].ok:hover {
+  background-color: rgb(67,123,47);
+}
+
+input[type=text].flat, input[type=password].flat, input[type=file].flat {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 1px solid #cfd1d4;
+  box-shadow: none;
+  margin: 0.5rem;
+  background-color: transparent;
+  display: block;
+  color: rgba(0, 0, 0, 0.75);
+  padding: 0.5rem;
+}
+
+input[type=text].flat:focus, input[type=password].flat:focus {
+  border-bottom: 2px solid #78909c;
+  outline: none;
+}
+
 #Controls select, #Controls input, #Send {
   height: 2.5rem;
   font-family: Roboto, Arial, sans-serif;
@@ -201,6 +291,7 @@ ul.sub-nav li.active a {
   background-color: transparent;
   width: 5.9375rem;
   border: none;
+  border-radius: 3px;
 }
 
 #Send {
@@ -209,6 +300,7 @@ ul.sub-nav li.active a {
   color: #607d8b;
   cursor: pointer;
   font-size: 2.25rem;
+  border-radius: 3px;
 }
 
 #Method:hover, #Send:hover, input[type=button]:hover {
@@ -384,7 +476,7 @@ img#History {
 
 .modal-buttons {
   text-align: right;
-  padding-top: 0;
+  padding-top: 0.2rem;
   padding-bottom: 0.5rem;
 }
 
@@ -449,11 +541,4 @@ img#History {
 
 .history-method-DELETE .label {
   color: red;
-}
-
-input[type=button].error:hover {
-  background-color: rgb(170,17,17);
-}
-input[type=button].ok:hover {
-  background-color: rgb(67,123,47);
 }
