@@ -5,11 +5,24 @@
  * Free to use under the MIT license.
  * https://raw.githubusercontent.com/jsargiot/restman/master/LICENSE
  */
+@font-face {
+  font-family: "Roboto";
+  src: url("./font/roboto/Roboto-Regular.ttf");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("./font/roboto/Roboto-Bold.ttf");
+  font-weight: 700;
+}
+
 body {
   background-color: #ECEFF1;
   line-height: 1;
   font-size: 16px;
   color: rgba(0, 0, 0, 0.75);
+  font-weight: 400;
 }
 
 dl {
@@ -46,7 +59,6 @@ header, footer {
 
 header .title {
   line-height: 3rem;
-  font-weight: 500;
   text-align: left;
   display: inherit;
   align-items: center;
@@ -110,7 +122,6 @@ footer {
   overflow: hidden;
   line-height: 2rem;
   font-size: 0.8rem;
-  font-weight: 300;
   color: #FFF;
 }
 
