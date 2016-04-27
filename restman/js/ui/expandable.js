@@ -29,5 +29,11 @@ $(document).ready(function(event) {
         }
         // Avoid going to href when coming from a link
         return false;
+    }).on('keypress', function (event) {
+        if (event.which == 13) {
+            event.preventDefault();
+            // Redirect "enter" to click event
+            event.target.click();
+        }
     });
 });

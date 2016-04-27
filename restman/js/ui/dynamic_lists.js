@@ -81,11 +81,18 @@ $(document).ready(function(event) {
         return false;
     });
 
-    $("[data-delete-item]").click(function(event) {
+    $("[data-delete-item]").on('click', function(event) {
         var target = $(this).parent();
         restman.ui.dynamic_list.del_item(target);
         return false;
+    }).on('keypress', function (event) {
+        if (event.which == 13) {
+            event.preventDefault();
+            // Redirect "enter" to click event
+            event.target.click();
+        }
     });
+
 
     $("[data-clear-all]").click(function(event) {
         var id = $(this).attr('data-clear-all');

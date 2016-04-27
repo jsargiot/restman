@@ -22,7 +22,7 @@
                 <img class="logo" src="res/icon64.png" />
             </div>
             <div id="Controls" class="flex-item-dynamic flex-container">
-                <select class="border-radius flex-item-static" id="Method">
+                <select id="Method" class="border-radius flex-item-static" tabindex="0">
                     <option value="GET">GET</option>
                     <option value="POST">POST</option>
                     <option value="PUT">PUT</option>
@@ -30,8 +30,7 @@
                     <option value="DELETE">DELETE</option>
                 </select>
                 <div class="flex-item-dynamic">
-                    <input id="Url" class="shouldwait" type="text" name="url" placeholder="Enter url here..." value="" />
-
+                    <input id="Url" class="shouldwait" type="text" name="url" placeholder="Enter url here..." value=""  tabindex="0" />
                     <div id="HistoryPopup" class="history-popup">
                         <div class="flex-container flex-columns">
                             <div class="modal-content flex-item-dynamic flex-container flex-columns">
@@ -44,13 +43,13 @@
                                 </ul>
                             </div>
                             <div class="modal-buttons flex-item-static">
-                                <input id="CancelHistory" type="button" class="flat border-radius close-modal" value="Cancel" />
-                                <input id="ClearHistory" type="button" class="flat border-radius error" value="Clear all" />
+                                <input id="CancelHistory" type="button" class="flat border-radius close-modal" value="Cancel" tabindex="-1" />
+                                <input id="ClearHistory" type="button" class="flat border-radius error" value="Clear all" tabindex="-1" />
                             </div>
                         </div>
                     </div>
                 </div>
-                <input id="Send" type="button" value="Send" class="flat border-radius expanded flex-item-static blue-grey" />
+                <input id="Send" type="button" value="Send" class="flat border-radius expanded flex-item-static blue-grey"  tabindex="0" />
             </div>
         </header>
 
@@ -76,36 +75,36 @@
                 </div>
             </section>
 
-            <!-- Basic Authentication modal -->
-            <div id="BasicAuthForm" class="reveal-modal" data-reveal>
-                <div class="modal-content">
-                    <h4>Basic Authentication</h4>
-                    <form>
-                        <label>User: <input type="text" class="flat" name="user" placeholder="Username..." /></label>
-                        <label>Password: <input type="password" class="flat" name="pass" placeholder="Password..." /></label>
-                    </form>
-                </div>
-                <div class="modal-buttons">
-                    <input type="button" class="flat border-radius close-modal" value="Cancel" />
-                    <input type="button" class="flat border-radius save-modal ok" value="Save" />
-                </div>
-            </div>
-
             <section class="expandable closed">
                 <h3 class="expander">Headers</h3>
                 <div class="tabs-content">
                     <ul id="HeadersTable" class="name-value-list">
                         <li data-clone-template class="flex-container">
-                            <input class="flat key flex-item-dynamic" type="text" placeholder="Header..." />
-                            <input class="flat value flex-item-dynamic" type="text" placeholder="Value..." />
-                            <img src="img/mdi-remove.svg" class="flex-item-static" data-delete-item />
+                            <input class="flat key flex-item-dynamic" type="text" placeholder="Header..." tabindex="0" />
+                            <input class="flat value flex-item-dynamic" type="text" placeholder="Value..." tabindex="0" />
+                            <img src="img/mdi-remove.svg" class="flex-item-static" data-delete-item tabindex="0" />
                         </li>
                     </ul>
-                    <input type="button" data-clone-item="#HeadersTable" class="flat border-radius" value="Add header" />
-                    <input type="button" class="flat border-radius" data-reveal-id="BasicAuthForm" value="Add Basic Authentication" />
-                    <input type="button" data-clear-all="#HeadersTable" class="flat border-radius error" value="Clear All" />
+                    <input type="button" data-clone-item="#HeadersTable" class="flat border-radius" value="Add header" tabindex="0" />
+                    <input type="button" class="flat border-radius" data-reveal-id="BasicAuthForm" value="Add Basic Authentication" tabindex="0" />
+                    <input type="button" data-clear-all="#HeadersTable" class="flat border-radius error" value="Clear All" tabindex="0" />
                 </div>
             </section>
+
+            <!-- Basic Authentication modal -->
+            <div id="BasicAuthForm" class="reveal-modal" data-reveal>
+                <div class="modal-content">
+                    <h4>Basic Authentication</h4>
+                    <form>
+                        <label>User: <input type="text" class="flat" name="user" placeholder="Username..." tabindex="0" /></label>
+                        <label>Password: <input type="password" class="flat" name="pass" placeholder="Password..." tabindex="0" /></label>
+                    </form>
+                </div>
+                <div class="modal-buttons">
+                    <input type="button" class="flat border-radius close-modal" value="Cancel" tabindex="0" />
+                    <input type="button" class="flat border-radius save-modal ok" value="Save" tabindex="0" />
+                </div>
+            </div>
 
             <section id="BodySection" class="expandable closed">
                 <h3 class="expander">Body</h3>
@@ -117,16 +116,16 @@
                     <div id="PanelForm" class="content active">
                         <ul id="FormData" class="name-value-list">
                             <li data-clone-template class="flex-container">
-                                <input class="flat key flex-item-dynamic" type="text" placeholder="Write key..." />
-                                <input class="flat key flex-item-dynamic" type="text" placeholder="Write value or drop file..." data-fileable />
-                                <img src="img/mdi-remove.svg" class="flex-item-static" data-delete-item />
+                                <input class="flat key flex-item-dynamic" type="text" placeholder="Write key..." tabindex="0" />
+                                <input class="flat key flex-item-dynamic" type="text" placeholder="Write value or drop file..." data-fileable tabindex="0" />
+                                <img src="img/mdi-remove.svg" class="flex-item-static" data-delete-item tabindex="0" />
                             </li>
                         </ul>
-                        <input type="button" data-clone-item="#FormData" class="flat border-radius" value="Add form data" />
-                        <input type="button" data-clear-all="#FormData" class="flat border-radius error" value="Clear All" />
+                        <input type="button" data-clone-item="#FormData" class="flat border-radius" value="Add form data" tabindex="0" />
+                        <input type="button" data-clear-all="#FormData" class="flat border-radius error" value="Clear All" tabindex="0" />
                     </div>
                     <div id="PanelRaw" class="panel radius no-padding content">
-                        <textarea id="RequestContent"></textarea>
+                        <textarea id="RequestContent" tabindex="0"></textarea>
                         <ul class="sub-nav right">
                             <li class="active"><a href="#" data-target="#RequestContent" data-switch-type="javascript">JSON</a></li>
                             <li><a href="#" data-target="#RequestContent" data-switch-type="htmlmixed">XML</a></li>
@@ -152,7 +151,7 @@
                             </div>
                         </div>
                         <div data-show-type="javascript htmlmixed text">
-                            <textarea id="ResponseContentText" class="editor-box"></textarea>
+                            <textarea id="ResponseContentText" class="editor-box" tabindex="0"></textarea>
                         </div>
                         <ul class="sub-nav right">
                             <li><a href="#" data-target="#ResponseContentText" data-switch-type="javascript">JSON</a></li>
@@ -164,7 +163,7 @@
                     </div>
                     <div id="ResponseHeadersContainer" class="content">
                         <ul id="ResponseHeaders" class="name-value-list">
-                            <li data-clone-template class="flex-container">
+                            <li data-clone-template class="flex-container" tabindex="0">
                                 <span class="flat key flex-item-static"></span>
                                 <span class="flat value flex-item-dynamic"></span>
                             </li>
