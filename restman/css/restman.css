@@ -6,8 +6,10 @@
  * https://raw.githubusercontent.com/jsargiot/restman/master/LICENSE
  */
 body {
-  background-color: #FBFBFB;
+  background-color: #ECEFF1;
   line-height: 1;
+  font-size: 16px;
+  color: rgba(0, 0, 0, 0.75);
 }
 
 dl {
@@ -33,9 +35,13 @@ dl dd {
 
 header {
   padding: 1rem;
-  border-bottom: solid 1px #d3d3d3;
+  border-bottom: 1px solid #d3d3d3;
   box-shadow: 0 2px 5px 0 rgba(0,0,0,0.26);
   z-index: 100;
+}
+
+header, footer {
+  background-color: #607D8B;
 }
 
 header .title {
@@ -45,6 +51,7 @@ header .title {
   display: inherit;
   align-items: center;
   padding-right: 1rem;
+  color: #FFF;
 }
 
 header .title .logo {
@@ -52,21 +59,17 @@ header .title .logo {
 }
 
 header #Controls {
-  box-shadow: 0 1px 3px rgba(0,0,0,0.15);
-  border-radius: 3px;
-  background-color: white;
   padding-top: 0.3rem;
   padding-bottom: 0.3rem;
-  padding-left: 0.15rem;
+  padding-left: 0.3rem;
   padding-right: 0.15rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.5);
+  border-radius: 3px;
+  background-color: white;
 }
 
 header #Controls > * {
-  width: 5.9375rem;
-  margin-left: 0.15rem;
-  margin-right: 0.15rem;
-  margin-top: 0;
-  margin-bottom: 0;
+  margin: 0 0.15rem;
 }
 
 progress {
@@ -99,15 +102,20 @@ section h3 {
   background-color: #fafafa;
 }
 
-footer.page-footer {
+footer {
   text-align: center;
 }
 
-footer.page-footer .footer-copyright {
+.page-footer .footer-copyright {
   overflow: hidden;
   line-height: 2rem;
   font-size: 0.8rem;
   font-weight: 300;
+  color: #FFF;
+}
+
+footer a {
+  color: #90a4ae
 }
 
 ul.list {
@@ -171,9 +179,26 @@ ul.sub-nav li.active a {
   margin: 0;
 }
 
+#Method {
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAFCAYAAAB4ka1VAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAAJcEhZcwAACxEAAAsRAX9kX5EAAAAnSURBVBhXY/D19f0PwgxoAC4OYyArwhBDFkDGYEkYwCsJA5iSDAwA2BMpxchNQrMAAAAASUVORK5CYII=");
+  background-repeat: no-repeat;
+  background-position-x: 4.8rem;
+  background-position-y: center;
+  background-color: transparent;
+  width: 5.9375rem;
+  border: none;
+}
+
 #Send {
-  padding: 0;
+  padding: 0 0.5rem;
   text-align: center;
+  color: #607d8b;
+  cursor: pointer;
+  width: 5.9375rem;
+}
+
+#Method:hover, #Send:hover, input[type=button]:hover {
+  background-color: rgba(0,0,0,0.1);
 }
 
 img#History {
@@ -410,4 +435,11 @@ img#History {
 
 .history-method-DELETE .label {
   color: red;
+}
+
+input[type=button].error:hover {
+  background-color: rgb(170,17,17);
+}
+input[type=button].ok:hover {
+  background-color: rgb(67,123,47);
 }

@@ -14,10 +14,10 @@
         <link rel="stylesheet" href="css/restman.css">
     </head>
 
-    <body class="blue-grey lighten-5 flex-container flex-columns">
+    <body class="flex-container flex-columns">
         <progress id="progress" value="" max="100"></progress>
 
-        <header class="blue-grey flex-item-static flex-container">
+        <header class="flex-item-static flex-container">
             <div class="title flex-item-static hide-for-small-only">
                 <img class="logo" src="res/icon64.png" />
             </div>
@@ -30,10 +30,10 @@
                     <option value="DELETE">DELETE</option>
                 </select>
                 <div class="flex-item-dynamic">
-                    <input id="Url" class="shouldwait" type="text" name="url" placeholder="Enter url here..." value=""  tabindex="0" />
+                    <input id="Url" class="shouldwait" type="text" name="url" placeholder="Enter url here..." value="" tabindex="0" />
                     <div id="HistoryPopup" class="history-popup">
                         <div class="flex-container flex-columns">
-                            <div class="modal-content flex-item-dynamic flex-container flex-columns">
+                            <div class="flex-item-dynamic flex-container flex-columns">
                                 <ul id="HistoryList" class="list flex-item-dynamic">
                                     <li data-clone-template class="flex-container flex-item-middle close-modal" data-history-item="1411588114901">
                                         <span class="flex-item-static history-method label">method</span>
@@ -49,7 +49,7 @@
                         </div>
                     </div>
                 </div>
-                <input id="Send" type="button" value="Send" class="flat border-radius expanded flex-item-static blue-grey"  tabindex="0" />
+                <input id="Send" type="button" value="Send" class="flat border-radius expanded flex-item-static"  tabindex="0" />
             </div>
         </header>
 
@@ -173,9 +173,9 @@
             </section>
         </div>
 
-        <footer class="flex-item-static page-footer blue-grey">
-            <div class="footer-copyright blue-grey-text text-lighten-5">
-                <span id="VersionNumber"></span><span>. Made by <a class="blue-grey-text text-lighten-2" href="http://github.com/jsargiot">Joaquin Sargiotto</a>. MIT License v2.</span>
+        <footer class="flex-item-static page-footer">
+            <div class="footer-copyright">
+                <span id="VersionNumber"></span><span>. Made by <a href="http://github.com/jsargiot">Joaquin Sargiotto</a>. MIT License v2.</span>
             </div>
         </footer>
 
