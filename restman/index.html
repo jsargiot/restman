@@ -11,6 +11,7 @@
         <link rel="stylesheet" href="css/ui/expandable.css">
         <link rel="stylesheet" href="css/ui/material.css">
         <link rel="stylesheet" href="css/ui/history.css">
+        <link rel="stylesheet" href="css/icomoon.css">
         <link rel="stylesheet" href="css/restman.css">
     </head>
 
@@ -38,7 +39,7 @@
                                     <li data-clone-template class="flex-container flex-item-middle close-modal" data-history-item="1411588114901">
                                         <span class="flex-item-static history-method label">method</span>
                                         <span class="flex-item-dynamic history-url" title="">url</span>
-                                        <img src="img/mdi-remove.svg" class="flex-item-static" data-delete-item />
+                                        <span class="flex-item-static icon-delete" data-delete-item />
                                     </li>
                                 </ul>
                             </div>
@@ -49,7 +50,7 @@
                         </div>
                     </div>
                 </div>
-                <input id="Send" type="button" value="Send" class="flat border-radius expanded flex-item-static"  tabindex="0" />
+                <span id="Send" class="border-radius flex-item-static icon-send" tabindex="6" />
             </div>
         </header>
 
@@ -82,7 +83,7 @@
                         <li data-clone-template class="flex-container">
                             <input class="flat key flex-item-dynamic" type="text" placeholder="Header..." tabindex="0" />
                             <input class="flat value flex-item-dynamic" type="text" placeholder="Value..." tabindex="0" />
-                            <img src="img/mdi-remove.svg" class="flex-item-static" data-delete-item tabindex="0" />
+                            <span class="flex-item-static icon-delete" data-delete-item tabindex="0" />
                         </li>
                     </ul>
                     <input type="button" data-clone-item="#HeadersTable" class="flat border-radius" value="Add header" tabindex="0" />
@@ -118,7 +119,7 @@
                             <li data-clone-template class="flex-container">
                                 <input class="flat key flex-item-dynamic" type="text" placeholder="Write key..." tabindex="0" />
                                 <input class="flat key flex-item-dynamic" type="text" placeholder="Write value or drop file..." data-fileable tabindex="0" />
-                                <img src="img/mdi-remove.svg" class="flex-item-static" data-delete-item tabindex="0" />
+                                <span class="flex-item-static icon-delete" data-delete-item tabindex="0" />
                             </li>
                         </ul>
                         <input type="button" data-clone-item="#FormData" class="flat border-radius" value="Add form data" tabindex="0" />
