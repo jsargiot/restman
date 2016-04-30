@@ -222,9 +222,9 @@ input[type=button] {
   border-radius: 3px;
 }
 
-  input[type=button]:hover {
-    background-color: #DFDFDF;
-  }
+input[type=button]:hover,#Method:hover, #Send:hover {
+  background-image: linear-gradient(rgba(0, 0, 0, .1), rgba(0, 0, 0, .1));
+}
 
 input[type=button].disabled {
   background-color: #DFDFDF;
@@ -239,18 +239,10 @@ input[type=button].error {
   border: 1px solid #800;
 }
 
-input[type=button].error:hover {
-  background-color: rgb(170,17,17);
-}
-
 input[type=button].ok {
   background-color: #60b044;
   color: white;
   border: 1px solid #080;
-}
-
-input[type=button].ok:hover {
-  background-color: rgb(67,123,47);
 }
 
 input[type=text].flat, input[type=password].flat, input[type=file].flat {
@@ -308,10 +300,6 @@ input[type=text].flat:focus, input[type=password].flat:focus {
   border-radius: 3px;
 }
 
-#Method:hover, #Send:hover, input[type=button]:hover {
-  background-color: rgba(0,0,0,0.1);
-}
-
 #MainEditors:not(.flex-columns) > * {
   width: 50%;
 }
@@ -324,16 +312,6 @@ input[type=text].flat:focus, input[type=password].flat:focus {
   background-image: none;
   cursor: default;
 }
-
-img#History {
-  height: 2.5rem;
-  width: 2.5rem;
-  cursor: pointer;
-  opacity: 0.5;
-}
-  img#History:hover {
-    opacity: 1;
-  }
 
 #HistoryList {
   max-height: 50vh;
