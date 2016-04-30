@@ -106,5 +106,6 @@ $(document).ready(function(event) {
     $('#ResponseSection').on("expanded", refreshResponseCodeMirror);
 
     // Select Plain type by default
+    $('[data-target="#RequestContent"][data-switch-type="text"]').click()
     $('[data-target="#ResponseContentText"][data-switch-type="text"]').click()
 });

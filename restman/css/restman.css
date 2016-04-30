@@ -172,12 +172,14 @@ ul#ResponseHeaders li .key {
   width: 50%;
 }
 
-ul.sub-nav li.active a {
-    background-color: #607d8b;
+li.active input[type=button] {
+    background-color: #455A64;
+    color: #FFF;
 }
-  ul.sub-nav li.active a:hover {
-    background-color: #607d8b;
-  }
+
+li.active input[type=button]:hover {
+  background-color: #607d8b;
+}
 
 ul[data-tab] {
   margin: 0;
@@ -432,7 +434,7 @@ img#History {
 }
 
 .sub-nav li {
-  margin: 0;
+  margin: 0 0.125rem;
   padding: 0;
 }
 

@@ -49,7 +49,7 @@
                         </div>
                     </div>
                 </div>
-                <span id="Send" class="flex-item-static icon-send" tabindex="6" />
+                <span id="Send" class="flex-item-static icon-send" tabindex="0" />
             </div>
         </header>
 
@@ -128,9 +128,9 @@
                         <div id="PanelRaw" class="panel radius no-padding content">
                             <textarea id="RequestContent" tabindex="0"></textarea>
                             <ul class="sub-nav right">
-                                <li class="active"><a href="#" data-target="#RequestContent" data-switch-type="javascript">JSON</a></li>
-                                <li><a href="#" data-target="#RequestContent" data-switch-type="htmlmixed">XML</a></li>
-                                <li><a href="#" data-target="#RequestContent" data-switch-type="text">Plain</a></li>
+                                <li><input type="button" data-target="#RequestContent" data-switch-type="javascript" value="JSON"></input></li>
+                                <li><input type="button" data-target="#RequestContent" data-switch-type="htmlmixed" value="XML"></input></li>
+                                <li><input type="button" data-target="#RequestContent" data-switch-type="text" value="Plain"></input></li>
                             </ul>
                             <div class="clearfix"></div>
                         </div>
@@ -155,10 +155,10 @@
                                 <textarea id="ResponseContentText" class="editor-box" tabindex="0"></textarea>
                             </div>
                             <ul class="sub-nav right">
-                                <li><a href="#" data-target="#ResponseContentText" data-switch-type="javascript">JSON</a></li>
-                                <li><a href="#" data-target="#ResponseContentText" data-switch-type="htmlmixed">XML</a></li>
-                                <li><a href="#" data-target="#ResponseContentText" data-switch-type="html">HTML Preview</a></li>
-                                <li><a href="#" data-target="#ResponseContentText" data-switch-type="text">Plain</a></li>
+                                <li><input type="button" data-target="#ResponseContentText" data-switch-type="javascript" value="JSON"></input></li>
+                                <li><input type="button" data-target="#ResponseContentText" data-switch-type="htmlmixed" value="XML"></input></li>
+                                <li><input type="button" data-target="#ResponseContentText" data-switch-type="html" value="HTML Preview"></input></li>
+                                <li><input type="button" data-target="#ResponseContentText" data-switch-type="text" value="Plain"></input></li>
                             </ul>
                             <div class="clearfix"></div>
                         </div>
