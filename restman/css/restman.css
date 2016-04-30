@@ -99,12 +99,9 @@ progress {
   }
 
 section {
-  border-width: 0px;
-  margin-bottom: 1.25rem;
-  margin-left: 1rem;
-  margin-right: 1rem;
-  margin-top: 1rem;
-  background: white;
+  border-width: 0;
+  margin: 0.625rem;
+  background: #FFF;
   color: #333333;
   box-shadow: 0 1px 2px rgba(0,0,0,0.15);
 }
@@ -112,6 +109,8 @@ section {
 section h3 {
   font-size: 1em;
   background-color: #fafafa;
+  padding: 1em 0 1em 2em;
+  margin: 0;
 }
 
 footer {
@@ -309,6 +308,19 @@ input[type=text].flat:focus, input[type=password].flat:focus {
 
 #Method:hover, #Send:hover, input[type=button]:hover {
   background-color: rgba(0,0,0,0.1);
+}
+
+#MainEditors:not(.flex-columns) > * {
+  width: 50%;
+}
+
+#MainEditors:not(.flex-columns) .expandable.closed > * {
+  display: block;
+}
+
+#MainEditors:not(.flex-columns) .expandable .expander {
+  background-image: none;
+  cursor: default;
 }
 
 img#History {
@@ -539,4 +551,8 @@ img#History {
     100% {
        background-position: 50px 50px;
     }
+}
+
+.main-container {
+  padding: 0.625rem;
 }

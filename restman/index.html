@@ -53,8 +53,8 @@
             </div>
         </header>
 
-        <div class="flex-item-dynamic scrollable-y main-container">
-            <section class="expandable">
+        <div class="flex-item-dynamic scrollable-y main-container flex-container flex-columns">
+            <section class="expandable flex-item-static">
                 <div class="tabs-content text-center">
                     <dl class="small-6 medium-3 columns">
                         <dt>Status</dt>
@@ -75,7 +75,7 @@
                 </div>
             </section>
 
-            <section class="expandable closed">
+            <section class="expandable closed flex-item-static">
                 <h3 class="expander">Headers</h3>
                 <div class="tabs-content">
                     <ul id="HeadersTable" class="name-value-list">
@@ -106,76 +106,79 @@
                 </div>
             </div>
 
-            <section id="BodySection" class="expandable closed">
-                <h3 class="expander">Body</h3>
-                <ul class="material-tabs" data-tab>
-                    <li class="active"><a href="#PanelForm">Form</a></li>
-                    <li><a href="#PanelRaw">Raw</a></li>
-                </ul>
-                <div class="tabs-content">
-                    <div id="PanelForm" class="content active">
-                        <ul id="FormData" class="name-value-list">
-                            <li data-clone-template class="flex-container">
-                                <input class="flat key flex-item-dynamic" type="text" placeholder="Write key..." tabindex="0" />
-                                <input class="flat key flex-item-dynamic" type="text" placeholder="Write value or drop file..." data-fileable tabindex="0" />
-                                <span class="flex-item-static icon-delete" data-delete-item tabindex="0" />
-                            </li>
-                        </ul>
-                        <input type="button" data-clone-item="#FormData" value="Add form data" tabindex="0" />
-                        <input type="button" data-clear-all="#FormData" class="error" value="Clear All" tabindex="0" />
+            <div id="MainEditors" class="flex-item-static flex-container">
+                <section id="BodySection" class="expandable closed flex-item-dynamic">
+                    <h3 class="expander">Body</h3>
+                    <ul class="material-tabs" data-tab>
+                        <li class="active"><a href="#PanelForm">Form</a></li>
+                        <li><a href="#PanelRaw">Raw</a></li>
+                    </ul>
+                    <div class="tabs-content">
+                        <div id="PanelForm" class="content active">
+                            <ul id="FormData" class="name-value-list">
+                                <li data-clone-template class="flex-container">
+                                    <input class="flat key flex-item-dynamic" type="text" placeholder="Write key..." tabindex="0" />
+                                    <input class="flat key flex-item-dynamic" type="text" placeholder="Write value or drop file..." data-fileable tabindex="0" />
+                                    <span class="flex-item-static icon-delete" data-delete-item tabindex="0" />
+                                </li>
+                            </ul>
+                            <input type="button" data-clone-item="#FormData" value="Add form data" tabindex="0" />
+                            <input type="button" data-clear-all="#FormData" class="error" value="Clear All" tabindex="0" />
+                        </div>
+                        <div id="PanelRaw" class="panel radius no-padding content">
+                            <textarea id="RequestContent" tabindex="0"></textarea>
+                            <ul class="sub-nav right">
+                                <li class="active"><a href="#" data-target="#RequestContent" data-switch-type="javascript">JSON</a></li>
+                                <li><a href="#" data-target="#RequestContent" data-switch-type="htmlmixed">XML</a></li>
+                                <li><a href="#" data-target="#RequestContent" data-switch-type="text">Plain</a></li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
                     </div>
-                    <div id="PanelRaw" class="panel radius no-padding content">
-                        <textarea id="RequestContent" tabindex="0"></textarea>
-                        <ul class="sub-nav right">
-                            <li class="active"><a href="#" data-target="#RequestContent" data-switch-type="javascript">JSON</a></li>
-                            <li><a href="#" data-target="#RequestContent" data-switch-type="htmlmixed">XML</a></li>
-                            <li><a href="#" data-target="#RequestContent" data-switch-type="text">Plain</a></li>
-                        </ul>
-                        <div class="clearfix"></div>
-                    </div>
-                </div>
-            </section>
+                </section>
 
-            <section id="ResponseSection" class="expandable">
-                <h3 class="expander">Response</h3>
-                <ul class="material-tabs" data-tab>
-                    <li class="active"><a href="#ResponsePanel">Body</a></li>
-                    <li><a href="#ResponseHeadersContainer">Headers</a></li>
-                </ul>
-                <div class="tabs-content">
-                    <div class="overlay"></div>
-                    <div id="ResponsePanel" class="panel radius no-padding shouldwait content active">
-                        <div data-show-type="html">
-                            <div id="ResponseContentHtml" class="html-box">
-                                <iframe></iframe>
+                <section id="ResponseSection" class="expandable flex-item-dynamic">
+                    <h3 class="expander">Response</h3>
+                    <ul class="material-tabs" data-tab>
+                        <li class="active"><a href="#ResponsePanel">Body</a></li>
+                        <li><a href="#ResponseHeadersContainer">Headers</a></li>
+                    </ul>
+                    <div class="tabs-content">
+                        <div class="overlay"></div>
+                        <div id="ResponsePanel" class="panel radius no-padding shouldwait content active">
+                            <div data-show-type="html">
+                                <div id="ResponseContentHtml" class="html-box">
+                                    <iframe></iframe>
+                                </div>
                             </div>
+                            <div data-show-type="javascript htmlmixed text">
+                                <textarea id="ResponseContentText" class="editor-box" tabindex="0"></textarea>
+                            </div>
+                            <ul class="sub-nav right">
+                                <li><a href="#" data-target="#ResponseContentText" data-switch-type="javascript">JSON</a></li>
+                                <li><a href="#" data-target="#ResponseContentText" data-switch-type="htmlmixed">XML</a></li>
+                                <li><a href="#" data-target="#ResponseContentText" data-switch-type="html">HTML Preview</a></li>
+                                <li><a href="#" data-target="#ResponseContentText" data-switch-type="text">Plain</a></li>
+                            </ul>
+                            <div class="clearfix"></div>
                         </div>
-                        <div data-show-type="javascript htmlmixed text">
-                            <textarea id="ResponseContentText" class="editor-box" tabindex="0"></textarea>
+                        <div id="ResponseHeadersContainer" class="content">
+                            <ul id="ResponseHeaders" class="name-value-list">
+                                <li data-clone-template class="flex-container" tabindex="0">
+                                    <span class="flat key flex-item-static"></span>
+                                    <span class="flat value flex-item-dynamic"></span>
+                                </li>
+                            </ul>
                         </div>
-                        <ul class="sub-nav right">
-                            <li><a href="#" data-target="#ResponseContentText" data-switch-type="javascript">JSON</a></li>
-                            <li><a href="#" data-target="#ResponseContentText" data-switch-type="htmlmixed">XML</a></li>
-                            <li><a href="#" data-target="#ResponseContentText" data-switch-type="html">HTML Preview</a></li>
-                            <li><a href="#" data-target="#ResponseContentText" data-switch-type="text">Plain</a></li>
-                        </ul>
-                        <div class="clearfix"></div>
                     </div>
-                    <div id="ResponseHeadersContainer" class="content">
-                        <ul id="ResponseHeaders" class="name-value-list">
-                            <li data-clone-template class="flex-container" tabindex="0">
-                                <span class="flat key flex-item-static"></span>
-                                <span class="flat value flex-item-dynamic"></span>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
+                </section>
+            </div>
         </div>
 
         <footer class="flex-item-static page-footer">
             <div class="footer-copyright">
                 <span id="VersionNumber"></span><span>. Made by <a href="http://github.com/jsargiot">Joaquin Sargiotto</a>. MIT License v2.</span>
+                <span id="LayoutSwitcher">[Switch Layout]</span>
             </div>
         </footer>
 
