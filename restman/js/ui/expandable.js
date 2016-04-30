@@ -45,4 +45,7 @@ $(document).ready(function(event) {
             $me.addClass('flex-columns');
         }
     });
+    $('#ThemeSwitcher').click(function (event) {
+        restman.ui.theme.update('dark', 'side');
+    });
 });

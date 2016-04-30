@@ -177,10 +177,6 @@ li.active input[type=button] {
     color: #FFF;
 }
 
-li.active input[type=button]:hover {
-  background-color: #607d8b;
-}
-
 ul[data-tab] {
   margin: 0;
   border-bottom: 1px solid rgba(0,0,0,0.1);
@@ -224,6 +220,7 @@ input[type=button] {
 
 input[type=button]:hover,#Method:hover, #Send:hover {
   background-image: linear-gradient(rgba(0, 0, 0, .1), rgba(0, 0, 0, .1));
+  background-position: 0 0;
 }
 
 input[type=button].disabled {
@@ -320,10 +317,12 @@ input[type=text].flat:focus, input[type=password].flat:focus {
 
 #HistoryList li {
   cursor: pointer;
+  margin: 0;
 }
-  #HistoryList li:hover, #HistoryList li[selected="true"] {
-    background-color: rgba(0,0,0,0.1);
-  }
+
+#HistoryList li:hover, #HistoryList li[selected="true"] {
+  background-color: rgba(0,0,0,0.1);
+}
 
 #HistoryList li span {
   white-space: nowrap;
@@ -516,6 +515,10 @@ input[type=text].flat:focus, input[type=password].flat:focus {
 
 .history-method-DELETE .label {
   color: red;
+}
+
+.history-popup, .reveal-modal {
+  border-radius: 5px;
 }
 
 .loading {

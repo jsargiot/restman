@@ -1,0 +1,120 @@
+/*
+ * This file is part of RESTMan for Opera Extension.
+ * https://github.com/jsargiot/restman
+ *
+ * Free to use under the MIT license.
+ * https://raw.githubusercontent.com/jsargiot/restman/master/LICENSE
+ */
+body.dark-restman {
+  background-color: #303030;
+  color: #FFF;
+}
+
+.dark-restman h1, .dark-restman h2, .dark-restman h3, .dark-restman h4, .dark-restman h5, .dark-restman h6 {
+  color: rgba(255,255,255,0.7)
+}
+
+.dark-restman header, .dark-restman footer {
+  border-bottom-color: #000;
+  background-color: #212121;
+}
+
+.dark-restman section {
+  background-color: #424242;
+  border: 1px solid #262626;
+  color: inherit;
+}
+
+.dark-restman header #Controls, .dark-restman .history-popup, .dark-restman .reveal-modal {
+  background-color: #424242;
+}
+
+.dark-restman .history-popup, .dark-restman .reveal-modal {
+  color: rgba(255,255,255,0.7);
+  border: 1px solid #262626;
+  border-top: none;
+}
+
+.dark-restman select, .dark-restman input[type="button"], .dark-restman input[type="text"] {
+  color: rgba(255,255,255,0.7);
+}
+
+.dark-restman #Controls #Method, .dark-restman #Controls #Url, .dark-restman #Controls #Send {
+  color: #FFF;
+}
+
+.dark-restman #PanelRaw, .dark-restman #ResponsePanel {
+  border-color: #424242;
+  background-color: #212121;
+}
+
+.dark-restman input[type=button]:hover, .dark-restman #Method:hover, .dark-restman #Send:hover {
+  background-image: linear-gradient(rgba(255, 255, 255, .1), rgba(255, 255, 255, .1));
+}
+
+.dark-restman dl dt {
+  color: rgba(255,255,255,0.7);
+}
+
+.dark-restman dl dd {
+  color: #FFF;
+}
+
+.dark-restman #HistoryList li {
+  background-color: transparent;
+  border-color: transparent;
+}
+
+.dark-restman #HistoryList li:hover, .dark-restman #HistoryList li[selected="true"] {
+  background-color: rgba(255,255,255,0.12);
+}
+
+.dark-restman .history-method-GET .label {
+  color: green;
+}
+
+.dark-restman .history-method-POST .label {
+  color: lightblue;
+}
+
+.dark-restman .history-method-PUT .label {
+  color: blueviolet;
+}
+
+.dark-restman ::-webkit-scrollbar-thumb {
+  background-color: rgba(255,255,255,0.1);
+  border-color: rgba(0,0,0,0.2);
+}
+
+.dark-restman .expandable .expander {
+  background-color: transparent;
+  color: rgba(255,255,255,0.7);
+}
+
+.dark-restman ul.sub-nav li.active a {
+  background-color: #263238;
+}
+
+.dark-restman .panel {
+  background-color: transparent;
+}
+
+.dark-restman #ResponsePanel > [data-show-type] {
+  border-bottom: none;
+}
+
+.dark-restman input[type=text].flat, .dark-restman input[type=password].flat, .dark-restman input[type=file].flat  {
+  color: #FFF;
+}
+
+.dark-restman ul.material-tabs {
+  background-color: #424242;
+}
+
+ul[data-tab] li > a {
+  color: rgba(255,255,255,0.7);
+}
+
+.dark-restman label {
+  color: rgba(255,255,255,0.54);
+}

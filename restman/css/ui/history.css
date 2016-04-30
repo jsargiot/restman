@@ -7,9 +7,7 @@
  */
 
 .history-url {
-  color: #333333;
-  padding-left: 1rem;
-  width: 19rem;
+  font-size: 0.875rem;
 }
 
 .history-popup {
