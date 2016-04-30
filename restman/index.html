@@ -50,8 +50,9 @@
                         </div>
                     </div>
                 </div>
-                <span id="Send" class="flex-item-static icon-send" tabindex="0" />
+                <span id="Send" class="flex-item-static icon-send" tabindex="0"></span>
             </div>
+            <span id="Options" class="flex-item-static icon-more_vert" data-reveal-id="OptionsForm"></span>
         </header>
 
         <div class="flex-item-dynamic scrollable-y main-container flex-container flex-columns">
@@ -91,21 +92,6 @@
                     <input type="button" data-clear-all="#HeadersTable" class="error" value="Clear All" tabindex="0" />
                 </div>
             </section>
-
-            <!-- Basic Authentication modal -->
-            <div id="BasicAuthForm" class="reveal-modal" data-reveal>
-                <div class="modal-content">
-                    <h4>Basic Authentication</h4>
-                    <form>
-                        <label>User: <input type="text" name="user" placeholder="Username..." class="flat" tabindex="0" /></label>
-                        <label>Password: <input type="password" name="pass" placeholder="Password..." class="flat" tabindex="0" /></label>
-                    </form>
-                </div>
-                <div class="modal-buttons">
-                    <input type="button" class="close-modal" value="Cancel" tabindex="0" />
-                    <input type="button" class="save-modal ok" value="Save" tabindex="0" />
-                </div>
-            </div>
 
             <div id="MainEditors" class="flex-item-static flex-container">
                 <section id="BodySection" class="expandable closed flex-item-dynamic">
@@ -179,10 +165,44 @@
         <footer class="flex-item-static page-footer">
             <div class="footer-copyright">
                 <span id="VersionNumber"></span><span>. Made by <a href="http://github.com/jsargiot">Joaquin Sargiotto</a>. MIT License v2.</span>
-                <span id="LayoutSwitcher">[Switch Layout]</span>
-                <span id="ThemeSwitcher">[Switch Theme]</span>
             </div>
         </footer>
+
+        <!-- Basic Authentication modal -->
+        <div id="BasicAuthForm" class="reveal-modal" data-reveal>
+            <div class="modal-content">
+                <h4>Basic Authentication</h4>
+                <form>
+                    <label>User: <input type="text" name="user" placeholder="Username..." class="flat" tabindex="0" /></label>
+                    <label>Password: <input type="password" name="pass" placeholder="Password..." class="flat" tabindex="0" /></label>
+                </form>
+            </div>
+            <div class="modal-buttons">
+                <input type="button" class="close-modal" value="Cancel" tabindex="0" />
+                <input type="button" class="save-modal ok" value="Save" tabindex="0" />
+            </div>
+        </div>
+
+        <!-- Options modal -->
+        <div id="OptionsForm" class="reveal-modal tiny" data-reveal>
+            <div class="modal-content">
+                <h4>Options</h4>
+                <h6>Choose theme</h6>
+                <form class="theme-form">
+                    <label><img src="img/light-theme.png" alt="Light theme" /><input type="radio" name="theme" value="light"/>Light</label>
+                    <label><img src="img/dark-theme.png" alt="Light theme" /><input type="radio" name="theme" value="dark"/>Dark</label>
+                </form>
+                <h6>Choose layout</h6>
+                <form class="theme-form">
+                    <label><img src="img/stack-layout.png" alt="Light theme" /><input type="radio" name="layout" value="stack" />Stack</label>
+                    <label><img src="img/sbs-layout.png" alt="Light theme" /><input type="radio" name="layout" value="side" />Side by side</label>
+                </form>
+            </div>
+            <div class="modal-buttons">
+                <input type="button" class="flat border-radius close-modal" value="Cancel" />
+                <input type="button" class="flat border-radius save-modal ok" value="Save" />
+            </div>
+        </div>
 
         <!-- Load scripts -->
         <script type="text/javascript" src="js/jquery-2.1.4.js"></script>
@@ -201,6 +221,7 @@
 
         <script type="text/javascript" src="js/restman/storage.js"></script>
         <script type="text/javascript" src="js/restman/request.js"></script>
+        <script type="text/javascript" src="js/restman/settings.js"></script>
 
         <script type="text/javascript" src="js/ui/expandable.js"></script>
         <script type="text/javascript" src="js/ui/dynamic_lists.js"></script>

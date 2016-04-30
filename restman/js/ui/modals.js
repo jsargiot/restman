@@ -18,8 +18,28 @@ $(document).ready(function(event) {
         $('#BasicAuthForm').foundation('reveal', 'close')
     });
 
+    /* Save Options */
+    $('#OptionsForm .save-modal').click(function (event) {
+        var theme = $('input[name=theme]:checked', '#OptionsForm').val();
+        var layout = $('input[name=layout]:checked', '#OptionsForm').val();
+        restman.settings.save(theme, layout, function(algo) {
+            restman.ui.theme.update(theme, layout)
+            $('#OptionsForm').foundation('reveal', 'close')
+        });
+
+    });
+
     /* Cancel buttons for modals */
     $('.reveal-modal .close-modal').click(function (event) {
         $(this).parent().parent().foundation('reveal', 'close')
     });
+
+    /* Load saved settings and set the values in the options form */
+    restman.settings.load(function(settings) {
+        $('input[name=theme][value=' + settings.theme + ']').prop('checked', true);
+        $('input[name=layout][value=' + settings.layout + ']').prop('checked', true);
+        if (settings.theme && settings.layout) {
+            restman.ui.theme.update(settings.theme, settings.layout);
+        }
+    })
 });

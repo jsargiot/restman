@@ -9,7 +9,7 @@
     "64": "res/icon64.png"
   },
   "background": {"scripts": ["js/background.js"], "persistent": false},
-  "permissions": ["tabs", "http://*/", "http://*/*", "https://*/", "https://*/*"],
+  "permissions": ["tabs", "http://*/", "http://*/*", "https://*/", "https://*/*", "storage"],
   "browser_action": {
     "default_icon": "res/icon32.png",
     "default_title": "RestMan"

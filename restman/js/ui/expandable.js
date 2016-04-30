@@ -36,16 +36,4 @@ $(document).ready(function(event) {
             event.target.click();
         }
     });
-
-    $('#LayoutSwitcher').click(function (event) {
-        var $me = $('#MainEditors');
-        if ($me.hasClass('flex-columns')) {
-            $me.removeClass('flex-columns');
-        } else {
-            $me.addClass('flex-columns');
-        }
-    });
-    $('#ThemeSwitcher').click(function (event) {
-        restman.ui.theme.update('dark', 'side');
-    });
 });

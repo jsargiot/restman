@@ -218,7 +218,7 @@ input[type=button] {
   border-radius: 3px;
 }
 
-input[type=button]:hover,#Method:hover, #Send:hover {
+input[type=button]:hover,#Method:hover, #Send:hover, #Options:hover {
   background-image: linear-gradient(rgba(0, 0, 0, .1), rgba(0, 0, 0, .1));
   background-position: 0 0;
 }
@@ -260,7 +260,7 @@ input[type=text].flat:focus, input[type=password].flat:focus {
   outline: none;
 }
 
-#Controls select, #Controls input, #Send {
+#Controls select, #Controls input, #Send, #Options {
   height: 2.5rem;
   font-family: Roboto, Arial, sans-serif;
 }
@@ -288,13 +288,20 @@ input[type=text].flat:focus, input[type=password].flat:focus {
   border-radius: 3px;
 }
 
-#Send {
+#Send, #Options {
   padding: 0 0.5rem;
   text-align: center;
   color: #607d8b;
   cursor: pointer;
   font-size: 2.25rem;
   border-radius: 3px;
+}
+
+#Options {
+  align-self: center;
+  color: #FFF;
+  margin-left: 1rem;
+  padding: 0;
 }
 
 #MainEditors:not(.flex-columns) > * {
@@ -538,4 +545,25 @@ input[type=text].flat:focus, input[type=password].flat:focus {
 
 .main-container {
   padding: 0.625rem;
+}
+
+.theme-form {
+  text-align: center;
+}
+
+.theme-form label {
+  display: inline-block;
+  margin: 2rem 1rem;
+  padding: 0;
+}
+
+.theme-form label img {
+  border-radius: 0.3125rem;
+  box-shadow: 0 1px 1px rgba(0,0,0,0.12);
+  display: block;
+  width: 111px;
+}
+
+.theme-form label input {
+  margin: 0.5rem 1rem 0.5rem 0;
 }
