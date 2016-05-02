@@ -29,6 +29,15 @@ Features
 * View response headers.
 * Ctrl+Enter sends request.
 
+Running tests
+---
+
+    $ cd tests
+    $ virtualenv .virtualenv
+    $ source .virtualenv/bin/activate
+    $ pip install -r requirements.txt
+    $ behave
+
 License
 ---
 
