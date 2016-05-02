@@ -15,8 +15,9 @@ from behave import *
 
 @step('I open History dialog')
 def step_impl(context):
-    # Open history
-    context.browser.find_element_by_id('Url').send_keys("")
+    # Open history by focusing on the input and force a input event that
+    # even if the history was closed with ESC it will be shown.
+    context.browser.find_element_by_id('Url').send_keys("A", Keys.BACK_SPACE)
     # Wait for modal to appear
     WebDriverWait(context.browser, 10).until(
         expected_conditions.visibility_of_element_located(

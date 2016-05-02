@@ -8,18 +8,17 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 
 def start_background_test_server():
-    subprocess.Popen([sys.executable, ".\\test_server.py"])
+    subprocess.Popen([sys.executable, "./test_server.py"])
 
 def before_all(context):
-    service = Service('drivers\\operadriver.exe')
+    service = Service('drivers/operadriver')
     service.start()
-    test_extension = "..\\restman-0.5.nex"
+    test_extension = "../restman.nex"
 
     b64ext = base64.b64encode(open(test_extension, 'rb').read())
 
     capabilities = {
         'operaOptions': {
-            'binary': 'C:\\Program Files (x86)\\Opera Next\\34.0.2036.24\\opera.exe',
             'extensions': [b64ext],
         },
         'Proxy': {
@@ -35,7 +34,6 @@ def before_all(context):
     # Start extension
     context.browser.get('chrome-extension://fohkgjiaiapkkjjchddmhaaaghjakfeg/index.html')
     time.sleep(1)   # Wait for app to load
-
 
 def after_all(context):
     # Close session

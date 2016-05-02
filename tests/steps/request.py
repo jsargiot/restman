@@ -53,6 +53,8 @@ def step_impl(context):
         expected_conditions.presence_of_element_located(
             (By.XPATH,
             '//input[@id="Url" and not(contains(@class,"loading"))]')))
+    # Give time to UI to reflect status
+    time.sleep(0.1)
 
 @then('output contains "{value}"')
 def step_impl(context, value):
