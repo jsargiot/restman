@@ -111,7 +111,7 @@ body.dark-restman {
   background-color: #424242;
 }
 
-ul[data-tab] li > a {
+.dark-restman ul[data-tab] li > a {
   color: rgba(255,255,255,0.7);
 }
 

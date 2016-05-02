@@ -27,12 +27,6 @@ var restman = restman || {};
             // Set progress handler
             if (on_progress)
                 xhr.addEventListener('progress', on_progress, false);
-            // Set headers
-            for (var key in headers) {
-                if (key){
-                    xhr.setRequestHeader(key, headers[key]);
-                }
-            }
             // Set onload
             xhr.onload = function (event) {
                 timecomplete = window.performance.now();
@@ -46,6 +40,12 @@ var restman = restman || {};
             }
             // Open url
             xhr.open(method, url, true);
+            // Set headers
+            for (var key in headers) {
+                if (key){
+                    xhr.setRequestHeader(key, headers[key]);
+                }
+            }
             // Trigger request
             timestart = window.performance.now();
             return xhr.send(body);
