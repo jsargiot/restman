@@ -490,16 +490,6 @@ input[type=text].flat:focus, input[type=password].flat:focus {
   overflow-y: auto;
 }
 
-::-webkit-scrollbar {
-  width: 0.7rem;
-}
-
-::-webkit-scrollbar-thumb {
-  background-color: rgba(0,0,0,.2);
-  border-radius: 5px;
-  border: 2px solid white;
-}
-
 .history-method {
   background-color: transparent;
 }

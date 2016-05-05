@@ -81,11 +81,6 @@ body.dark-restman {
   color: blueviolet;
 }
 
-.dark-restman ::-webkit-scrollbar-thumb {
-  background-color: rgba(255,255,255,0.1);
-  border-color: rgba(0,0,0,0.2);
-}
-
 .dark-restman .expandable .expander {
   background-color: transparent;
   color: rgba(255,255,255,0.7);
