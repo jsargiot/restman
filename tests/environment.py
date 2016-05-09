@@ -11,8 +11,8 @@ def start_background_test_server():
     subprocess.Popen([sys.executable, "./test_server.py"])
 
 def before_all(context):
-    service = Service('drivers/operadriver')
-    service.start()
+    context.service = Service('drivers/operadriver')
+    context.service.start()
     test_extension = "../restman.nex"
 
     b64ext = base64.b64encode(open(test_extension, 'rb').read())
@@ -29,9 +29,10 @@ def before_all(context):
     context.server = subprocess.Popen([sys.executable, '-m', 'httpbin.core'])
 
     # Create browser
-    context.browser = webdriver.Remote(service.service_url, capabilities)
+    context.browser = webdriver.Remote(context.service.service_url, capabilities)
 
     # Start extension
+    context.browser.switch_to_window(context.browser.window_handles[1])
     context.browser.get('chrome-extension://fohkgjiaiapkkjjchddmhaaaghjakfeg/index.html')
     time.sleep(1)   # Wait for app to load
 
