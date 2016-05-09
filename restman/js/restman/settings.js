@@ -26,7 +26,11 @@ var restman = restman || {};
 
         load: function(on_complete) {
             // Load settings and run the callback
-            chrome.storage.local.get(['theme', 'layout'], on_complete);
+            if (chrome.storage) {
+                chrome.storage.local.get(['theme', 'layout'], on_complete);
+            } else {
+                on_complete(restman.settings.defaults);
+            }
         },
 
     };
