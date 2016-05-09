@@ -5,14 +5,14 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>RestMan</title>
 
-        <link rel="stylesheet" href="css/foundation-5.4.6.css" />
-        <link rel="stylesheet" href="css/codemirror-5.3/codemirror.css">
-        <link rel="stylesheet" href="css/codemirror-5.3/monokai.css">
-        <link rel="stylesheet" href="css/ui/expandable.css">
-        <link rel="stylesheet" href="css/ui/history.css">
-        <link rel="stylesheet" href="css/icomoon.css">
-        <link rel="stylesheet" href="css/restman.css">
-        <link rel="stylesheet" href="css/restman-dark.css">
+        <link rel="stylesheet" href="./css/foundation-5.4.6.css" />
+        <link rel="stylesheet" href="./css/codemirror-5.3/codemirror.css">
+        <link rel="stylesheet" href="./css/codemirror-5.3/monokai.css">
+        <link rel="stylesheet" href="./css/ui/expandable.css">
+        <link rel="stylesheet" href="./css/ui/history.css">
+        <link rel="stylesheet" href="./css/icomoon.css">
+        <link rel="stylesheet" href="./css/restman.css">
+        <link rel="stylesheet" href="./css/restman-dark.css">
     </head>
 
     <body class="flex-container flex-columns">
@@ -20,7 +20,7 @@
 
         <header class="flex-item-static flex-container">
             <div class="title flex-item-static hide-for-small-only">
-                <img class="logo" src="res/icon64.png" />
+                <img class="logo" src="./res/icon64.png" />
             </div>
             <div id="Controls" class="shouldwait flex-item-dynamic flex-container">
                 <select id="Method" class="flex-item-static" tabindex="0">
@@ -189,13 +189,13 @@
                 <h4>Options</h4>
                 <h6>Choose theme</h6>
                 <form class="theme-form">
-                    <label><img src="img/light-theme.png" alt="Light theme" /><input type="radio" name="theme" value="light"/>Light</label>
-                    <label><img src="img/dark-theme.png" alt="Light theme" /><input type="radio" name="theme" value="dark"/>Dark</label>
+                    <label><img src="./img/light-theme.png" alt="Light theme" /><input type="radio" name="theme" value="light"/>Light</label>
+                    <label><img src="./img/dark-theme.png" alt="Light theme" /><input type="radio" name="theme" value="dark"/>Dark</label>
                 </form>
                 <h6>Choose layout</h6>
                 <form class="theme-form">
-                    <label><img src="img/stack-layout.png" alt="Light theme" /><input type="radio" name="layout" value="stack" />Stack</label>
-                    <label><img src="img/sbs-layout.png" alt="Light theme" /><input type="radio" name="layout" value="side" />Side by side</label>
+                    <label><img src="./img/stack-layout.png" alt="Light theme" /><input type="radio" name="layout" value="stack" />Stack</label>
+                    <label><img src="./img/sbs-layout.png" alt="Light theme" /><input type="radio" name="layout" value="side" />Side by side</label>
                 </form>
             </div>
             <div class="modal-buttons">
@@ -205,35 +205,35 @@
         </div>
 
         <!-- Load scripts -->
-        <script type="text/javascript" src="js/jquery-2.1.4.js"></script>
+        <script type="text/javascript" src="./js/jquery-2.1.4.js"></script>
 
-        <script type="text/javascript" src="js/beautify-html.js"></script>
+        <script type="text/javascript" src="./js/beautify-html.js"></script>
 
-        <script type="text/javascript" src="js/codemirror-5.3/codemirror.js"></script>
-        <script type="text/javascript" src="js/codemirror-5.3/css/css.js"></script>
-        <script type="text/javascript" src="js/codemirror-5.3/javascript/javascript.js"></script>
-        <script type="text/javascript" src="js/codemirror-5.3/xml/xml.js"></script>
-        <script type="text/javascript" src="js/codemirror-5.3/htmlmixed/htmlmixed.js"></script>
+        <script type="text/javascript" src="./js/codemirror-5.3/codemirror.js"></script>
+        <script type="text/javascript" src="./js/codemirror-5.3/css/css.js"></script>
+        <script type="text/javascript" src="./js/codemirror-5.3/javascript/javascript.js"></script>
+        <script type="text/javascript" src="./js/codemirror-5.3/xml/xml.js"></script>
+        <script type="text/javascript" src="./js/codemirror-5.3/htmlmixed/htmlmixed.js"></script>
 
-        <script src="js/foundation-5.4.6.js"></script>
+        <script type="text/javascript" src="./js/foundation-5.4.6.js"></script>
 
-        <script type="text/javascript" src="js/shortcut.js"></script>
+        <script type="text/javascript" src="./js/shortcut.js"></script>
 
-        <script type="text/javascript" src="js/restman/storage.js"></script>
-        <script type="text/javascript" src="js/restman/request.js"></script>
-        <script type="text/javascript" src="js/restman/settings.js"></script>
+        <script type="text/javascript" src="./js/restman/storage.js"></script>
+        <script type="text/javascript" src="./js/restman/request.js"></script>
+        <script type="text/javascript" src="./js/restman/settings.js"></script>
 
-        <script type="text/javascript" src="js/ui/expandable.js"></script>
-        <script type="text/javascript" src="js/ui/dynamic_lists.js"></script>
-        <script type="text/javascript" src="js/ui/fileable.js"></script>
-        <script type="text/javascript" src="js/ui/modals.js"></script>
-        <script type="text/javascript" src="js/ui/request.js"></script>
-        <script type="text/javascript" src="js/ui/headers.js"></script>
-        <script type="text/javascript" src="js/ui/keys.js"></script>
-        <script type="text/javascript" src="js/ui/editors.js"></script>
-        <script type="text/javascript" src="js/ui/history.js"></script>
-        <script type="text/javascript" src="js/ui/version.js"></script>
-        <script type="text/javascript" src="js/ui/theme.js"></script>
+        <script type="text/javascript" src="./js/ui/expandable.js"></script>
+        <script type="text/javascript" src="./js/ui/dynamic_lists.js"></script>
+        <script type="text/javascript" src="./js/ui/fileable.js"></script>
+        <script type="text/javascript" src="./js/ui/modals.js"></script>
+        <script type="text/javascript" src="./js/ui/request.js"></script>
+        <script type="text/javascript" src="./js/ui/headers.js"></script>
+        <script type="text/javascript" src="./js/ui/keys.js"></script>
+        <script type="text/javascript" src="./js/ui/editors.js"></script>
+        <script type="text/javascript" src="./js/ui/history.js"></script>
+        <script type="text/javascript" src="./js/ui/version.js"></script>
+        <script type="text/javascript" src="./js/ui/theme.js"></script>
 
     </body>
 </html>
