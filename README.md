@@ -28,6 +28,7 @@ Features
 * View highlighted response.
 * View response headers.
 * Ctrl+Enter sends request.
+* Private mode
 
 Running tests
 ---
