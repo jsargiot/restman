@@ -36,6 +36,12 @@ $(document).ready(function(event) {
 
     /* Load saved settings and set the values in the options form */
     restman.settings.load(function(settings) {
+        /* Set default values */
+        if (!settings.theme)
+            settings.theme = 'light';
+        if (!settings.layout)
+            settings.layout = 'stack';
+
         $('input[name=theme][value=' + settings.theme + ']').prop('checked', true);
         $('input[name=layout][value=' + settings.layout + ']').prop('checked', true);
         if (settings.theme && settings.layout) {

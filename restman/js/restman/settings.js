@@ -14,11 +14,6 @@ var restman = restman || {};
 
     restman.settings = {
 
-        defaults: {
-            theme: 'light',
-            layout: 'stack'
-        },
-
         save: function(theme, layout, ok_callback) {
             // Save settings
             chrome.storage.local.set({theme: theme, layout: layout}, ok_callback);
@@ -29,7 +24,7 @@ var restman = restman || {};
             if (chrome.storage) {
                 chrome.storage.local.get(['theme', 'layout'], on_complete);
             } else {
-                on_complete(restman.settings.defaults);
+                on_complete({});
             }
         },
 
