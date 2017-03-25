@@ -5,13 +5,13 @@
   "description": "RESTMan is a browser extension to work on http requests.",
   "version": "0.6",
   "icons": {
-    "32": "res/icon32.png",
-    "64": "res/icon64.png"
+    "32": "img/icon32.png",
+    "64": "img/icon64.png"
   },
   "background": {"scripts": ["js/background.js"], "persistent": false},
   "permissions": ["tabs", "http://*/", "http://*/*", "https://*/", "https://*/*", "storage"],
   "browser_action": {
-    "default_icon": "res/icon32.png",
+    "default_icon": "img/icon32.png",
     "default_title": "RestMan"
   },
   "incognito": "split",
