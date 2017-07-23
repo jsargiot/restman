@@ -6,11 +6,12 @@ import sys
 
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
+import selenium.webdriver.common.proxy
 
 def start_background_test_server():
     subprocess.Popen([sys.executable, "./test_server.py"])
 
-def before_all(context):
+def prepare_opera(context):
     context.service = Service('drivers/operadriver')
     context.service.start()
     test_extension = "../restman.nex"
@@ -25,14 +26,38 @@ def before_all(context):
             'proxyType': 'system'
         }
     }
-    # Start web server (httpbin FTW!)
-    context.server = subprocess.Popen([sys.executable, '-m', 'httpbin.core'])
+
+    # Create browser
+    context.browser = webdriver.Remote(context.service.service_url, capabilities)
+    context.browser.switch_to_window(context.browser.window_handles[0])
+
+def prepare_chrome(context):
+    context.service = Service('drivers/chromedriver')
+    context.service.start()
+    test_extension = "../restman.crx"
+
+    b64ext = base64.b64encode(open(test_extension, 'rb').read())
+
+    capabilities = {
+        "chromeOptions": {
+            "extensions": [b64ext],
+        },
+        "Proxy": {
+            "proxyType": "MANUAL",
+            "httpProxy": "proxy.crawlera.com:8010"
+        }
+    }
 
     # Create browser
     context.browser = webdriver.Remote(context.service.service_url, capabilities)
 
+def before_all(context):
+    #prepare_chrome(context)
+    prepare_opera(context)
+    # Start web server (httpbin FTW!)
+    context.server = subprocess.Popen([sys.executable, '-m', 'httpbin.core'])
+
     # Start extension
-    context.browser.switch_to_window(context.browser.window_handles[1])
     context.browser.get('chrome-extension://fohkgjiaiapkkjjchddmhaaaghjakfeg/index.html')
     time.sleep(1)   # Wait for app to load
 
