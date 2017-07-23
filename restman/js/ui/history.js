@@ -203,6 +203,29 @@ $(document).ready(function(event) {
         // Remove history entry
         var id = $(this).parent().attr('data-history-item');
         restman.storage.deleteRequest(parseInt(id), function (e) {});
+
+        event.preventDefault();
+
+        return false;
+    });
+
+    /* Share a history item. */
+    $('#HistoryList li [data-share-item]').click(function(event) {
+        // Remove history entry
+        var id = $(this).parent().attr('data-history-item');
+        restman.storage.getRequest(parseInt(id), function (item){
+            restman.ui.editors.setValue("#ShareRequestEditor", JSON.stringify(item, null, 4) || "");
+
+            // Show dialog
+            $("#ShareRequestForm").foundation('reveal', 'open');
+            // Refresh editor after 200ms
+            setTimeout(function() {
+                restman.ui.editors.get("#ShareRequestEditor").refresh();
+            }, 200);
+            
+        });
+
+
         return false;
     });
 

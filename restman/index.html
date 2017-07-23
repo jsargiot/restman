@@ -41,7 +41,7 @@
                                         <span class="flex-item-static history-method label">method</span>
                                         <span class="flex-item-dynamic history-url" title="">url</span>
                                         <span class="flex-item-static icon-delete" data-delete-item></span>
-                                        <span class="flex-item-static icon-share" data-share-item></span>
+                                        <span class="flex-item-static icon-share" data-share-item data-reveal-id="ShareRequestForm"></span>
                                     </li>
                                 </ul>
                             </div>
@@ -212,6 +212,19 @@
             <div class="modal-buttons">
                 <input type="button" class="flat border-radius close-modal" value="Cancel" />
                 <input type="button" class="flat border-radius save-modal ok" value="Save" />
+            </div>
+        </div>
+
+        <!-- ShareRequest modal -->
+        <div id="ShareRequestForm" class="reveal-modal medium" data-reveal>
+            <div class="modal-content">
+                <h4>Share Request</h4>
+                <p>Warning! Request metadata like headers and data might contain sensitive information</p>
+                <p>Copy the following snippet and share it.</p>
+                <textarea id="ShareRequestEditor" tabindex="0"></textarea>
+            </div>
+            <div class="modal-buttons">
+                <input type="button" class="flat border-radius close-modal" value="Cancel" />
             </div>
         </div>
 
