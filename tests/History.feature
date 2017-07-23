@@ -17,11 +17,11 @@ Feature: History management
       and url is "http://localhost:5000/get?first=request"
       and I click on send
       and I wait for request to finish
-    When url is "http://localhost:5000/get?second=request"
+      and url is "http://localhost:5000/get?second=request"
       and I click on send
       and I wait for request to finish
-    Then I open History dialog
-      and url "http://localhost:5000/get?first=request" with method "GET" it's in the history
+    When I open History dialog
+    Then url "http://localhost:5000/get?first=request" with method "GET" it's in the history
       and url "http://localhost:5000/get?second=request" with method "GET" it's in the history
 
   Scenario: Clear All removes all entries in history

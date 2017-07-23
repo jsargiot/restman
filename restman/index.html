@@ -51,7 +51,7 @@
                                 </div>
 
                                 <div class="icon-button-wrapper icon-note_add">
-                                    <input id="ImportHistory" type="button" value="Import" tabindex="-1" />
+                                    <input id="ImportHistory" type="button" value="Import" tabindex="-1" data-reveal-id="ImportRequestForm" />
                                 </div>
 
                                 <div class="icon-button-wrapper icon-close">
@@ -116,7 +116,7 @@
                             <ul id="FormData" class="name-value-list">
                                 <li data-clone-template class="flex-container">
                                     <input class="flat key flex-item-dynamic" type="text" placeholder="Write key..." tabindex="0" />
-                                    <input class="flat key flex-item-dynamic" type="text" placeholder="Write value or drop file..." data-fileable tabindex="0" />
+                                    <input class="flat value flex-item-dynamic" type="text" placeholder="Write value or drop file..." data-fileable tabindex="0" />
                                     <span class="flex-item-static icon-delete" data-delete-item tabindex="0" />
                                 </li>
                             </ul>
@@ -225,6 +225,19 @@
             </div>
             <div class="modal-buttons">
                 <input type="button" class="flat border-radius close-modal" value="Cancel" />
+            </div>
+        </div>
+
+        <!-- ImportRequest modal -->
+        <div id="ImportRequestForm" class="reveal-modal medium" data-reveal>
+            <div class="modal-content">
+                <h4>Import Request</h4>
+                <p>Paste the snippet to import. Note: Imported requests are not saved when imported, only when executed.</p>
+                <textarea id="ImportRequestEditor" tabindex="0"></textarea>
+            </div>
+            <div class="modal-buttons">
+                <input type="button" class="flat border-radius close-modal" value="Cancel" />
+                <input type="button" class="flat border-radius save-modal ok" value="Import" />
             </div>
         </div>
 

@@ -1,6 +1,9 @@
 Feature: Request Sharing
 
-  @WIP
+  Background: Clean UI
+    Given I reload the extension
+      and I clear the history
+
   Scenario: Share request
     Given request method is "POST"
       and url is "http://localhost:5000/post"
@@ -18,3 +21,19 @@ Feature: Request Sharing
         | key                       | value                |
         | X-Custom-Request-Header   | testing-sharing-123  |
         | X-Test-Header             | another-sharing      |
+
+  Scenario: Import request
+    Given I open History dialog
+      and I click on import request
+      and I write a shared request for "http://localhost:5000/get?shared=request"
+    When I click on load import request
+    Then url is "http://localhost:5000/get?shared=request"
+      and request method is "POST"
+      and headers section contains the following headers
+        | key                       | value             |
+        | Content-Type              | application/json  |
+        | X-Test-Header             | shared_request    |
+      and form section contains the following keys
+        | key                       | value             |
+        | SomeKey                   | SomeValue11233    |
+        | SomeOtherKey              | SomeOtherValue019 |

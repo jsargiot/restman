@@ -19,12 +19,17 @@ def step_impl(context):
     context.browser.refresh()
     time.sleep(0.1)
 
-@step('request method is "{method}"')
+@given('request method is "{method}"')
 def step_impl(context, method):
     method_select = context.browser.find_element_by_id('Method')
     Select(method_select).select_by_value(method)
 
-@step('url is "{url}"')
+@then('request method is "{method}"')
+def step_impl(context, method):
+    select_txt = context.browser.find_element_by_id('Method').get_attribute("value")
+    assert method == select_txt
+
+@given('url is "{url}"')
 def step_impl(context, url):
     input_txt = context.browser.find_element_by_id('Url')
     input_txt.clear()
@@ -32,6 +37,11 @@ def step_impl(context, url):
     # Hide history
     input_txt.send_keys(Keys.ESCAPE)
     time.sleep(0.1)
+
+@then('url is "{url}"')
+def step_impl(context, url):
+    input_txt = context.browser.find_element_by_id('Url').get_attribute("value")
+    assert url == input_txt
 
 @step('I click on send')
 def step_impl(context):
@@ -191,6 +201,24 @@ def step_impl(context):
     ''')
     context.browser.find_element_by_xpath('//*[@data-clear-all="#HeadersTable"]').click()
     time.sleep(0.1)
+
+@then('headers section contains the following headers')
+def step_impl(context):
+    # Check if headers in table are in headers section
+    headers = context.browser.execute_script("return restman.ui.headers.collect(\"#HeadersTable\");");
+
+    for row in context.table:
+        assert row["key"] in headers, "Header {} is not in output".format(row['key'])
+        assert headers[row["key"]] == row["value"], "Header value is not correct. Expected: {}; Actual: {}".format(row["value"], headers[row["key"]])
+
+@then('form section contains the following keys')
+def step_impl(context):
+    # Check if form data is ok
+    formdata = context.browser.execute_script("return restman.ui.headers.collect(\"#FormData\");");
+
+    for row in context.table:
+        assert row["key"] in formdata, "Key {} is not in form data".format(row['key'])
+        assert formdata[row["key"]] == row["value"], "Key value is not correct. Expected: {}; Actual: {}".format(row["value"], formdata[row["key"]])
 
 @given('I clean FORM DATA')
 def step_impl(context):

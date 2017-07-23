@@ -29,6 +29,18 @@ $(document).ready(function(event) {
 
     });
 
+    $('#ImportRequestForm .save-modal').click(function (event) {
+        var value = restman.ui.editors.get('#ImportRequestEditor').getValue();
+        // Parse value entered by user
+        obj = JSON.parse(value);
+
+        // Load it up in the UI
+        restman.ui.request.load(obj);
+
+        // Close modal
+        $('#ImportRequestForm').foundation('reveal', 'close')
+    });
+
     /* Cancel buttons for modals */
     $('.reveal-modal .close-modal').click(function (event) {
         $(this).parent().parent().foundation('reveal', 'close')
