@@ -7,7 +7,7 @@ Feature: Send requests
   # METHOD
   #
 
-  Scenario: Correct request method returns success
+  Scenario: Correct GET request method returns success
     Given request method is "GET"
       and url is "http://localhost:5000/get"
     When I click on send
@@ -20,6 +20,13 @@ Feature: Send requests
     When I click on send
       and I wait for request to finish
     Then return code is "405 METHOD NOT ALLOWED"
+
+  Scenario: Correct OPTIONS request method returns success
+    Given request method is "OPTIONS"
+      and url is "http://localhost:5000/post"
+    When I click on send
+      and I wait for request to finish
+    Then return code is "200 OK"
 
   #
   # SEND
