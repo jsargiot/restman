@@ -11,7 +11,7 @@
     font-style: normal;
 }
 
-[class^="icon-"], [class*=" icon-"] {
+[class^="icon-"]:before, [class*=" icon-"]:before {
     /* use !important to prevent issues with browser extensions that change fonts */
     font-family: 'icomoon' !important;
     speak: none;
@@ -26,30 +26,21 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-brightness_low:before {
-    content: "\e1ad";
-}
-.icon-brightness_high:before {
-    content: "\e1ac";
-}
-.icon-cancel:before {
-    content: "\e5c9";
+.icon-close:before {
+  content: "\e5cd";
 }
 .icon-delete:before {
-    content: "\e872";
-}
-.icon-fullscreen:before {
-    content: "\e5d0";
-}
-.icon-fullscreen_exit:before {
-    content: "\e5d1";
-}
-.icon-send:before {
-    content: "\e163";
-}
-.icon-settings:before {
-    content: "\e8b8";
+  content: "\e872";
 }
 .icon-more_vert:before {
-    content: "\e5d4";
+  content: "\e5d4";
+}
+.icon-note_add:before {
+  content: "\e89c";
+}
+.icon-send:before {
+  content: "\e163";
+}
+.icon-share:before {
+  content: "\e80d";
 }

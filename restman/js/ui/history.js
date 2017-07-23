@@ -137,7 +137,6 @@ restman.ui = restman.ui || {};
 
         _mousedown: function (event) {
             event.preventDefault();
-            //self._blur();
         },
 
         /*
@@ -190,7 +189,7 @@ $(document).ready(function(event) {
         return false;
     });
 
-    $('#CancelHistory').click(function (event) {
+    $('#CloseHistory').click(function (event) {
         restman.ui.history.dialog.hide();
         return false;
     })
