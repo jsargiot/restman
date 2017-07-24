@@ -5,6 +5,62 @@
  * Free to use under the MIT license.
  * https://raw.githubusercontent.com/jsargiot/restman/master/LICENSE
  */
+var restman = restman || {};
+restman.ui = restman.ui || {};
+
+
+(function() {
+    'use strict';
+
+    var self = restman.ui.request = {
+        /*
+         * Adds a history item to the History section.
+         *
+         * The new item is always inserted at the beginning (newer)
+         */
+        load: function (item) {
+            $('#Method').val(item.method);
+            $('#Url').val(item.url);
+
+            // Cleanup headers
+            $('#HeadersTable > li:not([data-clone-template])').remove();
+            // Add headers
+            for (var d in item.headers) {
+                var row = restman.ui.dynamic_list.add_item($('#HeadersTable'));
+                row.find('input.key').val(d);
+                row.find('input.value').val(item.headers[d]);
+            }
+            if (!('type' in item.body)) {
+                item.body.type = 'raw';
+            }
+
+            // Cleanup body (form and raw)
+            var raw_value = '', form_value = [];
+
+            // Load Body
+            if (item.body.type == 'raw') {
+                raw_value = item.body.content;
+                $('a[href="#PanelRaw"]').click();
+            }
+
+            if (item.body.type == 'form') {
+                form_value = item.body.content;
+                $('a[href="#PanelForm"]').click();
+            }
+
+            // Load raw value (if set)
+            restman.ui.editors.setValue("#RequestContent", raw_value || "");
+            // Load form items (if any)
+            $('#FormData > li:not([data-clone-template])').remove();
+            for (var d in form_value) {
+                var row = restman.ui.dynamic_list.add_item($('#FormData'), true);
+                row.find('input.key').val(d);
+                row.find('input.value').val(item.body.content[d]);
+            }
+        }
+    };
+})();
+
 $(document).ready(function(event) {
 
     /*

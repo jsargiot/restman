@@ -150,7 +150,7 @@ ul.name-value-list {
   border: none;
 }
 
-span[data-delete-item] {
+span[data-delete-item], span[data-share-item] {
   width: 2.25rem;
   font-size: 1.25rem;
   padding: 0 0.5rem;
@@ -158,7 +158,7 @@ span[data-delete-item] {
   cursor: pointer;
   align-self: center;
 }
-  span[data-delete-item]:hover {
+  span[data-delete-item]:hover, span[data-share-item]:hover {
     opacity: 1;
   }
 
@@ -241,6 +241,22 @@ input[type=button].ok {
   color: white;
   border: 1px solid #080;
 }
+
+div.icon-button-wrapper {
+  display: inline-block;
+  position: relative;
+}
+  div.icon-button-wrapper:before {
+    z-index: 1000; /* On top of everything */
+    pointer-events: none; /* Do not interact with the pointer */
+    position: absolute;
+    top: 0.75rem;
+    left: 0.75rem;
+  }
+  div.icon-button-wrapper input[type="button"] {
+    padding-left: 2.5rem;
+    width: 100%;
+  }
 
 input[type=text].flat, input[type=password].flat, input[type=file].flat {
   border-top: none;
@@ -484,6 +500,10 @@ input[type=text].flat:focus, input[type=password].flat:focus {
 
 .flex-container.flex-columns {
   flex-direction: column;
+}
+
+.float-left {
+  float: left;
 }
 
 .scrollable-y {

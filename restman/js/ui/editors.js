@@ -52,6 +52,10 @@ $(document).ready(function(event) {
     restman.ui.editors.create('#RequestContent', false);
     // Create editor for request response
     restman.ui.editors.create('#ResponseContentText', true);
+    // Create editor for request share
+    restman.ui.editors.create('#ShareRequestEditor', true);
+    // Create editor for request import
+    restman.ui.editors.create('#ImportRequestEditor', false);
 
     // Prepare switches
     $("*[data-switch-type]").click(function(event) {

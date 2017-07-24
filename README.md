@@ -31,6 +31,7 @@ Features
 * View response headers.
 * Ctrl+Enter sends request.
 * Private mode
+* Share/Import requests.
 
 Running tests
 ---

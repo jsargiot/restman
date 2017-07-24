@@ -40,13 +40,23 @@
                                     <li data-clone-template class="flex-container flex-item-middle close-modal" data-history-item="1411588114901">
                                         <span class="flex-item-static history-method label">method</span>
                                         <span class="flex-item-dynamic history-url" title="">url</span>
-                                        <span class="flex-item-static icon-delete" data-delete-item />
+                                        <span class="flex-item-static icon-delete" data-delete-item></span>
+                                        <span class="flex-item-static icon-share" data-share-item data-reveal-id="ShareRequestForm"></span>
                                     </li>
                                 </ul>
                             </div>
                             <div class="modal-buttons flex-item-static">
-                                <input id="CancelHistory" type="button" value="Cancel" tabindex="-1" />
-                                <input id="ClearHistory" type="button" class="error" value="Clear all" tabindex="-1" />
+                                <div class="icon-button-wrapper icon-delete float-left">
+                                    <input id="ClearHistory" type="button" class="error" value="Clear all" tabindex="-1" />
+                                </div>
+
+                                <div class="icon-button-wrapper icon-note_add">
+                                    <input id="ImportHistory" type="button" value="Import" tabindex="-1" data-reveal-id="ImportRequestForm" />
+                                </div>
+
+                                <div class="icon-button-wrapper icon-close">
+                                    <input id="CloseHistory" type="button" value="Close" tabindex="-1" />
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -106,7 +116,7 @@
                             <ul id="FormData" class="name-value-list">
                                 <li data-clone-template class="flex-container">
                                     <input class="flat key flex-item-dynamic" type="text" placeholder="Write key..." tabindex="0" />
-                                    <input class="flat key flex-item-dynamic" type="text" placeholder="Write value or drop file..." data-fileable tabindex="0" />
+                                    <input class="flat value flex-item-dynamic" type="text" placeholder="Write value or drop file..." data-fileable tabindex="0" />
                                     <span class="flex-item-static icon-delete" data-delete-item tabindex="0" />
                                 </li>
                             </ul>
@@ -202,6 +212,32 @@
             <div class="modal-buttons">
                 <input type="button" class="flat border-radius close-modal" value="Cancel" />
                 <input type="button" class="flat border-radius save-modal ok" value="Save" />
+            </div>
+        </div>
+
+        <!-- ShareRequest modal -->
+        <div id="ShareRequestForm" class="reveal-modal medium" data-reveal>
+            <div class="modal-content">
+                <h4>Share Request</h4>
+                <p>Warning! Request metadata like headers and data might contain sensitive information</p>
+                <p>Copy the following snippet and share it.</p>
+                <textarea id="ShareRequestEditor" tabindex="0"></textarea>
+            </div>
+            <div class="modal-buttons">
+                <input type="button" class="flat border-radius close-modal" value="Cancel" />
+            </div>
+        </div>
+
+        <!-- ImportRequest modal -->
+        <div id="ImportRequestForm" class="reveal-modal medium" data-reveal>
+            <div class="modal-content">
+                <h4>Import Request</h4>
+                <p>Paste the snippet to import. Note: Imported requests are not saved when imported, only when executed.</p>
+                <textarea id="ImportRequestEditor" tabindex="0"></textarea>
+            </div>
+            <div class="modal-buttons">
+                <input type="button" class="flat border-radius close-modal" value="Cancel" />
+                <input type="button" class="flat border-radius save-modal ok" value="Import" />
             </div>
         </div>
 

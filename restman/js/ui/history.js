@@ -137,7 +137,6 @@ restman.ui = restman.ui || {};
 
         _mousedown: function (event) {
             event.preventDefault();
-            //self._blur();
         },
 
         /*
@@ -190,7 +189,7 @@ $(document).ready(function(event) {
         return false;
     });
 
-    $('#CancelHistory').click(function (event) {
+    $('#CloseHistory').click(function (event) {
         restman.ui.history.dialog.hide();
         return false;
     })
@@ -204,6 +203,29 @@ $(document).ready(function(event) {
         // Remove history entry
         var id = $(this).parent().attr('data-history-item');
         restman.storage.deleteRequest(parseInt(id), function (e) {});
+
+        event.preventDefault();
+
+        return false;
+    });
+
+    /* Share a history item. */
+    $('#HistoryList li [data-share-item]').click(function(event) {
+        // Remove history entry
+        var id = $(this).parent().attr('data-history-item');
+        restman.storage.getRequest(parseInt(id), function (item){
+            restman.ui.editors.setValue("#ShareRequestEditor", JSON.stringify(item, null, 4) || "");
+
+            // Show dialog
+            $("#ShareRequestForm").foundation('reveal', 'open');
+            // Refresh editor after 200ms
+            setTimeout(function() {
+                restman.ui.editors.get("#ShareRequestEditor").refresh();
+            }, 200);
+            
+        });
+
+
         return false;
     });
 
@@ -211,44 +233,7 @@ $(document).ready(function(event) {
     $('[data-history-item]').click(function (event) {
         // Load history item.
         restman.storage.getRequest(parseInt($(this).attr('data-history-item')), function (item){
-            $('#Method').val(item.method);
-            $('#Url').val(item.url);
-
-            // Cleanup headers
-            $('#HeadersTable > li:not([data-clone-template])').remove();
-            // Add headers
-            for (var d in item.headers) {
-                var row = restman.ui.dynamic_list.add_item($('#HeadersTable'));
-                row.find('input.key').val(d);
-                row.find('input.value').val(item.headers[d]);
-            }
-            if (!('type' in item.body)) {
-                item.body.type = 'raw';
-            }
-
-            // Cleanup body (form and raw)
-            var raw_value = '', form_value = [];
-
-            // Load Body
-            if (item.body.type == 'raw') {
-                raw_value = item.body.content;
-                $('a[href="#PanelRaw"]').click();
-            }
-
-            if (item.body.type == 'form') {
-                form_value = item.body.content;
-                $('a[href="#PanelForm"]').click();
-            }
-
-            // Load raw value (if set)
-            restman.ui.editors.setValue("#RequestContent", raw_value || "");
-            // Load form items (if any)
-            $('#FormData > li:not([data-clone-template])').remove();
-            for (var d in form_value) {
-                var row = restman.ui.dynamic_list.add_item($('#FormData'), true);
-                row.find('input.key').val(d);
-                row.find('input.value').val(item.body.content[d]);
-            }
+            restman.ui.request.load(item);
         });
         restman.ui.history.dialog.hide();
         return false;
