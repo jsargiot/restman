@@ -514,6 +514,10 @@ input[type=text].flat:focus, input[type=password].flat:focus {
   color: red;
 }
 
+.history-method-OPTIONS .label {
+  color: brown;
+}
+
 .history-popup, .reveal-modal {
   border-radius: 5px;
 }
