@@ -43,6 +43,11 @@ body.dark-restman {
   color: #FFF;
 }
 
+.dark-restman #Controls #Method {
+  /* Fix background defaulting to white on windows */
+  background-color: #424242;
+}
+
 .dark-restman #PanelRaw, .dark-restman #ResponsePanel {
   border-color: #424242;
   background-color: #212121;
