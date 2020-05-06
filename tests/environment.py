@@ -14,7 +14,7 @@ def start_background_test_server():
 def prepare_opera(context):
     context.service = Service('drivers/operadriver')
     context.service.start()
-    test_extension = "../restman.nex"
+    test_extension = "../restman.crx"
 
     b64ext = base64.b64encode(open(test_extension, 'rb').read())
 
@@ -39,12 +39,11 @@ def prepare_chrome(context):
     b64ext = base64.b64encode(open(test_extension, 'rb').read())
 
     capabilities = {
-        "chromeOptions": {
+        "goog:chromeOptions": {
             "extensions": [b64ext],
         },
-        "Proxy": {
-            "proxyType": "MANUAL",
-            "httpProxy": "proxy.crawlera.com:8010"
+        "proxy": {
+            "proxyType": "system"
         }
     }
 
