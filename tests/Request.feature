@@ -94,7 +94,7 @@ Feature: Send requests
     Then return code is "200 OK"
       and response contains the following headers
         | key                       | value               |
-        | X-Custom-Response-Header  | testing-header-123  |
+        | x-custom-response-header  | testing-header-123  |
 
   Scenario: Adding authorization headers to request authenticates correctly
     Given request method is "GET"
