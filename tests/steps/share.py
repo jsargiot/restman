@@ -14,11 +14,11 @@ def step_impl(context):
     context.execute_steps(u'''
         given I open History dialog
     ''')
-    history = context.browser.find_element_by_id("HistoryPopup")
-    entries = history.find_elements_by_xpath('.//li[not(@data-clone-template)]')
+    history = context.browser.find_element(By.ID, "HistoryPopup")
+    entries = history.find_elements(By.XPATH, './/li[not(@data-clone-template)]')
     assert len(entries) > 0, "There are no entries in the history"
     item = entries[0]
-    item.find_elements_by_xpath('.//*[@data-share-item]')[0].click()
+    item.find_elements(By.XPATH, './/*[@data-share-item]')[0].click()
 
 @then('the json to share is shown with url "{url}" and contains the following headers')
 def step_impl(context, url):
@@ -41,7 +41,7 @@ def step_impl(context):
         given I open History dialog
     ''')
     # Click on import
-    context.browser.find_element_by_id('ImportHistory').click()
+    context.browser.find_element(By.ID, 'ImportHistory').click()
     WebDriverWait(context.browser, 10).until(
         expected_conditions.visibility_of_element_located(
             (By.ID, 'ImportRequestForm')))
@@ -63,9 +63,13 @@ def step_impl(context, url):
             }
         }
     })
-    context.browser.execute_script("return restman.ui.editors.setValue('#ImportRequestEditor', atob('{}'));".format(base64.b64encode(req)))
+    # Set editor value
+    script = f"""
+        return restman.ui.editors.setValue('#ImportRequestEditor', atob('{base64.b64encode(req.encode("ascii")).decode("ascii")}'));
+    """
+    output = context.browser.execute_script(script)
 
 @step('I click on load import request')
 def step_impl(context):
     # Import request
-    context.browser.find_element_by_xpath("//*[@id='ImportRequestForm']//input[@value='Import']").click()
+    context.browser.find_element(By.XPATH, "//*[@id='ImportRequestForm']//input[@value='Import']").click()

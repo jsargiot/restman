@@ -36,6 +36,11 @@ Features
 Running tests
 ---
 
+Download drivers for Browsers and place them in tests/drivers folder.
+
+For Chrome: https://chromedriver.chromium.org/capabilities
+For Opera: https://github.com/operasoftware/operachromiumdriver
+
     $ cd tests
     $ virtualenv .virtualenv
     $ source .virtualenv/bin/activate
