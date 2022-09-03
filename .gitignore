@@ -1,1 +1,3 @@
 .idea/
+tests/drivers/
+tests/.virtualenv

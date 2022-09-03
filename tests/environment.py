@@ -38,17 +38,11 @@ def prepare_chrome(context):
 
     b64ext = base64.b64encode(open(test_extension, 'rb').read())
 
-    capabilities = {
-        "goog:chromeOptions": {
-            "extensions": [b64ext],
-        },
-        "proxy": {
-            "proxyType": "system"
-        }
-    }
+    chrome_options = webdriver.ChromeOptions()
+    chrome_options.add_extension(test_extension)
 
     # Create browser
-    context.browser = webdriver.Remote(context.service.service_url, capabilities)
+    context.browser = webdriver.Remote(context.service.service_url, options=chrome_options)
 
 def before_all(context):
     #prepare_chrome(context)

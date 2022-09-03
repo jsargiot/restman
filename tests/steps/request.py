@@ -21,17 +21,17 @@ def step_impl(context):
 
 @given('request method is "{method}"')
 def step_impl(context, method):
-    method_select = context.browser.find_element_by_id('Method')
+    method_select = context.browser.find_element(By.ID, 'Method')
     Select(method_select).select_by_value(method)
 
 @then('request method is "{method}"')
 def step_impl(context, method):
-    select_txt = context.browser.find_element_by_id('Method').get_attribute("value")
+    select_txt = context.browser.find_element(By.ID, 'Method').get_attribute("value")
     assert method == select_txt
 
 @given('url is "{url}"')
 def step_impl(context, url):
-    input_txt = context.browser.find_element_by_id('Url')
+    input_txt = context.browser.find_element(By.ID, 'Url')
     input_txt.clear()
     input_txt.send_keys(url)
     # Hide history
@@ -40,12 +40,12 @@ def step_impl(context, url):
 
 @then('url is "{url}"')
 def step_impl(context, url):
-    input_txt = context.browser.find_element_by_id('Url').get_attribute("value")
+    input_txt = context.browser.find_element(By.ID, 'Url').get_attribute("value")
     assert url == input_txt
 
 @step('I click on send')
 def step_impl(context):
-    send_button = context.browser.find_element_by_id('Send')
+    send_button = context.browser.find_element(By.ID, 'Send')
     send_button.click()
 
 @step('I press Ctrl+Enter')
@@ -54,7 +54,7 @@ def step_impl(context):
 
 @when('I press Enter on the url textbox')
 def step_impl(context):
-    input_txt = context.browser.find_element_by_id('Url')
+    input_txt = context.browser.find_element(By.ID, 'Url')
     input_txt.send_keys(Keys.ENTER)
 
 @step('I wait for request to finish')
@@ -114,27 +114,27 @@ def step_impl(context):
 @then('response contains the following headers')
 def step_impl(context):
     for row in context.table:
-        header_name = context.browser.find_element_by_xpath("//*[@id='ResponseHeaders']//span[text()='{}']".format(row['key']))
+        header_name = context.browser.find_element(By.XPATH, "//*[@id='ResponseHeaders']//span[text()='{}']".format(row['key']))
         assert header_name, "Header '{}' not found".format(row['key'])
-        header_value = context.browser.find_element_by_xpath("//*[@id='ResponseHeaders']//span[text()='{}']".format(row['value']))
+        header_value = context.browser.find_element(By.XPATH, "//*[@id='ResponseHeaders']//span[text()='{}']".format(row['value']))
         assert header_value, "Header value not found"
 
 @then('return code is "{code}"')
 def step_impl(context, code):
-    status = context.browser.find_element_by_id('ResponseStatus')
+    status = context.browser.find_element(By.ID, 'ResponseStatus')
     if not status:
         assert False, "Can't find status"
     assert code.upper() == status.text.upper(), "Received code [{}], expected [{}]".format(status.text, code)
 
 @then('request size is "{size}"')
 def step_impl(context, size):
-    resp = context.browser.find_element_by_id('ResponseSize')
+    resp = context.browser.find_element(By.ID, 'ResponseSize')
     assert size.upper() == resp.text.upper(), "Received [{}], expected [{}]".format(resp.text, code)
 
 @step('I open "{name}" section')
 def step_impl(context, name):
-    elem = context.browser.find_element_by_xpath("//section/h3[text()='{}']".format(name))
-    parent = elem.find_elements_by_xpath('..')[0]
+    elem = context.browser.find_element(By.XPATH, "//section/h3[text()='{}']".format(name))
+    parent = elem.find_elements(By.XPATH, '..')[0]
     if 'closed' in parent.get_attribute('class'):
         elem.click()
         time.sleep(1) # Wait for section to open
@@ -142,55 +142,58 @@ def step_impl(context, name):
 @step('I add Basic Auth header for user "{name}" with pass "{password}"')
 def step_impl(context, name, password):
     # Open Basic Auth Form
-    context.browser.find_element_by_xpath("//*[@data-reveal-id='BasicAuthForm']").click()
+    context.browser.find_element(By.XPATH, "//*[@data-reveal-id='BasicAuthForm']").click()
     time.sleep(0.5)   # Waiting for modal to open
     # Write user
-    user_txt = context.browser.find_element_by_xpath("//*[@id='BasicAuthForm']//input[@name='user']")
+    user_txt = context.browser.find_element(By.XPATH, "//*[@id='BasicAuthForm']//input[@name='user']")
     user_txt.clear()
     user_txt.send_keys(name)
     # Write pass
-    pass_txt = context.browser.find_element_by_xpath("//*[@id='BasicAuthForm']//input[@name='pass']")
+    pass_txt = context.browser.find_element(By.XPATH, "//*[@id='BasicAuthForm']//input[@name='pass']")
     pass_txt.clear()
     pass_txt.send_keys(password)
     # Save
-    save_btn = context.browser.find_element_by_xpath("//*[@id='BasicAuthForm']//input[@value='Save']")
+    save_btn = context.browser.find_element(By.XPATH, "//*[@id='BasicAuthForm']//input[@value='Save']")
     save_btn.click()
     time.sleep(0.5)   # Waiting for modal to close
 
 @step('I add the following headers to the request')
 def step_impl(context):
     for row in context.table:
-        context.browser.find_element_by_xpath("//*[@data-clone-item='#HeadersTable']").click()
+        context.browser.find_element(By.XPATH, "//*[@data-clone-item='#HeadersTable']").click()
         time.sleep(0.1)
         # Complete header name
-        name_txt = context.browser.find_element_by_xpath("//*[@id='HeadersTable']/li[last()]/input[1]")
+        name_txt = context.browser.find_element(By.XPATH, "//*[@id='HeadersTable']/li[last()]/input[1]")
         name_txt.clear()
         name_txt.send_keys(row['key'])
         # Header value
-        value_txt = context.browser.find_element_by_xpath("//*[@id='HeadersTable']/li[last()]/input[2]")
+        value_txt = context.browser.find_element(By.XPATH, "//*[@id='HeadersTable']/li[last()]/input[2]")
         value_txt.clear()
         value_txt.send_keys(row['value'])
 
 @given('a RAW body')
 def step_impl(context):
     # Open RAW sub-tab
-    context.browser.find_element_by_xpath('//section[@id="BodySection"]//a[@href="#PanelRaw"]').click()
+    context.browser.find_element(By.XPATH, '//section[@id="BodySection"]//a[@href="#PanelRaw"]').click()
     # Set editor value
-    output = context.browser.execute_script("return restman.ui.editors.setValue('#RequestContent', atob('{}'));".format(base64.b64encode(context.text)))
+    script = f"""
+        return restman.ui.editors.setValue('#RequestContent', atob('{base64.b64encode(context.text.encode("ascii")).decode("ascii")}'));
+    """
+    output = context.browser.execute_script(script)
 
 @given('a FORM body')
 def step_impl(context):
     # Open FORM sub-tab
-    context.browser.find_element_by_xpath('//section[@id="BodySection"]//a[@href="#PanelForm"]').click()
+    context.browser.find_element(By.XPATH, '//section[@id="BodySection"]//a[@href="#PanelForm"]').click()
     for row in context.table:
-        context.browser.find_element_by_xpath("//*[@data-clone-item='#FormData']").click()
+        context.browser.find_element(By.XPATH, "//*[@data-clone-item='#FormData']").click()
         time.sleep(0.1)
         # Complete header name
-        name_txt = context.browser.find_element_by_xpath("//*[@id='FormData']/li[last()]/input[1]")
+        name_txt = context.browser.find_element(By.XPATH, "//*[@id='FormData']/li[last()]/input[1]")
         name_txt.clear()
         name_txt.send_keys(row['key'])
         # Header value
-        value_txt = context.browser.find_element_by_xpath("//*[@id='FormData']/li[last()]/input[2]")
+        value_txt = context.browser.find_element(By.XPATH, "//*[@id='FormData']/li[last()]/input[2]")
         value_txt.clear()
         value_txt.send_keys(row['value'])
 
@@ -199,7 +202,7 @@ def step_impl(context):
     context.execute_steps(u'''
         given I open "Headers" section
     ''')
-    context.browser.find_element_by_xpath('//*[@data-clear-all="#HeadersTable"]').click()
+    context.browser.find_element(By.XPATH, '//*[@data-clear-all="#HeadersTable"]').click()
     time.sleep(0.1)
 
 @then('headers section contains the following headers')
@@ -225,9 +228,9 @@ def step_impl(context):
     context.execute_steps(u'''
         given I open "Body" section
     ''')
-    context.browser.find_element_by_xpath('//section[@id="BodySection"]//a[@href="#PanelForm"]').click()
+    context.browser.find_element(By.XPATH, '//section[@id="BodySection"]//a[@href="#PanelForm"]').click()
     time.sleep(0.1)
-    context.browser.find_element_by_xpath('//*[@data-clear-all="#FormData"]').click()
+    context.browser.find_element(By.XPATH, '//*[@data-clear-all="#FormData"]').click()
     time.sleep(0.1)
 
 @given('I clean RAW body')
