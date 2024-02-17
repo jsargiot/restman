@@ -103,6 +103,20 @@
                     <input type="button" data-clear-all="#HeadersTable" class="error" value="Clear All" tabindex="0" />
                 </div>
             </section>
+			<section class="expandable closed flex-item-static">
+                <h3 class="expander">Certificate</h3>
+                <div class="tabs-content">
+                    <ul id="CertificateTable" class="name-value-list">
+                        <li data-clone-template class="flex-container">
+                            <input class="flat key flex-item-dynamic" type="text" placeholder="Certificate..." tabindex="0" readonly/>
+                            <input class="flat value flex-item-dynamic" type="text" placeholder="Key..." tabindex="0" readonly/>
+                            <span class="flex-item-static icon-delete" data-delete-item tabindex="0" />
+                        </li>
+                    </ul>
+                    <input type="button" data-reveal-id="CertificateForm" value="Add certificate" tabindex="0" />
+                    <input type="button" data-clear-all="#CertificateTable" class="error" value="Clear All" tabindex="0" />
+                </div>
+            </section>
 
             <div id="MainEditors" class="flex-item-static flex-container">
                 <section id="BodySection" class="expandable closed flex-item-dynamic">
@@ -186,6 +200,20 @@
                 <form>
                     <label>User: <input type="text" name="user" placeholder="Username..." class="flat" tabindex="0" /></label>
                     <label>Password: <input type="password" name="pass" placeholder="Password..." class="flat" tabindex="0" /></label>
+                </form>
+            </div>
+            <div class="modal-buttons">
+                <input type="button" class="close-modal" value="Cancel" tabindex="0" />
+                <input type="button" class="save-modal ok" value="Save" tabindex="0" />
+            </div>
+        </div>
+		<!-- Certificate Upload modal -->
+        <div id="CertificateForm" class="reveal-modal" data-reveal>
+            <div class="modal-content">
+                <h4>Certificate</h4>
+                <form>
+                    <label>Certificate: <input id="cert" type="file" name="cert"/></label>
+                    <label>Key: <input id="key" type="file" name="key"/></label>
                 </form>
             </div>
             <div class="modal-buttons">

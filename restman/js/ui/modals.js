@@ -17,6 +17,19 @@ $(document).ready(function(event) {
 
         $('#BasicAuthForm').foundation('reveal', 'close')
     });
+	
+    /* Save Certificate header */
+    $('#CertificateForm .save-modal').click(function (event) {
+		var certinput = document.getElementById('cert');
+        var keyinput = document.getElementById('key');
+        var item = restman.ui.dynamic_list.add_item('#CertificateTable');
+		var cert = certinput.value.split(/(\\|\/)/g).pop();
+		var key = keyinput.value.split(/(\\|\/)/g).pop();
+		item.find('input.key').val(cert);
+        item.find('input.value').val(key);
+		
+        $('#CertificateForm').foundation('reveal', 'close')
+    });
 
     /* Save Options */
     $('#OptionsForm .save-modal').click(function (event) {
