@@ -5,8 +5,10 @@
  * Free to use under the MIT license.
  * https://raw.githubusercontent.com/jsargiot/restman/master/LICENSE
  */
+
+
 $(document).ready(function(event) {
-    var details = chrome.app.getDetails(),
+    var details = chrome.runtime.requestUpdateCheck(),
         version;
 
     version = details
