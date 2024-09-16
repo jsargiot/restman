@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "name": "RestMan",
+  "author": "Joaquin Sargiotto",
+  "description": "RESTMan is a browser extension to work on http requests.",
+  "version": "1.0",
+  
+  "icons": {
+    "32": "img/icon32.png",
+    "64": "img/icon64.png"
+  },
+
+  "background": {
+    "service_worker": "background.js"
+  },
+
+  "permissions": ["webRequest"],
+
+  "host_permissions": [
+    "http://*/", "http://*/*", "https://*/", "https://*/*"
+  ],
+
+  "action": {},
+
+  "incognito": "split"
+
+  // "content_security_policy": "default-src 'self'; connect-src *; script-src 'self'; style-src 'self' * blob: data: 'unsafe-inline'; img-src 'self' * data:;"
+}
