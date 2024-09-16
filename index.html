@@ -1,2 +1,276 @@
 <!DOCTYPE html>
-<meta http-equiv="refresh" content="0;url=./restman">
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>restman</title>
+
+        <link rel="stylesheet" href="./css/foundation-5.4.6.css" />
+        <link rel="stylesheet" href="./css/codemirror-5.3/codemirror.css">
+        <link rel="stylesheet" href="./css/codemirror-5.3/monokai.css">
+        <link rel="stylesheet" href="./css/ui/expandable.css">
+        <link rel="stylesheet" href="./css/ui/history.css">
+        <link rel="stylesheet" href="./css/icomoon.css">
+        <link rel="stylesheet" href="./css/restman.css">
+        <link rel="stylesheet" href="./css/restman-dark.css">
+    </head>
+
+    <body class="flex-container flex-columns">
+        <progress id="progress" value="" max="100"></progress>
+
+        <header class="flex-item-static flex-container">
+            <div class="title flex-item-static hide-for-small-only">
+                <img class="logo" src="./img/icon64.png" />
+            </div>
+            <div id="Controls" class="shouldwait flex-item-dynamic flex-container">
+                <select id="Method" class="flex-item-static" tabindex="0">
+                    <option value="GET">GET</option>
+                    <option value="POST">POST</option>
+                    <option value="PUT">PUT</option>
+                    <option value="PATCH">PATCH</option>
+                    <option value="DELETE">DELETE</option>
+                    <option value="OPTIONS">OPTIONS</option>
+                </select>
+                <div class="flex-item-dynamic">
+                    <input id="Url" type="text" name="url" placeholder="Enter url here..." value="" tabindex="0" autocomplete="off" />
+                    <div id="HistoryPopup" class="history-popup">
+                        <div class="flex-container flex-columns">
+                            <div class="flex-item-dynamic flex-container flex-columns">
+                                <ul id="HistoryList" class="list flex-item-dynamic">
+                                    <li data-clone-template class="flex-container flex-item-middle close-modal" data-history-item="1411588114901">
+                                        <span class="flex-item-static history-method label">method</span>
+                                        <span class="flex-item-dynamic history-url" title="">url</span>
+                                        <span class="flex-item-static icon-delete" data-delete-item></span>
+                                        <span class="flex-item-static icon-share" data-share-item data-reveal-id="ShareRequestForm"></span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="modal-buttons flex-item-static">
+                                <div class="icon-button-wrapper icon-delete float-left">
+                                    <input id="ClearHistory" type="button" class="error" value="Clear all" tabindex="-1" />
+                                </div>
+
+                                <div class="icon-button-wrapper icon-note_add">
+                                    <input id="ImportHistory" type="button" value="Import" tabindex="-1" data-reveal-id="ImportRequestForm" />
+                                </div>
+
+                                <div class="icon-button-wrapper icon-close">
+                                    <input id="CloseHistory" type="button" value="Close" tabindex="-1" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <span id="Send" class="flex-item-static icon-send" tabindex="0"></span>
+            </div>
+            <span id="Options" class="flex-item-static icon-more_vert" data-reveal-id="OptionsForm"></span>
+        </header>
+
+        <div class="flex-item-dynamic scrollable-y main-container flex-container flex-columns">
+            <section class="expandable flex-item-static">
+                <div class="tabs-content text-center">
+                    <dl class="small-6 medium-3 columns">
+                        <dt>Status</dt>
+                        <dd id="ResponseStatus">-</dd>
+                    </dl>
+                    <dl class="small-6 medium-3 columns">
+                        <dt>Time</dt>
+                        <dd id="ResponseTime">-</dd>
+                    </dl>
+                    <dl class="small-6 medium-3 columns">
+                        <dt>Size</dt>
+                        <dd id="ResponseSize">-</dd>
+                    </dl>
+                    <dl class="small-6 medium-3 columns">
+                        <dt>Type</dt>
+                        <dd id="ResponseType">-</dd>
+                    </dl>
+                </div>
+            </section>
+
+            <section class="expandable closed flex-item-static">
+                <h3 class="expander">Headers</h3>
+                <div class="tabs-content">
+                    <ul id="HeadersTable" class="name-value-list">
+                        <li data-clone-template class="flex-container">
+                            <input class="flat key flex-item-dynamic" type="text" placeholder="Header..." tabindex="0" />
+                            <input class="flat value flex-item-dynamic" type="text" placeholder="Value..." tabindex="0" />
+                            <span class="flex-item-static icon-delete" data-delete-item tabindex="0" />
+                        </li>
+                    </ul>
+                    <input type="button" data-clone-item="#HeadersTable" value="Add header" tabindex="0" />
+                    <input type="button" data-reveal-id="BasicAuthForm" value="Add Basic Authentication" tabindex="0" />
+                    <input type="button" data-clear-all="#HeadersTable" class="error" value="Clear All" tabindex="0" />
+                </div>
+            </section>
+
+            <div id="MainEditors" class="flex-item-static flex-container">
+                <section id="BodySection" class="expandable closed flex-item-dynamic">
+                    <h3 class="expander">Body</h3>
+                    <ul class="material-tabs" data-tab>
+                        <li class="active"><a href="#PanelForm">Form</a></li>
+                        <li><a href="#PanelRaw">Raw</a></li>
+                    </ul>
+                    <div class="tabs-content">
+                        <div id="PanelForm" class="content active">
+                            <ul id="FormData" class="name-value-list">
+                                <li data-clone-template class="flex-container">
+                                    <input class="flat key flex-item-dynamic" type="text" placeholder="Write key..." tabindex="0" />
+                                    <input class="flat value flex-item-dynamic" type="text" placeholder="Write value or drop file..." data-fileable tabindex="0" />
+                                    <span class="flex-item-static icon-delete" data-delete-item tabindex="0" />
+                                </li>
+                            </ul>
+                            <input type="button" data-clone-item="#FormData" value="Add form data" tabindex="0" />
+                            <input type="button" data-clear-all="#FormData" class="error" value="Clear All" tabindex="0" />
+                        </div>
+                        <div id="PanelRaw" class="panel radius no-padding content">
+                            <textarea id="RequestContent" tabindex="0"></textarea>
+                            <ul class="sub-nav right">
+                                <li><input type="button" data-target="#RequestContent" data-switch-type="javascript" value="JSON"></input></li>
+                                <li><input type="button" data-target="#RequestContent" data-switch-type="htmlmixed" value="XML"></input></li>
+                                <li><input type="button" data-target="#RequestContent" data-switch-type="text" value="Plain"></input></li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="ResponseSection" class="expandable flex-item-dynamic">
+                    <h3 class="expander">Response</h3>
+                    <ul class="material-tabs" data-tab>
+                        <li class="active"><a href="#ResponsePanel">Body</a></li>
+                        <li><a href="#ResponseHeadersContainer">Headers</a></li>
+                    </ul>
+                    <div class="tabs-content">
+                        <div class="overlay"></div>
+                        <div id="ResponsePanel" class="panel radius no-padding shouldwait content active">
+                            <div data-show-type="html">
+                                <div id="ResponseContentHtml" class="html-box">
+                                    <iframe></iframe>
+                                </div>
+                            </div>
+                            <div data-show-type="javascript htmlmixed text">
+                                <textarea id="ResponseContentText" class="editor-box" tabindex="0"></textarea>
+                            </div>
+                            <ul class="sub-nav right">
+                                <li><input type="button" data-target="#ResponseContentText" data-switch-type="javascript" value="JSON"></input></li>
+                                <li><input type="button" data-target="#ResponseContentText" data-switch-type="htmlmixed" value="XML"></input></li>
+                                <li><input type="button" data-target="#ResponseContentText" data-switch-type="html" value="HTML Preview"></input></li>
+                                <li><input type="button" data-target="#ResponseContentText" data-switch-type="text" value="Plain"></input></li>
+                            </ul>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div id="ResponseHeadersContainer" class="content">
+                            <ul id="ResponseHeaders" class="name-value-list">
+                                <li data-clone-template class="flex-container" tabindex="0">
+                                    <span class="flat key flex-item-static"></span>
+                                    <span class="flat value flex-item-dynamic"></span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <footer class="flex-item-static page-footer">
+            <div class="footer-copyright">
+                <span id="VersionNumber"></span><span>. Made by <a href="http://github.com/jsargiot">Joaquin Sargiotto</a>. MIT License v2.</span>
+            </div>
+        </footer>
+
+        <!-- Basic Authentication modal -->
+        <div id="BasicAuthForm" class="reveal-modal" data-reveal>
+            <div class="modal-content">
+                <h4>Basic Authentication</h4>
+                <form>
+                    <label>User: <input type="text" name="user" placeholder="Username..." class="flat" tabindex="0" /></label>
+                    <label>Password: <input type="password" name="pass" placeholder="Password..." class="flat" tabindex="0" /></label>
+                </form>
+            </div>
+            <div class="modal-buttons">
+                <input type="button" class="close-modal" value="Cancel" tabindex="0" />
+                <input type="button" class="save-modal ok" value="Save" tabindex="0" />
+            </div>
+        </div>
+
+        <!-- Options modal -->
+        <div id="OptionsForm" class="reveal-modal tiny" data-reveal>
+            <div class="modal-content">
+                <h4>Options</h4>
+                <h6>Choose theme</h6>
+                <form class="theme-form">
+                    <label><img src="./img/light-theme.png" alt="Light theme" /><input type="radio" name="theme" value="light"/>Light</label>
+                    <label><img src="./img/dark-theme.png" alt="Light theme" /><input type="radio" name="theme" value="dark"/>Dark</label>
+                </form>
+                <h6>Choose layout</h6>
+                <form class="theme-form">
+                    <label><img src="./img/stack-layout.png" alt="Light theme" /><input type="radio" name="layout" value="stack" />Stack</label>
+                    <label><img src="./img/sbs-layout.png" alt="Light theme" /><input type="radio" name="layout" value="side" />Side by side</label>
+                </form>
+            </div>
+            <div class="modal-buttons">
+                <input type="button" class="flat border-radius close-modal" value="Cancel" />
+                <input type="button" class="flat border-radius save-modal ok" value="Save" />
+            </div>
+        </div>
+
+        <!-- ShareRequest modal -->
+        <div id="ShareRequestForm" class="reveal-modal medium" data-reveal>
+            <div class="modal-content">
+                <h4>Share Request</h4>
+                <p>Warning! Request metadata like headers and data might contain sensitive information</p>
+                <p>Copy the following snippet and share it.</p>
+                <textarea id="ShareRequestEditor" tabindex="0"></textarea>
+            </div>
+            <div class="modal-buttons">
+                <input type="button" class="flat border-radius close-modal" value="Cancel" />
+            </div>
+        </div>
+
+        <!-- ImportRequest modal -->
+        <div id="ImportRequestForm" class="reveal-modal medium" data-reveal>
+            <div class="modal-content">
+                <h4>Import Request</h4>
+                <p>Paste the snippet to import. Note: Imported requests are not saved when imported, only when executed.</p>
+                <textarea id="ImportRequestEditor" tabindex="0"></textarea>
+            </div>
+            <div class="modal-buttons">
+                <input type="button" class="flat border-radius close-modal" value="Cancel" />
+                <input type="button" class="flat border-radius save-modal ok" value="Import" />
+            </div>
+        </div>
+
+        <!-- Load scripts -->
+        <script type="text/javascript" src="./js/jquery-2.1.4.js"></script>
+
+        <script type="text/javascript" src="./js/beautify-html.js"></script>
+
+        <script type="text/javascript" src="./js/codemirror-5.3/codemirror.js"></script>
+        <script type="text/javascript" src="./js/codemirror-5.3/css/css.js"></script>
+        <script type="text/javascript" src="./js/codemirror-5.3/javascript/javascript.js"></script>
+        <script type="text/javascript" src="./js/codemirror-5.3/xml/xml.js"></script>
+        <script type="text/javascript" src="./js/codemirror-5.3/htmlmixed/htmlmixed.js"></script>
+
+        <script type="text/javascript" src="./js/foundation-5.4.6.js"></script>
+
+        <script type="text/javascript" src="./js/shortcut.js"></script>
+
+        <script type="text/javascript" src="./js/restman/storage.js"></script>
+        <script type="text/javascript" src="./js/restman/request.js"></script>
+        <script type="text/javascript" src="./js/restman/settings.js"></script>
+
+        <script type="text/javascript" src="./js/ui/expandable.js"></script>
+        <script type="text/javascript" src="./js/ui/dynamic_lists.js"></script>
+        <script type="text/javascript" src="./js/ui/fileable.js"></script>
+        <script type="text/javascript" src="./js/ui/modals.js"></script>
+        <script type="text/javascript" src="./js/ui/request.js"></script>
+        <script type="text/javascript" src="./js/ui/headers.js"></script>
+        <script type="text/javascript" src="./js/ui/keys.js"></script>
+        <script type="text/javascript" src="./js/ui/editors.js"></script>
+        <script type="text/javascript" src="./js/ui/history.js"></script>
+        <script type="text/javascript" src="./js/ui/version.js"></script>
+        <script type="text/javascript" src="./js/ui/theme.js"></script>
+
+    </body>
+</html>
