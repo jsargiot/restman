@@ -1,6 +1,6 @@
 behave==1.2.6
 selenium==4.4.3
-Werkzeug==3.0.1
+Werkzeug==3.0.3
 flask==2.3.2
 
 # For testing
