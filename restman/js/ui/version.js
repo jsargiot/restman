@@ -15,3 +15,4 @@ $(document).ready(function(event) {
 
     $('#VersionNumber').text("v" + version);
 });
+
