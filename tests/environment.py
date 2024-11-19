@@ -45,8 +45,8 @@ def prepare_chrome(context):
     context.browser = webdriver.Remote(context.service.service_url, options=chrome_options)
 
 def before_all(context):
-    #prepare_chrome(context)
-    prepare_opera(context)
+    prepare_chrome(context)
+    #prepare_opera(context)
     # Start web server (httpbin FTW!)
     context.server = subprocess.Popen([sys.executable, '-m', 'httpbin.core'])
 
