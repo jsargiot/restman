@@ -11,5 +11,5 @@ $(document).ready(function(event) {
     // Press Ctrl+Enter to execute request
     shortcut.add("ctrl+enter", function() {
         $("#Send").click();
-    }); 
+    });
 });

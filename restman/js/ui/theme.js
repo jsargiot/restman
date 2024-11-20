@@ -15,7 +15,7 @@ var restman = restman || {};
 
         update: function(theme, layout) {
             var $body = $('body');
-            
+
             if (theme == 'light') {
                 $body.removeClass('dark-restman');
                 $('.CodeMirror').removeClass('cm-s-monokai').addClass('cm-s-default');

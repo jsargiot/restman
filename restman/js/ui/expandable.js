@@ -19,7 +19,7 @@ $(document).ready(function(event) {
     $(".expandable .expander").click(function(event) {
         /* Act on the event */
         var section = $(this).parent();
-        
+
         if (section.hasClass("closed")) {
             section.removeClass("closed");
             section.trigger('expanded', section)
