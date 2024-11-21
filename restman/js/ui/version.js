@@ -6,13 +6,6 @@
  * https://raw.githubusercontent.com/jsargiot/restman/master/LICENSE
  */
 $(document).ready(function(event) {
-    var details = chrome.app.getDetails(),
-        version;
-
-    version = details
-        ? details["version"]
-        : "N/A";
-
+    var version = chrome.runtime.getManifest().version;
     $('#VersionNumber').text("v" + version);
 });
-
